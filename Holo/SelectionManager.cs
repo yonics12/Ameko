@@ -98,7 +98,7 @@ public class SelectionManager : BindableBase
     /// </summary>
     /// <param name="active">Event to set as active</param>
     /// <param name="selection">Collection of all selected events</param>
-    internal void ForceSelect(Event active, IList<Event> selection)
+    public void ForceSelect(Event active, IList<Event> selection)
     {
         BeginSelectionChange();
         _activeEvent = active;

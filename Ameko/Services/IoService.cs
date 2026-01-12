@@ -450,7 +450,7 @@ public class IoService(
         {
             var line = doc.EventManager.Events.FirstOrDefault(e => e.Index == lineIdx + 1);
             if (line is not null)
-                workspace.SelectionManager.Select(line);
+                workspace.SelectionManager.ForceSelect(line, [line]);
         }
 
         // Video

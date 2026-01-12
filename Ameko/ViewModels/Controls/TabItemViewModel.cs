@@ -344,7 +344,14 @@ public partial class TabItemViewModel : ViewModelBase
 
         Workspace.SelectionManager.SelectionChanged += async (_, _) =>
         {
-            await SelectEvents.Handle(Workspace.SelectionManager.SelectedEventCollection);
+            try
+            {
+                await SelectEvents.Handle(Workspace.SelectionManager.SelectedEventCollection);
+            }
+            catch
+            {
+                // ignored
+            }
         };
 
         Workspace.OnFileModifiedExternally += async (_, _) =>
