@@ -207,7 +207,7 @@ public class Time : BindableBase, IComparable<Time>
 
     public int CompareTo(Time? other)
     {
-        return other is null ? 1 : this.TotalMilliseconds.CompareTo(other.TotalMilliseconds);
+        return other is null ? 1 : _local.TotalMilliseconds.CompareTo(other.TotalMilliseconds);
     }
 
     public override bool Equals(object? obj)
@@ -246,7 +246,7 @@ public class Time : BindableBase, IComparable<Time>
 
     public static bool operator ==(Time? left, Time? right)
     {
-        return left?._local.Milliseconds == right?._local.Milliseconds;
+        return left?._local.TotalMilliseconds.Equals(right?._local.TotalMilliseconds) is true;
     }
 
     public static bool operator !=(Time? left, Time? right)
