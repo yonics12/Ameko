@@ -133,7 +133,7 @@ public class Workspace : BindableBase
     /// <param name="amend">Force amend</param>
     public void Commit(Event active, ChangeType changeType, bool amend = false)
     {
-        Commit([active], changeType, amend);
+        Commit(active, [active], changeType, amend);
     }
 
     /// <summary>
@@ -143,6 +143,27 @@ public class Workspace : BindableBase
     /// <param name="changeType">Type of change</param>
     /// <param name="amend">Force amend</param>
     public void Commit(IList<Event> selection, ChangeType changeType, bool amend = false)
+    {
+        Commit(null, selection, changeType, amend);
+    }
+
+    /// <summary>
+    /// Commit a change
+    /// </summary>
+    /// <param name="active">Active event (<see cref="SelectionManager.ActiveEvent"/>)</param>
+    /// <param name="selection">Entire selection (<see cref="SelectionManager.SelectedEventCollection"/>)</param>
+    /// <param name="changeType">Type of change</param>
+    /// <param name="amend">Force amend</param>
+    /// <remarks>
+    /// If supplied, changes will be propagated from <paramref name="active"/> to the rest
+    /// of the <paramref name="selection"/> based on the user's <see cref="Configuration"/>.
+    /// </remarks>
+    public void Commit(
+        Event? active,
+        IList<Event> selection,
+        ChangeType changeType,
+        bool amend = false
+    )
     {
         // See: SubsEditBox::SetSelectedRows
         // https://github.com/arch1t3cht/Aegisub/blob/b2a0b098215d7028ba26f1bf728731fc585f2b99/src/subs_edit_box.cpp#L476
@@ -154,6 +175,20 @@ public class Workspace : BindableBase
             changeType,
             amend
         );
+
+        // Propagation, if applicable
+        if (
+            active is not null
+            && selection.Count > 1
+            && _configuration.PropagateFields is not PropagateFields.None
+        )
+        {
+            var progenitor = Document.HistoryManager.CanUndo
+                ? Document.HistoryManager.PeekHistory().Events.GetValueOrDefault(active.Id) ?? null
+                : null;
+            progenitor ??= new Event(-1); // Default state
+            PropagateChanges(selection, progenitor, active, _configuration.PropagateFields);
+        }
 
         var selectionIds = !amend ? selection.Select(e => e.Id).ToList() : null;
 

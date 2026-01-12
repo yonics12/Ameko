@@ -76,7 +76,7 @@
                                  Watermark="{x:Static i18n:Resources.Editor_ActorAcBox_Watermark}"
                                  ToolTip.Tip="{x:Static i18n:Resources.Editor_ActorAcBox_ToolTip}"
                                  FontFamily="{StaticResource ZenKakuGothicNew}"
-                                 SelectionChanged="AnyControl_EventMetaChanged" />
+                                 TextChanged="AnyControl_EventMetaChanged" />
                 <AutoCompleteBox Name="EffectAcBox"
                                  Grid.Column="4"
                                  Margin="1"
@@ -87,7 +87,7 @@
                                  Watermark="{x:Static i18n:Resources.Editor_EffectAcBox_Watermark}"
                                  ToolTip.Tip="{x:Static i18n:Resources.Editor_EffectAcBox_ToolTip}"
                                  FontFamily="{StaticResource ZenKakuGothicNew}"
-                                 SelectionChanged="AnyControl_EventMetaChanged" />
+                                 TextChanged="AnyControl_EventMetaChanged" />
                 <TextBlock Name="MaxLineWidthBox"
                            Grid.Column="5"
                            Margin="1"

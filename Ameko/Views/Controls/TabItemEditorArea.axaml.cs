@@ -63,6 +63,7 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
             return;
 
         ViewModel?.Workspace.Commit(
+            ViewModel.Workspace.SelectionManager.ActiveEvent,
             ViewModel.Workspace.SelectionManager.SelectedEventCollection,
             ChangeType.ModifyEventText
         );
@@ -77,6 +78,7 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
             return;
 
         ViewModel?.Workspace.Commit(
+            ViewModel.Workspace.SelectionManager.ActiveEvent,
             ViewModel.Workspace.SelectionManager.SelectedEventCollection,
             ChangeType.ModifyEventMeta
         );
@@ -91,6 +93,7 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
             return;
 
         ViewModel?.Workspace.Commit(
+            ViewModel.Workspace.SelectionManager.ActiveEvent,
             ViewModel.Workspace.SelectionManager.SelectedEventCollection,
             ChangeType.ModifyEventMeta
         );
