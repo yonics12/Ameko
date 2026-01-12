@@ -96,9 +96,14 @@ public class EventManager : BindableBase
                 if (!string.IsNullOrEmpty(actor))
                     result.Add(actor);
             }
-            return result;
+            // If changed, raise
+            if (field.SetEquals(result))
+                return field;
+            field = result;
+            RaisePropertyChanged();
+            return field;
         }
-    }
+    } = [];
 
     /// <summary>
     /// A set of all the effect values currently present in the document
@@ -114,9 +119,14 @@ public class EventManager : BindableBase
                 if (!string.IsNullOrEmpty(effect))
                     result.Add(effect);
             }
-            return result;
+            // If changed, raise
+            if (field.SetEquals(result))
+                return field;
+            field = result;
+            RaisePropertyChanged();
+            return field;
         }
-    }
+    } = [];
 
     /// <summary>
     /// The first event in the document
