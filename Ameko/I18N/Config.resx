@@ -85,7 +85,7 @@
         <value>Propagate changes for</value>
     </data>
     <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
-        <value>Propagate changes from the active event to other selected events</value>
+        <value>Controls how changes made to the active event's properties are replicated to other selected events</value>
     </data>
     <data name="Config_Label_AutosaveEnabled" xml:space="preserve">
         <value>Autosave enabled?</value>
