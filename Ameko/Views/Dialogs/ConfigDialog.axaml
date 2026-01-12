@@ -12,7 +12,7 @@
         x:Class="Ameko.Views.Dialogs.ConfigDialog"
         x:DataType="vm:ConfigDialogViewModel"
 
-        Width="480"
+        Width="525"
         Topmost="True"
         CanResize="False"
         SizeToContent="WidthAndHeight"
@@ -106,7 +106,7 @@
                        Content="{x:Static i18n:Config.Config_Label_DisplayLanguage}" />
                 <ComboBox Grid.Column="1"
                           Grid.Row="0"
-                          Width="175"
+                          Width="200"
                           ItemsSource="{Binding CultureService.AvailableLanguages}"
                           SelectedValue="{Binding Config.Culture}"
                           DisplayMemberBinding="{Binding Name}"
@@ -122,7 +122,7 @@
                        Content="{x:Static i18n:Config.Config_Label_SpellcheckLanguage}" />
                 <ComboBox Grid.Column="1"
                           Grid.Row="1"
-                          Width="175"
+                          Width="200"
                           ItemsSource="{Binding DictionaryService.InstalledDictionaries}"
                           SelectedValue="{Binding Config.SpellcheckCulture}"
                           DisplayMemberBinding="{Binding Lang.Name}"
@@ -133,7 +133,7 @@
                        Content="{x:Static i18n:Config.Config_Label_RichPresence}" />
                 <ComboBox Grid.Column="1"
                           Grid.Row="2"
-                          Width="175"
+                          Width="200"
                           ItemsSource="{Binding RichPresenceLevelChoices}"
                           SelectedValue="{Binding Config.RichPresenceLevel}"
                           DisplayMemberBinding="{Binding Item2}"
@@ -145,7 +145,7 @@
                        ToolTip.Tip="{x:Static i18n:Config.Config_Label_PropagateChanges_ToolTip}" />
                 <ComboBox Grid.Column="1"
                           Grid.Row="3"
-                          Width="175"
+                          Width="200"
                           ItemsSource="{Binding PropagateFieldsChoices}"
                           SelectedValue="{Binding Config.PropagateFields}"
                           DisplayMemberBinding="{Binding Item2}"
@@ -156,7 +156,7 @@
                        Content="{x:Static i18n:Config.Config_Label_SaveFrames}" />
                 <ComboBox Grid.Column="1"
                           Grid.Row="4"
-                          Width="175"
+                          Width="200"
                           ItemsSource="{Binding SaveFramesChoices}"
                           SelectedValue="{Binding Config.SaveFrames}"
                           DisplayMemberBinding="{Binding Item2}"

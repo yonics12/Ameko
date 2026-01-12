@@ -35,8 +35,8 @@
   <data name="Config_PropFields_None" xml:space="preserve">
         <value>Ningún campo</value>
     </data>
-  <data name="Config_PropFields_NonText" xml:space="preserve">
-        <value>Solo campos sin texto</value>
+    <data name="Config_PropFields_NonText" xml:space="preserve">
+        <value>Solo campos de metadatos</value>
     </data>
   <data name="Config_Theme_Default" xml:space="preserve">
         <value>Predeterminado</value>

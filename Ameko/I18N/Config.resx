@@ -37,7 +37,7 @@
         <value>No fields</value>
     </data>
     <data name="Config_PropFields_NonText" xml:space="preserve">
-        <value>Non-Text fields only</value>
+        <value>Metadata fields only</value>
     </data>
     <data name="Config_Theme_Default" xml:space="preserve">
         <value>Default</value>
