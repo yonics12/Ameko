@@ -14,10 +14,12 @@ namespace AssCS.Overrides.Blocks;
 /// </remarks>
 public class OverrideBlock(ReadOnlySpan<char> data) : Block(data.ToString(), BlockType.Override)
 {
+    private readonly string _data = data.ToString();
+
     /// <summary>
     /// Override tags in this block
     /// </summary>
-    public List<OverrideTag> Tags { get; } = ParseTags(data);
+    public List<OverrideTag> Tags => field ??= ParseTags(_data.AsSpan());
 
     public override string Text
     {
