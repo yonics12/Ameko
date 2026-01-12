@@ -11,13 +11,20 @@ namespace Holo.Tests;
 
 public class WorkspaceTests
 {
-    private static Workspace CreateWorkspace(Document document, int id)
+    private static Workspace CreateWorkspace(
+        Document document,
+        int id,
+        PropagateFields propagateFields = PropagateFields.NonText
+    )
     {
         var persist = new Persistence(new MockFileSystem(), NullLogger<Persistence>.Instance);
         var config = new Configuration.Configuration(
             new MockFileSystem(),
             NullLogger<Configuration.Configuration>.Instance
-        );
+        )
+        {
+            PropagateFields = propagateFields,
+        };
 
         return new Workspace(
             document,
@@ -94,6 +101,100 @@ public class WorkspaceTests
         wsp.Commit(wsp.Document.EventManager.Tail, ChangeType.ModifyEventText);
 
         await Assert.That(wsp.Document.HistoryManager.CanUndo).IsTrue();
+    }
+
+    [Test]
+    public async Task Commit_PropagatesNonTextChanges_When_SetToNonText()
+    {
+        var wsp = CreateWorkspace(new Document(true), 1);
+        var e1 = new Event(99)
+        {
+            Text = "Hello",
+            Start = Time.FromSeconds(1),
+            Actor = "A",
+        };
+        var e2 = new Event(100)
+        {
+            Text = "World",
+            Start = Time.FromSeconds(5),
+            Actor = "B",
+        };
+        wsp.Document.EventManager.AddLast([e1, e2]);
+        wsp.Commit(e1, ChangeType.AddEvent);
+
+        e1.Start = Time.FromSeconds(10);
+        wsp.Commit(e1, [e1, e2], ChangeType.ModifyEventMeta);
+
+        await Assert.That(e1.Start).IsEqualTo(Time.FromSeconds(10));
+        await Assert.That(e2.Start).IsEqualTo(Time.FromSeconds(10));
+        await Assert.That(e1.Text).IsNotEqualTo(e2.Text);
+
+        await Assert.That(e1.Actor).IsEqualTo("A");
+        await Assert.That(e2.Actor).IsEqualTo("B");
+    }
+
+    [Test]
+    public async Task Commit_PropagatesTextChanges_When_SetToAll()
+    {
+        var wsp = CreateWorkspace(new Document(true), 1, PropagateFields.All);
+        var e1 = new Event(99)
+        {
+            Text = "Hello",
+            Start = Time.FromSeconds(1),
+            Actor = "A",
+        };
+        var e2 = new Event(100)
+        {
+            Text = "World",
+            Start = Time.FromSeconds(5),
+            Actor = "B",
+        };
+        wsp.Document.EventManager.AddLast([e1, e2]);
+        wsp.Commit(e1, ChangeType.AddEvent);
+
+        e1.Start = Time.FromSeconds(10);
+        e1.Text = "Cool Beans!";
+        wsp.Commit(e1, [e1, e2], ChangeType.ModifyEventMeta);
+
+        await Assert.That(e1.Start).IsEqualTo(Time.FromSeconds(10));
+        await Assert.That(e2.Start).IsEqualTo(Time.FromSeconds(10));
+        await Assert.That(e1.Text).IsEqualTo("Cool Beans!");
+        await Assert.That(e2.Text).IsEqualTo("Cool Beans!");
+
+        await Assert.That(e1.Actor).IsEqualTo("A");
+        await Assert.That(e2.Actor).IsEqualTo("B");
+    }
+
+    [Test]
+    public async Task Commit_DoesNotPropagateChanges_When_SetToNone()
+    {
+        var wsp = CreateWorkspace(new Document(true), 1, PropagateFields.None);
+        var e1 = new Event(99)
+        {
+            Text = "Hello",
+            Start = Time.FromSeconds(1),
+            Actor = "A",
+        };
+        var e2 = new Event(100)
+        {
+            Text = "World",
+            Start = Time.FromSeconds(5),
+            Actor = "B",
+        };
+        wsp.Document.EventManager.AddLast([e1, e2]);
+        wsp.Commit(e1, ChangeType.AddEvent);
+
+        e1.Start = Time.FromSeconds(10);
+        e1.Text = "Cool Beans!";
+        wsp.Commit(e1, [e1, e2], ChangeType.ModifyEventMeta);
+
+        await Assert.That(e1.Start).IsEqualTo(Time.FromSeconds(10));
+        await Assert.That(e2.Start).IsNotEqualTo(Time.FromSeconds(10));
+        await Assert.That(e1.Text).IsEqualTo("Cool Beans!");
+        await Assert.That(e2.Text).IsNotEqualTo("Cool Beans!");
+
+        await Assert.That(e1.Actor).IsEqualTo("A");
+        await Assert.That(e2.Actor).IsEqualTo("B");
     }
 
     [Test]
