@@ -344,7 +344,7 @@ public partial class Event(int id) : BindableBase, IEntry
     {
         var extradatas =
             LinkedExtradatas.Count > 0 ? $"{{{string.Join("=", LinkedExtradatas)}}}" : "";
-        var textContent = Effect.Contains("code") ? TransformCodeToAss() : Text;
+        var textContent = !Effect.StartsWith("code") ? Text : TransformCodeToAss();
 
         return $"{(IsComment ? Comment : Dialogue)} {Layer},{Start.AsAss()},{End.AsAss()},{Style},{Actor},"
             + $"{Margins.Left},{Margins.Right},{Margins.Vertical},{Effect},{extradatas}"
@@ -376,7 +376,7 @@ public partial class Event(int id) : BindableBase, IEntry
             return null;
         }
 
-        return new Event(id)
+        var result = new Event(id)
         {
             _isComment = isComment,
             Layer = ParseInt(ref data),
@@ -392,6 +392,9 @@ public partial class Event(int id) : BindableBase, IEntry
             Effect = ParseString(ref data),
             Text = data.ToString(),
         };
+        if (result.Effect.StartsWith("code"))
+            result.Text = result.TransformAssToCode();
+        return result;
     }
 
     /// <summary>
