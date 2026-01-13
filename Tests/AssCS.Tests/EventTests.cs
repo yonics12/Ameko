@@ -94,14 +94,14 @@ public class EventTests
     public async Task TransformCodeToAss()
     {
         var evt = new Event(1) { Text = "Line1\n  Line2" };
-        await Assert.That(evt.TransformCodeToAss()).Contains("--[[2]]");
+        await Assert.That(evt.TransformCodeToAss()).Contains(@"--[[\N]]");
     }
 
     [Test]
     public async Task TransformAssToCode()
     {
-        var evt = new Event(1) { Text = "Line1--[[2]]Line2" };
-        await Assert.That(evt.TransformAssToCode()).Contains(Environment.NewLine + "  Line2");
+        var evt = new Event(1) { Text = @"Line1--[[\N]]Line2" };
+        await Assert.That(evt.TransformAssToCode()).Contains(Environment.NewLine);
     }
 
     [Test]

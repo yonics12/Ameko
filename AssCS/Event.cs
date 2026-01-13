@@ -209,15 +209,7 @@ public partial class Event(int id) : BindableBase, IEntry
     /// <remarks>This function reverses <see cref="TransformAssToCode"/></remarks>
     public string TransformCodeToAss()
     {
-        return CodeToAssRegex()
-            .Replace(
-                Text,
-                m =>
-                {
-                    var spacesCount = m.Groups[2].Value.Length;
-                    return $"--[[{spacesCount}]]";
-                }
-            );
+        return Text.ReplaceLineEndings(@"--[[\N]]");
     }
 
     /// <summary>
@@ -229,15 +221,7 @@ public partial class Event(int id) : BindableBase, IEntry
     /// <remarks>This function reverses <see cref="TransformCodeToAss"/></remarks>
     public string TransformAssToCode()
     {
-        return AssToCodeRegex()
-            .Replace(
-                Text,
-                m =>
-                {
-                    var spacesCount = int.Parse(m.Groups[1].Value);
-                    return Environment.NewLine + new string(' ', spacesCount);
-                }
-            );
+        return AssToCodeRegex().Replace(Text, Environment.NewLine);
     }
 
     /// <summary>
@@ -761,10 +745,7 @@ public partial class Event(int id) : BindableBase, IEntry
     [GeneratedRegex(@"^\{(=\d+)+\}")]
     private static partial Regex ExtradataRegex();
 
-    [GeneratedRegex(@"(\r\n|\r|\n)([\ |\t]*)")]
-    private static partial Regex CodeToAssRegex();
-
-    [GeneratedRegex(@"--\[\[([0-9]+)\]\]")]
+    [GeneratedRegex(@"--\[\[\\N\]\]")]
     private static partial Regex AssToCodeRegex();
 
     [GeneratedRegex(@"\\[Nnh]")]
