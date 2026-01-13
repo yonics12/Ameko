@@ -18,6 +18,10 @@ public partial class Event(int id) : BindableBase, IEntry
     private const string Dialogue = "Dialogue:";
     private const string Comment = "Comment:";
 
+    private const string CodeNewlineLua = @"--[[\N]]";
+    private const string CodeNewlineCSharp = @"/*\N*/";
+    private static readonly string[] CodeNewlines = [CodeNewlineLua, CodeNewlineCSharp];
+
     private bool _isComment;
     private int _layer = Options.DefaultLayer;
     private Time _start = Time.FromSeconds(0);
@@ -209,7 +213,12 @@ public partial class Event(int id) : BindableBase, IEntry
     /// <remarks>This function reverses <see cref="TransformAssToCode"/></remarks>
     public string TransformCodeToAss()
     {
-        return Text.ReplaceLineEndings(@"--[[\N]]");
+        return DetectCodeLanguage(Text) switch
+        {
+            CodeLanguage.Lua => Text.ReplaceLineEndings(CodeNewlineLua),
+            CodeLanguage.CSharp => Text.ReplaceLineEndings(CodeNewlineCSharp),
+            _ => Text.ReplaceLineEndings(CodeNewlineLua),
+        };
     }
 
     /// <summary>
@@ -221,7 +230,7 @@ public partial class Event(int id) : BindableBase, IEntry
     /// <remarks>This function reverses <see cref="TransformCodeToAss"/></remarks>
     public string TransformAssToCode()
     {
-        return AssToCodeRegex().Replace(Text, Environment.NewLine);
+        return Text.ReplaceMany(CodeNewlines, Environment.NewLine);
     }
 
     /// <summary>
@@ -680,6 +689,51 @@ public partial class Event(int id) : BindableBase, IEntry
         return !(left == right);
     }
 
+    /// <summary>
+    /// Try to detect what language a code block is written in using heuristics
+    /// </summary>
+    /// <param name="data">Text content</param>
+    /// <returns>Presumed language</returns>
+    private static CodeLanguage DetectCodeLanguage(ReadOnlySpan<char> data)
+    {
+        var csScore = 0;
+        var luaScore = 0;
+
+        // C#
+        if (data.Contains("=>", StringComparison.Ordinal))
+            csScore += 5;
+        if (data.Contains("foreach", StringComparison.Ordinal))
+            csScore += 5;
+        if (data.Contains("null", StringComparison.Ordinal))
+            csScore += 3;
+        if (data.Contains("var ", StringComparison.Ordinal))
+            csScore += 2;
+        if (data.Contains("int", StringComparison.Ordinal))
+            csScore++;
+        if (data.Contains("bool", StringComparison.Ordinal))
+            csScore++;
+
+        // Lua
+        if (data.Contains("local ", StringComparison.Ordinal))
+            luaScore += 5;
+        if (data.Contains("end", StringComparison.Ordinal))
+            luaScore += 4;
+        if (data.Contains("nil", StringComparison.Ordinal))
+            luaScore += 3;
+        if (data.Contains("function", StringComparison.Ordinal))
+            luaScore += 3;
+        if (data.Contains("elseif", StringComparison.Ordinal))
+            luaScore++;
+        if (data.Contains(".#", StringComparison.Ordinal))
+            luaScore++;
+
+        if (csScore > luaScore)
+            return CodeLanguage.CSharp;
+        if (luaScore > csScore)
+            return CodeLanguage.Lua;
+        return CodeLanguage.Unknown;
+    }
+
     #region Parsing Helpers
 
     /// <summary>
@@ -745,9 +799,13 @@ public partial class Event(int id) : BindableBase, IEntry
     [GeneratedRegex(@"^\{(=\d+)+\}")]
     private static partial Regex ExtradataRegex();
 
-    [GeneratedRegex(@"--\[\[\\N\]\]")]
-    private static partial Regex AssToCodeRegex();
-
     [GeneratedRegex(@"\\[Nnh]")]
     private static partial Regex NewlineHardSpaceRegex();
+
+    private enum CodeLanguage
+    {
+        Lua,
+        CSharp,
+        Unknown,
+    }
 }

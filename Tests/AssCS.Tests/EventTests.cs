@@ -91,16 +91,30 @@ public class EventTests
     }
 
     [Test]
-    public async Task TransformCodeToAss()
+    public async Task TransformCodeToAss_Lua()
     {
-        var evt = new Event(1) { Text = "Line1\n  Line2" };
+        var evt = new Event(1) { Text = "function it(char)\n  return char.i * 14\nend" };
         await Assert.That(evt.TransformCodeToAss()).Contains(@"--[[\N]]");
     }
 
     [Test]
-    public async Task TransformAssToCode()
+    public async Task TransformCodeToAss_Cs()
+    {
+        var evt = new Event(1) { Text = "int It(char c) {\n  return char.I * 14;\n}" };
+        await Assert.That(evt.TransformCodeToAss()).Contains(@"/*\N*/");
+    }
+
+    [Test]
+    public async Task TransformAssToCode_Lua()
     {
         var evt = new Event(1) { Text = @"Line1--[[\N]]Line2" };
+        await Assert.That(evt.TransformAssToCode()).Contains(Environment.NewLine);
+    }
+
+    [Test]
+    public async Task TransformAssToCode_Cs()
+    {
+        var evt = new Event(1) { Text = @"Line1/*\N*/Line2" };
         await Assert.That(evt.TransformAssToCode()).Contains(Environment.NewLine);
     }
 
