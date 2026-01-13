@@ -58,7 +58,7 @@ public partial class TabItemViewModel : ViewModelBase
     [KeybindTarget("ameko.event.pasteOver", "Ctrl+Shift+V", KeybindContext.Grid)]
     public ICommand PasteOverEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.copyPlaintext", "Ctrl+C", KeybindContext.Grid)]
+    [KeybindTarget("ameko.event.copyPlaintext", KeybindContext.Grid)]
     public ICommand CopyPlaintextEventsCommand { get; }
 
     [KeybindTarget("ameko.event.duplicate", "Ctrl+D", KeybindContext.Grid)]

@@ -224,7 +224,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [KeybindTarget("ameko.about.show", "Shift+F1", KeybindContext.Global)]
     public ICommand ShowAboutWindowCommand { get; }
 
-    [KeybindTarget("ameko.config.show", "Ctrl+,", KeybindContext.Global)]
+    [KeybindTarget("ameko.config.show", "Ctrl+OemComma", KeybindContext.Global)]
     public ICommand ShowConfigDialogCommand { get; }
 
     [KeybindTarget("ameko.keybinds.show", KeybindContext.Global)]

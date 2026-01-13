@@ -4,27 +4,57 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Ameko.DataModels;
-using Ameko.Messages;
 using Holo.Configuration.Keybinds;
+using Holo.Models;
+using Holo.Providers;
 using ReactiveUI;
 
 namespace Ameko.ViewModels.Dialogs;
 
-public partial class KeybindsDialogViewModel : ViewModelBase
+public class KeybindsDialogViewModel : ViewModelBase
 {
     private readonly IKeybindRegistrar _registrar;
+    private readonly IMessageBoxService _messageBoxService;
     private readonly List<string> _keybindsToRemove = [];
 
     public RangeObservableCollection<EditableKeybind> Keybinds { get; }
 
-    public ReactiveCommand<Unit, EmptyMessage> SaveCommand { get; }
+    public ReactiveCommand<Unit, bool> SaveCommand { get; }
     public ICommand DeleteCommand { get; }
     public ICommand ResetCommand { get; }
 
-    private EmptyMessage Save()
+    private async Task<bool> Save()
     {
+        // Detect conflicts
+        var conflicts = Keybinds
+            .Where(k => !string.IsNullOrEmpty(k.Key))
+            .GroupBy(k => k.Key)
+            .Where(g =>
+                g.GroupBy(x => x.OverrideContext.Context).Any(cg => cg.Count() > 1)
+                || (
+                    g.Any(x => x.OverrideContext.Context == KeybindContext.Global)
+                    && g.Any(x => x.OverrideContext.Context != KeybindContext.Global)
+                )
+            )
+            .SelectMany(g => g)
+            .Select(k => k.QualifiedName)
+            .ToList();
+
+        if (conflicts.Count != 0)
+        {
+            await _messageBoxService.ShowAsync(
+                I18N.Keybinds.Keybinds_MsgBox_Conflict_Title,
+                string.Format(
+                    I18N.Keybinds.Keybinds_MsgBox_Conflict_Body,
+                    $"\n{string.Join('\n', conflicts)}"
+                )
+            );
+            return false;
+        }
+
         foreach (var keybind in Keybinds)
         {
             _registrar.ApplyOverride(
@@ -41,10 +71,10 @@ public partial class KeybindsDialogViewModel : ViewModelBase
         }
 
         _registrar.Save();
-        return new EmptyMessage(); // Funky workaround to get the super clean commands
+        return true;
     }
 
-    private static IList<EditableKeybind> CreateEditableKeybinds(IEnumerable<Keybind> keybinds)
+    private static List<EditableKeybind> CreateEditableKeybinds(IEnumerable<Keybind> keybinds)
     {
         return keybinds
             .Select(k => new EditableKeybind
@@ -62,15 +92,19 @@ public partial class KeybindsDialogViewModel : ViewModelBase
             .ToList();
     }
 
-    public KeybindsDialogViewModel(IKeybindRegistrar registrar)
+    public KeybindsDialogViewModel(
+        IKeybindRegistrar registrar,
+        IMessageBoxService messageBoxService
+    )
     {
         _registrar = registrar;
+        _messageBoxService = messageBoxService;
 
         Keybinds = new RangeObservableCollection<EditableKeybind>(
             CreateEditableKeybinds(registrar.GetKeybinds())
         );
 
-        SaveCommand = ReactiveCommand.Create(Save);
+        SaveCommand = ReactiveCommand.CreateFromTask(Save);
         DeleteCommand = ReactiveCommand.Create(
             (EditableKeybind keybind) =>
             {

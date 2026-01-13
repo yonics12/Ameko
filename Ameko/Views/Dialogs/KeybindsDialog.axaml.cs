@@ -3,6 +3,7 @@
 using System;
 using System.Reactive.Disposables;
 using System.Reactive.Disposables.Fluent;
+using System.Reactive.Linq;
 using Ameko.ViewModels.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
@@ -17,7 +18,7 @@ public partial class KeybindsDialog : ReactiveWindow<KeybindsDialogViewModel>
 
         this.WhenActivated(disposables =>
         {
-            ViewModel?.SaveCommand.Subscribe(Close);
+            ViewModel?.SaveCommand.Where(success => success).Subscribe(_ => Close());
 
             Disposable.Create(() => { }).DisposeWith(disposables);
         });

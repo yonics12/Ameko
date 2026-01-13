@@ -122,5 +122,29 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("Keybinds_Button_Reset", resourceCulture);
             }
         }
+        
+        public static string Keybinds_MsgBox_Conflict_Title {
+            get {
+                return ResourceManager.GetString("Keybinds_MsgBox_Conflict_Title", resourceCulture);
+            }
+        }
+        
+        public static string Keybinds_MsgBox_Conflict_Body {
+            get {
+                return ResourceManager.GetString("Keybinds_MsgBox_Conflict_Body", resourceCulture);
+            }
+        }
+        
+        public static string Keybinds_Button_Clear_Tooltip {
+            get {
+                return ResourceManager.GetString("Keybinds_Button_Clear_Tooltip", resourceCulture);
+            }
+        }
+        
+        public static string Keybinds_ChkBox_Enabled_ToolTip {
+            get {
+                return ResourceManager.GetString("Keybinds_ChkBox_Enabled_ToolTip", resourceCulture);
+            }
+        }
     }
 }

@@ -57,4 +57,16 @@
     <data name="Keybinds_Button_Reset" xml:space="preserve">
         <value>Reset Defaults</value>
     </data>
+    <data name="Keybinds_MsgBox_Conflict_Title" xml:space="preserve">
+        <value>Conflicting keybinds detected!</value>
+    </data>
+    <data name="Keybinds_MsgBox_Conflict_Body" xml:space="preserve">
+        <value>The following keybinds have conflicts: {0}</value>
+    </data>
+    <data name="Keybinds_Button_Clear_Tooltip" xml:space="preserve">
+        <value>Clear</value>
+    </data>
+    <data name="Keybinds_ChkBox_Enabled_ToolTip" xml:space="preserve">
+        <value>Enable / Disable Keybind</value>
+    </data>
 </root>
