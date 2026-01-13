@@ -212,7 +212,8 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
             return;
 
         var text = await clipboard.TryGetTextAsync();
-        text = text?.Replace(Environment.NewLine, UseSoftLinebreaks ? @"\n" : @"\N");
+        if (!ViewModel!.Workspace.SelectionManager.ActiveEvent.Effect.Contains("code"))
+            text = text?.Replace(Environment.NewLine, UseSoftLinebreaks ? @"\n" : @"\N");
 
         if (text is not null && EditBox.Text is not null)
         {
