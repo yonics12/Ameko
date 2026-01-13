@@ -2,11 +2,12 @@
 
 using System;
 using System.Collections.ObjectModel;
+using AssCS;
 using Holo.Configuration.Keybinds;
 
 namespace Ameko.DataModels;
 
-public class EditableKeybind
+public class EditableKeybind : BindableBase
 {
     public required bool IsEnabled { get; set; }
     public required bool IsBuiltin { get; init; }
@@ -36,8 +37,15 @@ public class EditableKeybind
                 return DefaultKey;
             return string.Empty;
         }
-        set => OverrideKey = value != DefaultKey ? value : null;
+        set
+        {
+            OverrideKey = value != DefaultKey ? value : null;
+            RaisePropertyChanged();
+            RaisePropertyChanged(nameof(IsOverridden));
+        }
     }
+
+    public bool IsOverridden => Key != DefaultKey;
 }
 
 public class EditableKeybindContext

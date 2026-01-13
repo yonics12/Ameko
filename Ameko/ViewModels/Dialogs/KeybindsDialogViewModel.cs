@@ -24,6 +24,7 @@ public class KeybindsDialogViewModel : ViewModelBase
 
     public ReactiveCommand<Unit, bool> SaveCommand { get; }
     public ICommand DeleteCommand { get; }
+    public ICommand ClearCommand { get; }
     public ICommand ResetCommand { get; }
 
     private async Task<bool> Save()
@@ -110,6 +111,12 @@ public class KeybindsDialogViewModel : ViewModelBase
             {
                 Keybinds.Remove(Keybinds.First(k => k.QualifiedName == keybind.QualifiedName));
                 _keybindsToRemove.Add(keybind.QualifiedName);
+            }
+        );
+        ClearCommand = ReactiveCommand.Create(
+            (EditableKeybind keybind) =>
+            {
+                keybind.Key = string.Empty;
             }
         );
         ResetCommand = ReactiveCommand.Create(() =>

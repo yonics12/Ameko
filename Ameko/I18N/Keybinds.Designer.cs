@@ -135,15 +135,9 @@ namespace Ameko.I18N {
             }
         }
         
-        public static string Keybinds_Button_Clear_Tooltip {
+        public static string Keybinds_Button_ClearOverride_ToolTip {
             get {
-                return ResourceManager.GetString("Keybinds_Button_Clear_Tooltip", resourceCulture);
-            }
-        }
-        
-        public static string Keybinds_ChkBox_Enabled_ToolTip {
-            get {
-                return ResourceManager.GetString("Keybinds_ChkBox_Enabled_ToolTip", resourceCulture);
+                return ResourceManager.GetString("Keybinds_Button_ClearOverride_ToolTip", resourceCulture);
             }
         }
     }

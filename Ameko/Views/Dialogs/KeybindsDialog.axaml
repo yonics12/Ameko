@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        d:DesignWidth="550"
+        d:DesignWidth="650"
         d:DesignHeight="400"
         
         xmlns:c="using:Ameko.Views.Controls"
@@ -16,7 +16,7 @@
         
         CanResize="False"
         Icon="/Assets/Ameko-Simplified-BG-64.ico"
-        Width="550"
+        Width="650"
         Height="400"
         Title="{x:Static i18n:Keybinds.KeybindsWindow_Title}"
         WindowStartupLocation="CenterScreen">
@@ -69,6 +69,18 @@
                                               Watermark="{Binding DefaultKey, FallbackValue=''}"
                                               Margin="1"
                                               Padding="0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button IsVisible="{Binding IsOverridden}"
+                                    Background="Transparent"
+                                    Content="{icons:MaterialIconExt Kind=ArrowULeftBottom, Size=14}"
+                                    ToolTip.Tip="{x:Static i18n:Keybinds.Keybinds_Button_ClearOverride_ToolTip}"
+                                    Command="{Binding $parent[Window].((vm:KeybindsDialogViewModel)DataContext).ClearCommand, FallbackValue=.}"
+                                    CommandParameter="{Binding .}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
