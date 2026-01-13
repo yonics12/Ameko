@@ -8,7 +8,7 @@ using Avalonia.Data.Converters;
 namespace Ameko.Converters;
 
 /// <summary>
-/// Converter limiting text length in the grid
+/// Converter limiting text length in the grid, among other things
 /// </summary>
 public class EventTextLengthConverter : IValueConverter
 {
@@ -16,7 +16,10 @@ public class EventTextLengthConverter : IValueConverter
     {
         if (value is not string text)
             return null;
-        return text.Length <= 256 ? text : text[..256];
+
+        text = text.Length <= 256 ? text : text[..256];
+        text = text.ReplaceLineEndings("↩");
+        return text;
     }
 
     public object? ConvertBack(
