@@ -6,7 +6,7 @@ namespace AssCS.Tests;
 
 public class KaraokeTests
 {
-    // TODO: Verify that all this is correct    [Test]
+    [Test]
     public async Task Text_ReturnsSyllableTextWithKTags()
     {
         var karaoke = new Karaoke();
