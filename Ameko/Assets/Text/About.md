@@ -1,6 +1,7 @@
 ## Thank you for participating in the Ameko beta!
 
-Your feedback and contributions will help shape Ameko's future ❤️
+Your feedback and contributions during this pre-release phase
+are immensely valuable!
 
 ----
 
