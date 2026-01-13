@@ -535,6 +535,21 @@ public partial class MainWindowViewModel
     }
 
     /// <summary>
+    /// Show Script Info dialog
+    /// </summary>
+    private ReactiveCommand<Unit, Unit> CreateShowScriptInfoDialogCommand()
+    {
+        return ReactiveCommand.CreateFromTask(async () =>
+        {
+            var wsp = ProjectProvider.Current.WorkingSpace;
+            if (wsp is null)
+                return;
+            var vm = _vmFactory.Create<ScriptInfoDialogViewModel>(wsp.Document);
+            await ShowScriptInfoDialog.Handle(vm);
+        });
+    }
+
+    /// <summary>
     /// Show sort lines dialog
     /// </summary>
     private ReactiveCommand<Unit, Unit> CreateShowSortDialogCommand()

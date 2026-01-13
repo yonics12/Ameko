@@ -44,12 +44,13 @@ public partial class ScriptInfoManager
     /// <summary>
     /// Get all the info
     /// </summary>
+    /// <param name="export">Whether to clean bang headers</param>
     /// <returns>Read-only collection of key/value pairs</returns>
-    public IReadOnlyCollection<KeyValuePair<string, string>> GetAll()
+    public IReadOnlyCollection<KeyValuePair<string, string>> GetAll(bool export = true)
     {
         return _data
             .Select(kvp => new KeyValuePair<string, string>(
-                BangHeaderRegex().IsMatch(kvp.Key) ? "!" : kvp.Key,
+                export && BangHeaderRegex().IsMatch(kvp.Key) ? "!" : kvp.Key,
                 kvp.Value
             ))
             .ToList();

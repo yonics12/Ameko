@@ -58,6 +58,7 @@ public partial class MainWindowViewModel : ViewModelBase
     // Subtitle
     public Interaction<StylesManagerWindowViewModel, Unit> ShowStylesManager { get; }
     public Interaction<Unit, Uri?> AttachReferenceFile { get; }
+    public Interaction<ScriptInfoDialogViewModel, Unit> ShowScriptInfoDialog { get; }
     public Interaction<SortDialogViewModel, Unit> ShowSortDialog { get; }
     public Interaction<SelectDialogViewModel, Unit> ShowSelectDialog { get; }
 
@@ -153,6 +154,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [KeybindTarget("ameko.reference.detach", KeybindContext.Global)]
     public ICommand DetachReferenceFileCommand { get; }
+
+    [KeybindTarget("ameko.document.properties", KeybindContext.Global)]
+    public ICommand ShowScriptInfoDialogCommand { get; }
 
     [KeybindTarget("ameko.document.sort", KeybindContext.Global)]
     public ICommand ShowSortDialogCommand { get; }
@@ -414,6 +418,7 @@ public partial class MainWindowViewModel : ViewModelBase
         // Subtitle
         ShowStylesManager = new Interaction<StylesManagerWindowViewModel, Unit>();
         AttachReferenceFile = new Interaction<Unit, Uri?>();
+        ShowScriptInfoDialog = new Interaction<ScriptInfoDialogViewModel, Unit>();
         ShowSortDialog = new Interaction<SortDialogViewModel, Unit>();
         ShowSelectDialog = new Interaction<SelectDialogViewModel, Unit>();
         // Project
@@ -467,6 +472,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ShowStylesManagerCommand = CreateShowStylesManagerCommand();
         AttachReferenceFileCommand = CreateAttachReferenceFileCommand();
         DetachReferenceFileCommand = CreateDetachReferenceFileCommand();
+        ShowScriptInfoDialogCommand = CreateShowScriptInfoDialogCommand();
         ShowSortDialogCommand = CreateShowSortDialogCommand();
         ShowSelectDialogCommand = CreateShowSelectDialogCommand();
         // Project

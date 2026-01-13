@@ -100,7 +100,8 @@
                       Command="{Binding DetachReferenceFileCommand}" />
             <Separator />
             <MenuItem Header="{x:Static i18n:Resources.Menu_ScriptProperties}"
-                      Icon="{icons:MaterialIconExt Kind=ListBoxOutline}" />
+                      Icon="{icons:MaterialIconExt Kind=ListBoxOutline}"
+                      Command="{Binding ShowScriptInfoDialogCommand}" />
             <Separator />
             <MenuItem Header="{x:Static i18n:Resources.Menu_Sort_Lines}"
                       Icon="{icons:MaterialIconExt Kind=Sort}"

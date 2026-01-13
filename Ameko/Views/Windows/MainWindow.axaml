@@ -163,7 +163,8 @@
                                                         FallbackValue=false}"
                                     Command="{Binding DetachReferenceFileCommand}" />
                     <NativeMenuItemSeparator />
-                    <NativeMenuItem Header="{x:Static i18n:Resources.Menu_ScriptProperties}" />
+                    <NativeMenuItem Header="{x:Static i18n:Resources.Menu_ScriptProperties}"
+                                    Command="{Binding ShowScriptInfoDialogCommand}" />
                     <NativeMenuItemSeparator />
                     <NativeMenuItem Header="{x:Static i18n:Resources.Menu_Sort_Lines}"
                                     Command="{Binding ShowSortDialogCommand}" />

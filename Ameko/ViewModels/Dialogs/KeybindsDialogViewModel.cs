@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Ameko.DataModels;
 using Holo.Configuration.Keybinds;
-using Holo.Models;
 using Holo.Providers;
 using ReactiveUI;
 
