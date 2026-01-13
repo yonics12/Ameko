@@ -28,23 +28,84 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
         if (ViewModel is null)
             return;
 
+        // Select Emacs keybind implementations
+        // since Avalonia currently doesn't have them >:(
+        if (OperatingSystem.IsMacOS() && e.KeyModifiers.HasFlag(KeyModifiers.Control))
+        {
+            var length = EditBox.Text?.Length ?? 0;
+            switch (e.Key)
+            {
+                // Movement
+                case Key.A:
+                    EditBox.CaretIndex = 0;
+                    e.Handled = true;
+                    break;
+                case Key.E:
+                    EditBox.CaretIndex = length;
+                    e.Handled = true;
+                    break;
+                case Key.F:
+                    if (EditBox.CaretIndex < length)
+                        EditBox.CaretIndex += 1;
+                    e.Handled = true;
+                    break;
+                case Key.B:
+                    if (EditBox.CaretIndex > 0)
+                        EditBox.CaretIndex -= 1;
+                    e.Handled = true;
+                    break;
+                // Local clipboard
+                case Key.K:
+                    if (EditBox.Text is null)
+                        break;
+                    if (EditBox.SelectionEnd == EditBox.SelectionStart)
+                        EditBox.SelectionEnd = length;
+
+                    ViewModel.MacosClipboardService.Set(
+                        EditBox.Text[EditBox.SelectionStart..EditBox.SelectionEnd]
+                    );
+
+                    EditBox.Text =
+                        EditBox.Text[..EditBox.SelectionStart]
+                        + EditBox.Text[EditBox.SelectionEnd..];
+
+                    EditBox.SelectionEnd = EditBox.SelectionStart; // Clear selection (if applicable)
+                    e.Handled = true;
+                    break;
+                case Key.Y:
+                    if (EditBox.Text is null)
+                        break;
+                    var paste = ViewModel.MacosClipboardService.Get();
+                    if (!string.IsNullOrEmpty(paste))
+                    {
+                        EditBox.Text =
+                            EditBox.Text[..EditBox.SelectionStart]
+                            + paste
+                            + EditBox.Text[EditBox.SelectionEnd..];
+
+                        EditBox.CaretIndex += paste.Length;
+                    }
+                    e.Handled = true;
+                    break;
+                // Additional newline option ig
+                case Key.O:
+                    InsertNewline();
+                    e.Handled = true;
+                    break;
+            }
+
+            // Skip everything else if we did something here
+            if (e.Handled)
+                return;
+        }
+
         if (e.Key != Key.Enter)
             return;
 
         e.Handled = true;
         if (e.KeyModifiers.HasFlag(KeyModifiers.Shift))
         {
-            var idx = EditBox.CaretIndex;
-            if (ViewModel.Workspace.SelectionManager.ActiveEvent.Effect.Contains("code"))
-            {
-                EditBox.Text = EditBox.Text?.Insert(idx, Environment.NewLine);
-                EditBox.CaretIndex += Environment.NewLine.Length;
-            }
-            else
-            {
-                EditBox.Text = EditBox.Text?.Insert(idx, UseSoftLinebreaks ? "\\n" : "\\N");
-                EditBox.CaretIndex += 2;
-            }
+            InsertNewline();
         }
         else
         {
@@ -97,6 +158,21 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
             ViewModel.Workspace.SelectionManager.SelectedEventCollection,
             ChangeType.ModifyEventMeta
         );
+    }
+
+    private void InsertNewline()
+    {
+        var idx = EditBox.CaretIndex;
+        if (ViewModel!.Workspace.SelectionManager.ActiveEvent.Effect.Contains("code"))
+        {
+            EditBox.Text = EditBox.Text?.Insert(idx, Environment.NewLine);
+            EditBox.CaretIndex += Environment.NewLine.Length;
+        }
+        else
+        {
+            EditBox.Text = EditBox.Text?.Insert(idx, UseSoftLinebreaks ? "\\n" : "\\N");
+            EditBox.CaretIndex += 2;
+        }
     }
 
     public TabItemEditorArea()

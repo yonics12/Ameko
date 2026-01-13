@@ -79,6 +79,7 @@ public class AmekoServiceProvider
         services.AddSingleton<IMessageService, MessageService>();
         services.AddSingleton<IDictionaryService, DictionaryService>();
         services.AddSingleton<ISpellcheckService, SpellcheckService>();
+        services.AddSingleton<IMacOsClipboardService, MacOsClipboardService>();
 
         // --- Presentation ---
         services.AddSingleton<ThemeService>();
