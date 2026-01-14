@@ -19,7 +19,6 @@
         x:DataType="vm:ShiftTimesDialogViewModel"
 
         Width="375"
-        Topmost="True"
         CanResize="False"
         SizeToContent="Height"
         ShowInTaskbar="False"

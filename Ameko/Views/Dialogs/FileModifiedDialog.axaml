@@ -15,7 +15,6 @@
         x:DataType="vm:FileModifiedDialogViewModel"
 
         Width="525"
-        Topmost="True"
         CanResize="False"
         SizeToContent="Height"
         ShowInTaskbar="False"

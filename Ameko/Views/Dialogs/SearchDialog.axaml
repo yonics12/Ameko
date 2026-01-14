@@ -14,7 +14,6 @@
         x:Class="Ameko.Views.Dialogs.SearchDialog"
         x:DataType="vm:SearchDialogViewModel"
         
-        Topmost="True"
         CanResize="False"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"

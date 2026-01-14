@@ -17,7 +17,6 @@
         x:DataType="vm:StyleEditorDialogViewModel"
         
         Width="400"
-        Topmost="True"
         CanResize="False"
         SizeToContent="Height"
         WindowStartupLocation="CenterOwner"

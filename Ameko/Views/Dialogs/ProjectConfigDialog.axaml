@@ -13,7 +13,6 @@
         x:DataType="vm:ProjectConfigDialogViewModel"
 
         Width="480"
-        Topmost="True"
         CanResize="False"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"

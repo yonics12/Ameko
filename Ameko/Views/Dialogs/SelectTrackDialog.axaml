@@ -13,7 +13,6 @@
         
         Width="350"
         Height="200"
-        Topmost="True"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
         Icon="/Assets/Ameko-Simplified-BG-64.ico"

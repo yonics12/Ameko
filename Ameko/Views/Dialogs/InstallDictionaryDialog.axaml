@@ -16,7 +16,6 @@
         x:DataType="vm:InstallDictionaryDialogViewModel"
 
         Width="550"
-        Topmost="True"
         CanResize="False"
         SizeToContent="Height"
         ShowInTaskbar="False"

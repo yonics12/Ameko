@@ -14,7 +14,6 @@
         x:Class="Ameko.Views.Dialogs.SelectDialog"
         x:DataType="vm:SelectDialogViewModel"
         
-        Topmost="True"
         CanResize="False"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"

@@ -14,7 +14,6 @@
         x:DataType="vm:JumpDialogViewModel"
 
         Width="200"
-        Topmost="True"
         CanResize="False"
         SizeToContent="Height"
         ShowInTaskbar="False"

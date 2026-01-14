@@ -15,7 +15,6 @@
         x:Class="Ameko.Views.Dialogs.ColorDialog"
         x:DataType="vm:ColorDialogViewModel"
         
-        Topmost="True"
         CanResize="False"
         ShowInTaskbar="False"
         SizeToContent="WidthAndHeight"

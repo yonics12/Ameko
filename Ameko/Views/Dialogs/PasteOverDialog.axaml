@@ -15,7 +15,6 @@
         x:DataType="vm:PasteOverDialogViewModel"
 
         Width="300"
-        Topmost="True"
         CanResize="False"
         SizeToContent="Height"
         ShowInTaskbar="False"
