@@ -171,12 +171,7 @@ public partial class StylesManagerWindowViewModel : ViewModelBase
 
                 var style = new Style(manager.NextId) { Name = string.Empty };
 
-                var vm = _vmFactory.Create<StyleEditorDialogViewModel>(
-                    _persistence,
-                    style,
-                    manager,
-                    document!
-                );
+                var vm = _vmFactory.Create<StyleEditorDialogViewModel>(style, manager, document!);
                 var result = await ShowStyleEditorWindow.Handle(vm);
 
                 // Abort if aborted
