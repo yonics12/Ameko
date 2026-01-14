@@ -19,6 +19,7 @@ public class MediaController : BindableBase
     private readonly HighResolutionTimer _videoPlayback;
     private readonly HighResolutionTimer _audioPlayback;
 
+    private readonly Lock _requestLock = new();
     private readonly Lock _frameLock = new();
     private readonly Lock _boundsLock = new();
 
@@ -882,7 +883,7 @@ public class MediaController : BindableBase
 
         // TODO: preferably not create a new writer on each change
         var writer = new AssWriter(document, new ConsumerInfo("", "", ""));
-        lock (_frameLock)
+        lock (_requestLock)
         {
             _provider.SetSubtitles(writer.Write(), null);
             _subtitlesChanged = true;
@@ -935,9 +936,6 @@ public class MediaController : BindableBase
         var videoTime = VideoInfo?.MillisecondsFromFrame(frameToFetch) ?? 0;
         var audioTime = VideoInfo?.MillisecondsFromFrame(_currentAudioFrame) ?? -1;
 
-        // Get video/subtitles
-        var frame = _provider.GetFrame(frameToFetch, videoTime, false);
-
         // Get audio visualization
         Bitmap* vizFrame = null;
 
@@ -962,8 +960,10 @@ public class MediaController : BindableBase
             }
         }
 
-        lock (_frameLock)
+        lock (_requestLock)
         {
+            var frame = _provider.GetFrame(frameToFetch, videoTime, false);
+
             _nextFrame = frame;
             _nextVizFrame = vizFrame;
 
