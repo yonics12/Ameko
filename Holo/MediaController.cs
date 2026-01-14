@@ -727,9 +727,6 @@ public class MediaController : BindableBase
     /// <exception cref="InvalidOperationException">If the provider isn't initialized</exception>
     public bool CloseVideo()
     {
-        if (!_provider.IsInitialized)
-            throw new InvalidOperationException("Provider is not initialized");
-
         if (!IsVideoLoaded)
             return true;
 
