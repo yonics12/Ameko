@@ -22,6 +22,12 @@ public interface ISourceProvider
     Rational Sar { get; }
 
     /// <summary>
+    /// Validate that native dependencies are available for use
+    /// </summary>
+    /// <returns><see langword="true"/> if dependencies are available</returns>
+    bool ValidateDependencies();
+
+    /// <summary>
     /// Initialize the provider
     /// </summary>
     /// <returns>0 on success</returns>

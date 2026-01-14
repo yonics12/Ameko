@@ -38,8 +38,57 @@ public unsafe class MizukiSourceProvider(
     public Rational Sar { get; }
 
     /// <inheritdoc />
+    public bool ValidateDependencies()
+    {
+        string[] ffms2Candidates =
+            OperatingSystem.IsWindows() ? ["ffms2.dll", "libffms2.dll"]
+            : OperatingSystem.IsMacOS() ? ["libffms2.dylib", "ffms2.dylib"]
+            : OperatingSystem.IsLinux() ? ["libffms2.so", "ffms2.so"]
+            : [];
+
+        string[] libassCandidates =
+            OperatingSystem.IsWindows() ? ["libass.dll", "ass.dll"]
+            : OperatingSystem.IsMacOS() ? ["libass.dylib", "ass.dylib"]
+            : OperatingSystem.IsLinux() ? ["libass.so", "ass.so"]
+            : [];
+
+        var ffms2Exists = false;
+        var libassExists = false;
+
+        foreach (var candidate in ffms2Candidates)
+        {
+            if (!NativeLibrary.TryLoad(candidate, out var handle))
+                continue;
+            NativeLibrary.Free(handle);
+            ffms2Exists = true;
+            break;
+        }
+        foreach (var candidate in libassCandidates)
+        {
+            if (!NativeLibrary.TryLoad(candidate, out var handle))
+                continue;
+            NativeLibrary.Free(handle);
+            libassExists = true;
+            break;
+        }
+
+        if (!ffms2Exists)
+            logger.LogWarning("Dependency ffms2 not found!");
+        if (!libassExists)
+            logger.LogWarning("Dependency libass not found!");
+
+        return ffms2Exists && libassExists;
+    }
+
+    /// <inheritdoc />
     public int Initialize()
     {
+        if (!ValidateDependencies())
+        {
+            logger.LogWarning("One or more dependencies was not found. Cancelling initialization!");
+            return -1;
+        }
+
         External.SetLoggerCallback(LogDelegate);
         var result = External.Initialize();
 

@@ -31,27 +31,6 @@ pub fn GetVersion() common.BackingVersion {
     };
 }
 
-/// Check if the library is available
-pub fn CheckAvailability() bool {
-    if (builtin.target.os.tag == .linux) {
-        _ = std.DynLib.open("libass.so") catch {
-            _ = std.DynLib.open("libass.so.9") catch return false;
-        };
-        return true;
-    }
-    if (builtin.target.os.tag == .macos) {
-        _ = std.DynLib.open("libffms2.dylib") catch {
-            _ = std.DynLib.open("/opt/homebrew/lib/libffms2.dylib") catch return false;
-        };
-        return true;
-    }
-    if (builtin.target.os.tag == .windows) {
-        _ = std.DynLib.open("ass-9.dll") catch return false;
-        return true;
-    }
-    return false;
-}
-
 /// Initialize libass
 pub fn Initialize() void {
     if (library == null) {

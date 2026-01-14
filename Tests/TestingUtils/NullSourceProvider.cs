@@ -17,6 +17,12 @@ public unsafe class NullSourceProvider : ISourceProvider
     public Rational Sar => new();
 
     /// <inheritdoc />
+    public bool ValidateDependencies()
+    {
+        return true;
+    }
+
+    /// <inheritdoc />
     public int Initialize()
     {
         return 0;

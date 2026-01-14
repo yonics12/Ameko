@@ -22,16 +22,6 @@ pub export fn Initialize() c_int {
     }
     logger.Debug("Initializing Mizuki...");
 
-    if (!ffms.CheckAvailability()) {
-        logger.Error("FATAL: FFMS2 could not be found!");
-        return 1;
-    }
-
-    if (!libass.CheckAvailability()) {
-        logger.Error("FATAL: libass could not be found!");
-        return 2;
-    }
-
     ffms.Initialize();
     libass.Initialize();
 
