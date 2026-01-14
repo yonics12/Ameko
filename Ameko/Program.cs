@@ -80,8 +80,20 @@ sealed class Program
             .UseReactiveUI()
             .With(new MacOSPlatformOptions { DisableDefaultApplicationMenuItems = true });
 
+    private static bool ShouldIgnoreUnhandledException(Exception ex)
+    {
+        if (ex.Message.Contains("org.freedesktop.DBus.Error.ServiceUnknown"))
+            return true;
+        if (ex.Message.Contains("org.freedesktop.DBus.Error.UnknownMethod"))
+            return true;
+        return false;
+    }
+
     private static void HandleUnhandledException(string category, Exception ex)
     {
+        if (ShouldIgnoreUnhandledException(ex))
+            return;
+
         try
         {
             // Write log and hope for the best
