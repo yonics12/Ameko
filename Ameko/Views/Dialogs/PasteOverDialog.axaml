@@ -14,6 +14,7 @@
         x:Class="Ameko.Views.Dialogs.PasteOverDialog"
         x:DataType="vm:PasteOverDialogViewModel"
 
+        Focusable="True"
         Width="300"
         CanResize="False"
         SizeToContent="Height"

@@ -12,6 +12,7 @@
         x:Class="Ameko.Views.Dialogs.ProjectConfigDialog"
         x:DataType="vm:ProjectConfigDialogViewModel"
 
+        Focusable="True"
         Width="480"
         CanResize="False"
         SizeToContent="WidthAndHeight"

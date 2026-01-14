@@ -15,6 +15,7 @@
         x:Class="Ameko.Views.Windows.AboutWindow"
         x:DataType="vm:AboutWindowViewModel"
 
+        Focusable="True"
         Width="500"
         Height="600"
         CanResize="False"

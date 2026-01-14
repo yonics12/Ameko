@@ -5,9 +5,7 @@
         mc:Ignorable="d"
         d:DesignWidth="550"
         d:DesignHeight="180"
-
-        xmlns:converters="clr-namespace:Ameko.Converters"
-        xmlns:dm="clr-namespace:Ameko.DataModels"
+        
         xmlns:i18n="clr-namespace:Ameko.I18N"
         xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         xmlns:vm="clr-namespace:Ameko.ViewModels.Dialogs"
@@ -15,6 +13,7 @@
         x:Class="Ameko.Views.Dialogs.InstallDictionaryDialog"
         x:DataType="vm:InstallDictionaryDialogViewModel"
 
+        Focusable="True"
         Width="550"
         CanResize="False"
         SizeToContent="Height"

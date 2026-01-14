@@ -18,6 +18,7 @@
         x:Class="Ameko.Views.Dialogs.ShiftTimesDialog"
         x:DataType="vm:ShiftTimesDialogViewModel"
 
+        Focusable="True"
         Width="375"
         CanResize="False"
         SizeToContent="Height"

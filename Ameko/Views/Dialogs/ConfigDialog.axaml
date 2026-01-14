@@ -12,6 +12,7 @@
         x:Class="Ameko.Views.Dialogs.ConfigDialog"
         x:DataType="vm:ConfigDialogViewModel"
 
+        Focusable="True"
         Width="525"
         CanResize="False"
         SizeToContent="WidthAndHeight"

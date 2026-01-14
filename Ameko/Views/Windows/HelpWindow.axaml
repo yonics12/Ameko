@@ -7,15 +7,14 @@
         mc:Ignorable="d"
         d:DesignWidth="600"
         d:DesignHeight="600"
-
-        xmlns:converters="clr-namespace:Ameko.Converters"
-        xmlns:dm="clr-namespace:Ameko.DataModels"
+        
         xmlns:i18n="clr-namespace:Ameko.I18N"
         xmlns:vm="clr-namespace:Ameko.ViewModels.Windows"
 
         x:Class="Ameko.Views.Windows.HelpWindow"
         x:DataType="vm:HelpWindowViewModel"
 
+        Focusable="True"
         Width="900"
         Height="650"
         MinWidth="900"

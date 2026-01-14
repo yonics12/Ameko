@@ -13,6 +13,19 @@ public partial class AboutWindow : Window
     public AboutWindow()
     {
         InitializeComponent();
+
+        KeyDown += (_, e) =>
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                case Key.W
+                    when e.KeyModifiers.HasFlag(KeyModifiers.Control)
+                        || e.KeyModifiers.HasFlag(KeyModifiers.Meta):
+                    Close();
+                    break;
+            }
+        };
     }
 
     private void VersionLabel_OnPointerPressed(object? sender, PointerPressedEventArgs e)

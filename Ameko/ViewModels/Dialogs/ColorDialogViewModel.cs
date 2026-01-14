@@ -58,12 +58,20 @@ public partial class ColorDialogViewModel : ViewModelBase
     {
         _persistence = persistence;
 
-        _assColor = color;
+        _assColor = AssCS.Color.FromColor(color);
         _hsvColor = new Avalonia.Media.HsvColor(
             new Avalonia.Media.Color((byte)(255 - color.Alpha), color.Red, color.Green, color.Blue)
         );
 
-        SelectColorCommand = ReactiveCommand.Create(() => new ColorDialogClosedMessage(_assColor));
+        SelectColorCommand = ReactiveCommand.Create(() =>
+        {
+            // Set
+            color.Alpha = _assColor.Alpha;
+            color.Blue = _assColor.Blue;
+            color.Green = _assColor.Green;
+            color.Red = _assColor.Red;
+            return new ColorDialogClosedMessage(_assColor);
+        });
 
         _useRing = persistence.UseColorRing;
     }

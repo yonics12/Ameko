@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using TheArtOfDev.HtmlRenderer.Core.Entities;
@@ -14,6 +15,19 @@ public partial class HelpWindow : Window
     public HelpWindow()
     {
         InitializeComponent();
+
+        KeyDown += (_, e) =>
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                case Key.W
+                    when e.KeyModifiers.HasFlag(KeyModifiers.Control)
+                        || e.KeyModifiers.HasFlag(KeyModifiers.Meta):
+                    Close();
+                    break;
+            }
+        };
 
         HtmlPanel.ImageLoad += (_, e) =>
         {

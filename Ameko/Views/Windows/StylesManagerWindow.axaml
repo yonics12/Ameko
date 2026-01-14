@@ -17,6 +17,7 @@
         x:Class="Ameko.Views.Windows.StylesManagerWindow"
         x:DataType="vm:StylesManagerWindowViewModel"
 
+        Focusable="True"
         Width="900"
         Height="525"
         CanResize="False"

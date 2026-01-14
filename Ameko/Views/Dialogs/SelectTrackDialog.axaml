@@ -11,6 +11,7 @@
         x:Class="Ameko.Views.Dialogs.SelectTrackDialog"
         x:DataType="vm:SelectTrackDialogViewModel"
         
+        Focusable="True"
         Width="350"
         Height="200"
         CanResize="False"

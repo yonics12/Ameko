@@ -5,15 +5,14 @@
         mc:Ignorable="d"
         d:DesignWidth="525"
         d:DesignHeight="175"
-
-        xmlns:converters="clr-namespace:Ameko.Converters"
-        xmlns:dm="clr-namespace:Ameko.DataModels"
+        
         xmlns:i18n="clr-namespace:Ameko.I18N"
         xmlns:vm="clr-namespace:Ameko.ViewModels.Dialogs"
 
         x:Class="Ameko.Views.Dialogs.FileModifiedDialog"
         x:DataType="vm:FileModifiedDialogViewModel"
 
+        Focusable="True"
         Width="525"
         CanResize="False"
         SizeToContent="Height"

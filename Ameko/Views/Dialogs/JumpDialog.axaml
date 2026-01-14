@@ -13,6 +13,7 @@
         x:Class="Ameko.Views.Dialogs.JumpDialog"
         x:DataType="vm:JumpDialogViewModel"
 
+        Focusable="True"
         Width="200"
         CanResize="False"
         SizeToContent="Height"

@@ -9,6 +9,7 @@ using Ameko.ViewModels.Dialogs;
 using Ameko.ViewModels.Windows;
 using Ameko.Views.Dialogs;
 using Avalonia.Controls;
+using Avalonia.Input;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
 
@@ -36,6 +37,19 @@ public partial class PkgManWindow : ReactiveWindow<PkgManWindowViewModel>
     public PkgManWindow()
     {
         InitializeComponent();
+
+        KeyDown += (_, e) =>
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                case Key.W
+                    when e.KeyModifiers.HasFlag(KeyModifiers.Control)
+                        || e.KeyModifiers.HasFlag(KeyModifiers.Meta):
+                    Close();
+                    break;
+            }
+        };
 
         this.WhenActivated(disposables =>
         {

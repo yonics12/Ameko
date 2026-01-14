@@ -12,6 +12,7 @@
         x:Class="Ameko.Views.Dialogs.SpellcheckDialog"
         x:DataType="vm:SpellcheckDialogViewModel"
 
+        Focusable="True"
         Width="550"
         Height="275"
         CanResize="False"

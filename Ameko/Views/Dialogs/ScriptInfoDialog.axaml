@@ -13,6 +13,7 @@
         x:Class="Ameko.Views.Dialogs.ScriptInfoDialog"
         x:DataType="vm:ScriptInfoDialogViewModel"
         
+        Focusable="True"
         CanResize="False"
         Icon="/Assets/Ameko-Simplified-BG-64.ico"
         Width="650"

@@ -59,6 +59,19 @@ public partial class StylesManagerWindow : ReactiveWindow<StylesManagerWindowVie
     {
         InitializeComponent();
 
+        KeyDown += (_, e) =>
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                case Key.W
+                    when e.KeyModifiers.HasFlag(KeyModifiers.Control)
+                        || e.KeyModifiers.HasFlag(KeyModifiers.Meta):
+                    Close();
+                    break;
+            }
+        };
+
         this.WhenActivated(disposables =>
         {
             ViewModel?.ShowStyleEditorWindow.RegisterHandler(DoShowStyleEditor);

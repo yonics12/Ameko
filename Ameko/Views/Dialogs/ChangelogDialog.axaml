@@ -10,6 +10,7 @@
         x:Class="Ameko.Views.Dialogs.ChangelogDialog"
         x:DataType="vm:ChangelogDialogViewModel"
         
+        Focusable="True"
         Width="600"
         Height="600"
         CanResize="True"

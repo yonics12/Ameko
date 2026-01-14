@@ -4,6 +4,7 @@ using System;
 using System.Reactive.Disposables;
 using System.Reactive.Disposables.Fluent;
 using System.Threading.Tasks;
+using Ameko.Messages;
 using Ameko.ViewModels.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
@@ -18,8 +19,8 @@ public partial class StyleEditorDialog : ReactiveWindow<StyleEditorDialogViewMod
     )
     {
         var dialog = new ColorDialog { DataContext = interaction.Input };
-        var result = await dialog.ShowDialog<Color?>(this);
-        interaction.SetOutput(result);
+        var result = await dialog.ShowDialog<ColorDialogClosedMessage?>(this);
+        interaction.SetOutput(result?.Color);
     }
 
     public StyleEditorDialog()
