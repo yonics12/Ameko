@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        d:DesignWidth="650"
+        d:DesignWidth="675"
         d:DesignHeight="400"
         
         xmlns:c="using:Ameko.Views.Controls"
@@ -14,10 +14,12 @@
         x:Class="Ameko.Views.Dialogs.KeybindsDialog"
         x:DataType="vm:KeybindsDialogViewModel"
         
-        CanResize="False"
+        CanResize="True"
         Icon="/Assets/Ameko-Simplified-BG-64.ico"
-        Width="650"
+        Width="675"
         Height="400"
+        MinWidth="675"
+        MinHeight="400"
         Title="{x:Static i18n:Keybinds.KeybindsWindow_Title}"
         WindowStartupLocation="CenterScreen">
     <Grid RowDefinitions="*, Auto">
@@ -61,7 +63,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="85"
+                <DataGridTemplateColumn Width="175"
                                         Header="{x:Static i18n:Keybinds.Keybinds_Header_Keybind}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
