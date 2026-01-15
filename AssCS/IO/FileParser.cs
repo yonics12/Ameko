@@ -15,7 +15,7 @@ public abstract class FileParser
     /// </summary>
     /// <param name="reader">Data to parse</param>
     /// <returns><see cref="Document"/> represented by the <paramref name="reader"/></returns>
-    protected abstract Document Parse(TextReader reader);
+    public abstract Document Parse(TextReader reader);
 
     /// <summary>
     /// Parse a file into a <see cref="Document"/>

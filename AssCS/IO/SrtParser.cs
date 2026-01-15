@@ -11,7 +11,7 @@ namespace AssCS.IO;
 /// </summary>
 public partial class SrtParser : FileParser
 {
-    protected override Document Parse(TextReader reader)
+    public override Document Parse(TextReader reader)
     {
         var doc = new Document(false);
         doc.StyleManager.LoadDefault();

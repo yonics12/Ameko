@@ -18,7 +18,7 @@ public class AssWriter(Document document, ConsumerInfo consumer) : FileWriter
         + "BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding";
 
     /// <inheritdoc/>
-    protected override bool Write(TextWriter writer, bool export = false)
+    public override bool Write(TextWriter writer, bool export = false)
     {
         WriteHeader(writer);
         WriteScriptInfo(writer);

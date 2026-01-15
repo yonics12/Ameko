@@ -12,7 +12,7 @@ namespace AssCS.IO;
 public partial class AssParser : FileParser
 {
     /// <inheritdoc/>
-    protected override Document Parse(TextReader reader)
+    public override Document Parse(TextReader reader)
     {
         var doc = new Document(false);
         doc.ScriptInfoManager.LoadDefault();

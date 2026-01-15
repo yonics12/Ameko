@@ -16,7 +16,7 @@ public abstract class FileWriter
     /// <param name="writer">Writer to write to</param>
     /// <param name="export"><see langword="true"/> if this write is an export</param>
     /// <returns><see langword="true"/> if writing was successful</returns>
-    protected abstract bool Write(TextWriter writer, bool export = false);
+    public abstract bool Write(TextWriter writer, bool export = false);
 
     /// <summary>
     /// Write an ass document to file
