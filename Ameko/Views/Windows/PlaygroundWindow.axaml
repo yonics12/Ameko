@@ -25,7 +25,7 @@
         <avaloniaEdit:TextEditor Grid.Row="0"
                                  Name="PlaygroundEditor"
                                  FontFamily="{StaticResource SarasaMono}"
-                                 FontSize="12"
+                                 FontSize="14"
                                  ShowLineNumbers="True"
                                  Document="{Binding Document}" />
         <GridSplitter Grid.Row="1"
