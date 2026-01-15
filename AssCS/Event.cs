@@ -647,11 +647,13 @@ public partial class Event(int id) : BindableBase, IEntry
 
     #endregion
 
+    /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         return obj is Event @event && Id == @event.Id && IsCongruentWith(@event);
     }
 
+    /// <inheritdoc />
     public override int GetHashCode()
     {
         var hash = new HashCode();
@@ -679,11 +681,23 @@ public partial class Event(int id) : BindableBase, IEntry
             && _text == @event._text;
     }
 
+    /// <summary>
+    /// Equality operator
+    /// </summary>
+    /// <param name="left">left event</param>
+    /// <param name="right">right event</param>
+    /// <returns><see langword="true"/> if the events are equal</returns>
     public static bool operator ==(Event? left, Event? right)
     {
         return left?.Equals(right) ?? false;
     }
 
+    /// <summary>
+    /// Inequality operator
+    /// </summary>
+    /// <param name="left">left event</param>
+    /// <param name="right">right event</param>
+    /// <returns><see langword="true"/> if the events are not equal</returns>
     public static bool operator !=(Event? left, Event? right)
     {
         return !(left == right);

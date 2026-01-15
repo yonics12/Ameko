@@ -989,8 +989,19 @@ public abstract class OverrideTag
         /// </summary>
         public enum ClipVariant
         {
+            /// <summary>
+            /// Rectangular clip
+            /// </summary>
             Rectangle,
+
+            /// <summary>
+            /// Vector clip
+            /// </summary>
             Drawing,
+
+            /// <summary>
+            /// Scaled vector clip
+            /// </summary>
             ScaledDrawing,
         }
     }
@@ -1667,9 +1678,19 @@ public abstract class OverrideTag
             }
         }
 
+        /// <summary>
+        /// Type of font size represented
+        /// </summary>
         public enum FsVariant
         {
+            /// <summary>
+            /// Absolute font size
+            /// </summary>
             Absolute,
+
+            /// <summary>
+            /// Relative font size
+            /// </summary>
             Relative,
         }
     }
@@ -2046,8 +2067,19 @@ public abstract class OverrideTag
         /// </summary>
         public enum IClipVariant
         {
+            /// <summary>
+            /// Rectangular clip
+            /// </summary>
             Rectangle,
+
+            /// <summary>
+            /// Vector clip
+            /// </summary>
             Drawing,
+
+            /// <summary>
+            /// Scaled vector clip
+            /// </summary>
             ScaledDrawing,
         }
     }
@@ -2965,11 +2997,29 @@ public abstract class OverrideTag
                 _ => throw new ArgumentOutOfRangeException(nameof(Variant), Variant, null),
             };
 
+        /// <summary>
+        /// Type of transform block
+        /// </summary>
         public enum TransformVariant
         {
+            /// <summary>
+            /// Just the override tags
+            /// </summary>
             BlockOnly,
+
+            /// <summary>
+            /// Acceleration and override tags
+            /// </summary>
             AccelerationOnly,
+
+            /// <summary>
+            /// Time and override tags
+            /// </summary>
             TimeOnly,
+
+            /// <summary>
+            /// Time, acceleration, and override tags
+            /// </summary>
             Full,
         }
     }
@@ -3225,8 +3275,11 @@ public abstract class OverrideTag
     public class Unknown(string name, params string[] args) : OverrideTag
     {
         /// <inheritdoc />
-        /// <inheritdoc />
         public override string Name { get; } = name;
+
+        /// <summary>
+        /// Arguments provided
+        /// </summary>
         public string[] Args { get; } = args;
 
         /// <inheritdoc />

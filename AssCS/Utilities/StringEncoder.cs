@@ -4,6 +4,9 @@ using System.Text;
 
 namespace AssCS.Utilities;
 
+/// <summary>
+/// Encode or decode strings
+/// </summary>
 public static class StringEncoder
 {
     /// <summary>

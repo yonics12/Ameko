@@ -180,7 +180,7 @@ public sealed partial class SeekSlider : RangeBase
     /// </summary>
     private Track? Track { get; set; }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);

@@ -36,6 +36,10 @@ public class HistoryManager(
     /// The type of the most recent commit, used for coalescing
     /// </summary>
     public ChangeType LastCommitType { get; private set; }
+
+    /// <summary>
+    /// Time the last commit occured at
+    /// </summary>
     public DateTimeOffset LastCommitTime { get; private set; }
 
     /// <summary>
@@ -207,6 +211,11 @@ public class HistoryManager(
         return true;
     }
 
+    /// <summary>
+    /// Peek the history stack
+    /// </summary>
+    /// <returns>The commit at the top of the stack</returns>
+    /// <exception cref="InvalidOperationException">If the stack is empty</exception>
     public Commit PeekHistory()
     {
         if (_history.IsEmpty || !_history.TryPeek(out var commit))
@@ -216,6 +225,11 @@ public class HistoryManager(
         return commit;
     }
 
+    /// <summary>
+    /// Peek the future stack
+    /// </summary>
+    /// <returns>The commit at the top of the stack</returns>
+    /// <exception cref="InvalidOperationException">If the stack is empty</exception>
     public Commit PeekFuture()
     {
         if (_future.IsEmpty || !_future.TryPeek(out var commit))
@@ -256,5 +270,8 @@ public class HistoryManager(
         OnChangeMade?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Event raised when a commit or other operation occurs
+    /// </summary>
     public event EventHandler<EventArgs>? OnChangeMade;
 }

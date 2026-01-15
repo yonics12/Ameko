@@ -2,6 +2,9 @@
 
 namespace AssCS.Utilities;
 
+/// <summary>
+/// Extensions for enums
+/// </summary>
 public static class EnumExtensions
 {
     /// <summary>

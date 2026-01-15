@@ -2,8 +2,15 @@
 
 namespace AssCS.Overrides.Blocks;
 
+/// <summary>
+/// Extensions for a list of <see cref="Block"/>s
+/// </summary>
 public static class BlockListExtensions
 {
+    /// <summary>
+    /// Extensions for a list of <see cref="Block"/>s
+    /// </summary>
+    /// <param name="blocks">List of <see cref="Block"/>s</param>
     extension(List<Block> blocks)
     {
         /// <summary>

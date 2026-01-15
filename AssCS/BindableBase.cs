@@ -38,8 +38,15 @@ public abstract class BindableBase : INotifyPropertyChanged
         return true;
     }
 
+    /// <summary>
+    /// Event raised when a property changes
+    /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// Raise the <see cref="PropertyChanged"/> event with the <paramref name="propertyName"/>
+    /// </summary>
+    /// <param name="propertyName">Name of the property being changed</param>
     protected virtual void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

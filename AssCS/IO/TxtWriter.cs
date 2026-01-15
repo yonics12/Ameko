@@ -14,6 +14,7 @@ public partial class TxtWriter(
     bool includeActors = true
 ) : FileWriter
 {
+    /// <inheritdoc />
     public override bool Write(TextWriter writer, bool export = false)
     {
         writer.WriteLine($"# Exported by {consumer.Name} {consumer.Version} [AssCS]");

@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MPL-2.0
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace AssCS.Overrides;
 
+/// <summary>
+/// Override tag names
+/// </summary>
 public static class OverrideTags
 {
     public const string A = "a";

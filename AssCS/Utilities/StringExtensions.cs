@@ -4,6 +4,9 @@ using System.Globalization;
 
 namespace AssCS.Utilities;
 
+/// <summary>
+/// Extensions for strings
+/// </summary>
 public static class StringExtensions
 {
     /// <param name="str">String to replace on</param>
@@ -29,7 +32,7 @@ public static class StringExtensions
         /// Parse an integer from a string
         /// </summary>
         /// <returns>Integer</returns>
-        /// <remarks>Positive & negative decimal, hexadecimal, and exponential numbers are supported</remarks>
+        /// <remarks>Positive &amp; negative decimal, hexadecimal, and exponential numbers are supported</remarks>
         public int ParseAssInt()
         {
             return Convert.ToInt32(Math.Truncate(ParseAssDouble(str)));
@@ -39,7 +42,7 @@ public static class StringExtensions
         /// Parse a double from a string
         /// </summary>
         /// <returns>Double</returns>
-        /// <remarks>Positive & negative decimal, hexadecimal, and exponential numbers are supported</remarks>
+        /// <remarks>Positive &amp; negative decimal, hexadecimal, and exponential numbers are supported</remarks>
         public double ParseAssDouble()
         {
             if (string.IsNullOrWhiteSpace(str))

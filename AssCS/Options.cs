@@ -2,6 +2,9 @@
 
 namespace AssCS;
 
+/// <summary>
+/// Options for calculations, defaults, etc.
+/// </summary>
 public static class Options
 {
     /// <summary>

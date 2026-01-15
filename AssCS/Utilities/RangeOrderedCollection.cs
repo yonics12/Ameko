@@ -78,6 +78,9 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
 
     #region Public Properties
 
+    /// <summary>
+    /// Compare two collections
+    /// </summary>
     public EqualityComparer<T> Comparer
     {
         get => field ??= EqualityComparer<T>.Default;
@@ -119,7 +122,7 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
     /// Inserts the elements of a collection into the <see cref="ObservableCollection{T}"/> at the specified index.
     /// </summary>
     /// <param name="index">The zero-based index at which the new elements should be inserted.</param>
-    /// <param name="collection">The collection whose elements should be inserted into the List<T>.
+    /// <param name="collection">The collection whose elements should be inserted into the List.
     /// The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
     /// <exception cref="ArgumentNullException"><paramref name="collection"/> is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is not in the collection range.</exception>
@@ -375,7 +378,6 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is out of range.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="count"/> is out of range.</exception>
     /// <exception cref="ArgumentNullException"><paramref name="collection"/> is null.</exception>
-    /// <exception cref="ArgumentNullException"><paramref name="comparer"/> is null.</exception>
     public void ReplaceRange(int index, int count, IEnumerable<T> collection)
     {
         ArgumentOutOfRangeException.ThrowIfNegative(index);
@@ -526,7 +528,7 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
         OnCollectionReset();
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     protected override void InsertItem(int index, T item)
     {
         if (!AllowDuplicates && Items.Contains(item))
@@ -535,7 +537,7 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
         base.InsertItem(index, item);
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     protected override void SetItem(int index, T item)
     {
         if (AllowDuplicates)
@@ -559,10 +561,6 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
     /// Properties/methods modifying this ObservableCollection will raise
     /// a collection changed event through this virtual method.
     /// </summary>
-    /// <remarks>
-    /// When overriding this method, either call its base implementation
-    /// or call <see cref="BlockReentrancy"/> to guard against reentrant collection changes.
-    /// </remarks>
     protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
     {
         if (_deferredEvents != null)
@@ -573,6 +571,10 @@ public class RangeObservableCollection<T> : ObservableCollection<T>
         base.OnCollectionChanged(e);
     }
 
+    /// <summary>
+    /// Defer events disposable
+    /// </summary>
+    /// <returns>Disposable</returns>
     protected virtual IDisposable DeferEvents() => new DeferredEventsCollection(this);
 
     #endregion Protected Methods

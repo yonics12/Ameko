@@ -11,7 +11,7 @@ namespace AssCS.IO;
 /// </summary>
 public partial class AssParser : FileParser
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override Document Parse(TextReader reader)
     {
         var doc = new Document(false);

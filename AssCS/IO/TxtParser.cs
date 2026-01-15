@@ -11,6 +11,7 @@ namespace AssCS.IO;
 /// <param name="actorDelim">Delimiter for actors</param>
 public class TxtParser(char commentDelim = '#', char actorDelim = ':') : FileParser
 {
+    /// <inheritdoc />
     public override Document Parse(TextReader reader)
     {
         var doc = new Document(false);

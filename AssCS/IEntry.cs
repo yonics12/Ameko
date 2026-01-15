@@ -2,4 +2,7 @@
 
 namespace AssCS;
 
+/// <summary>
+/// An entry in a <see cref="Document"/>
+/// </summary>
 public interface IEntry;

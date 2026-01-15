@@ -182,6 +182,9 @@ public class StyleManager : BindableBase
         Add(new Style(NextId));
     }
 
+    /// <summary>
+    /// Instantiate a Style Manager
+    /// </summary>
     public StyleManager()
     {
         _styles = [];

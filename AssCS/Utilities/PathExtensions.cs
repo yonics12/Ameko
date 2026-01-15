@@ -2,6 +2,9 @@
 
 namespace AssCS.Utilities;
 
+/// <summary>
+/// Extensions for path strings
+/// </summary>
 public static class PathExtensions
 {
     private const char ForwardSlash = '/';

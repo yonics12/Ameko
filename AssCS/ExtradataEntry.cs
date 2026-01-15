@@ -46,6 +46,7 @@ public class ExtradataEntry(int id, int expiration, string key, string value)
         return new ExtradataEntry(Id, Expiration, Key, Value);
     }
 
+    /// <inheritdoc />
     public int CompareTo(ExtradataEntry? other)
     {
         return Id.CompareTo(other?.Id);

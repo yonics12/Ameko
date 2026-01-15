@@ -17,7 +17,7 @@ public class AssWriter(Document document, ConsumerInfo consumer) : FileWriter
         "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, "
         + "BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding";
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public override bool Write(TextWriter writer, bool export = false)
     {
         WriteHeader(writer);

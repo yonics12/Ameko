@@ -38,6 +38,11 @@ public class Syllable
     /// </summary>
     public Dictionary<int, string> OverrideTags { get; private set; } = [];
 
+    /// <summary>
+    /// Get the formatted textual representation of the syllable
+    /// </summary>
+    /// <param name="includeKTag">Whether to include the k-tag in the output</param>
+    /// <returns>Text representation of the syllable</returns>
     public string GetFormattedText(bool includeKTag)
     {
         var sb = new StringBuilder();
@@ -45,7 +50,7 @@ public class Syllable
         if (includeKTag)
             sb.Append($"{{\\{TagType}{(Duration + 5) / 10}}}");
 
-        int i = 0;
+        var i = 0;
         foreach (var pair in OverrideTags)
         {
             sb.Append(Text[i..pair.Key]);

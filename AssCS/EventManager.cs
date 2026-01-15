@@ -546,6 +546,9 @@ public class EventManager : BindableBase
         return result;
     }
 
+    /// <summary>
+    /// Remove all events
+    /// </summary>
     public void Clear()
     {
         _events.Clear();
@@ -1117,6 +1120,9 @@ public class EventManager : BindableBase
         RaisePropertyChanged(nameof(Events));
     }
 
+    /// <summary>
+    /// Instantiate the Event Manager
+    /// </summary>
     public EventManager()
     {
         _chain = [];

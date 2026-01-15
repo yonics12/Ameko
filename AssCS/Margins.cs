@@ -41,6 +41,7 @@ public class Margins(int left, int right, int vertical) : BindableBase
         set => SetProperty(ref _vertical, value);
     }
 
+    /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         return obj is Margins margins
@@ -49,16 +50,29 @@ public class Margins(int left, int right, int vertical) : BindableBase
             && _vertical == margins._vertical;
     }
 
+    /// <inheritdoc />
     public override int GetHashCode()
     {
         return 1;
     }
 
+    /// <summary>
+    /// Equality operator
+    /// </summary>
+    /// <param name="left">left margins</param>
+    /// <param name="right">right margins</param>
+    /// <returns><see langword="true"/> if the margins are equal</returns>
     public static bool operator ==(Margins? left, Margins? right)
     {
         return left?.Equals(right) ?? false;
     }
 
+    /// <summary>
+    /// Inequality operator
+    /// </summary>
+    /// <param name="left">left margins</param>
+    /// <param name="right">right margins</param>
+    /// <returns><see langword="true"/> if the margins are not equal</returns>
     public static bool operator !=(Margins? left, Margins? right)
     {
         return !(left == right);

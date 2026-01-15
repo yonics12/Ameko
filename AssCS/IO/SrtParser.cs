@@ -11,6 +11,7 @@ namespace AssCS.IO;
 /// </summary>
 public partial class SrtParser : FileParser
 {
+    /// <inheritdoc />
     public override Document Parse(TextReader reader)
     {
         var doc = new Document(false);

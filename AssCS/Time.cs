@@ -205,16 +205,19 @@ public class Time : BindableBase, IComparable<Time>
         _local = TimeSpan.FromMilliseconds(t.TotalMilliseconds);
     }
 
+    /// <inheritdoc />
     public int CompareTo(Time? other)
     {
         return other is null ? 1 : _local.TotalMilliseconds.CompareTo(other.TotalMilliseconds);
     }
 
+    /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         return obj is Time time && _local.TotalMilliseconds.Equals(time._local.TotalMilliseconds);
     }
 
+    /// <inheritdoc />
     public override int GetHashCode()
     {
         return 1;
@@ -244,21 +247,45 @@ public class Time : BindableBase, IComparable<Time>
 
     #region Operators
 
+    /// <summary>
+    /// Equality operator
+    /// </summary>
+    /// <param name="left">left time</param>
+    /// <param name="right">right time</param>
+    /// <returns><see langword="true"/> if the times are equal</returns>
     public static bool operator ==(Time? left, Time? right)
     {
         return left?._local.TotalMilliseconds.Equals(right?._local.TotalMilliseconds) is true;
     }
 
+    /// <summary>
+    /// Inequality operator
+    /// </summary>
+    /// <param name="left">left time</param>
+    /// <param name="right">right time</param>
+    /// <returns><see langword="true"/> if the times are not equal</returns>
     public static bool operator !=(Time? left, Time? right)
     {
         return !(left == right);
     }
 
+    /// <summary>
+    /// Addition operator
+    /// </summary>
+    /// <param name="a">left time</param>
+    /// <param name="b">right time</param>
+    /// <returns>Sum of the two times</returns>
     public static Time operator +(Time a, Time b)
     {
         return new Time(a._local + b._local);
     }
 
+    /// <summary>
+    /// Subtraction operator
+    /// </summary>
+    /// <param name="a">left time</param>
+    /// <param name="b">right time</param>
+    /// <returns>Difference between the two times, minimum of 0</returns>
     public static Time operator -(Time a, Time b)
     {
         var temp = new Time(a._local - b._local);
@@ -267,21 +294,45 @@ public class Time : BindableBase, IComparable<Time>
         return temp;
     }
 
+    /// <summary>
+    /// Greater than operator
+    /// </summary>
+    /// <param name="a">left time</param>
+    /// <param name="b">right time</param>
+    /// <returns><see langword="true"/> if <paramref name="a"/> is greater than <paramref name="b"/></returns>
     public static bool operator >(Time a, Time b)
     {
         return a._local > b._local;
     }
 
+    /// <summary>
+    /// Less than operator
+    /// </summary>
+    /// <param name="a">left time</param>
+    /// <param name="b">right time</param>
+    /// <returns><see langword="true"/> if <paramref name="a"/> is less than <paramref name="b"/></returns>
     public static bool operator <(Time a, Time b)
     {
         return a._local < b._local;
     }
 
+    /// <summary>
+    /// Greater than or equal to operator
+    /// </summary>
+    /// <param name="a">left time</param>
+    /// <param name="b">right time</param>
+    /// <returns><see langword="true"/> if <paramref name="a"/> is greater than or equal to <paramref name="b"/></returns>
     public static bool operator >=(Time a, Time b)
     {
         return a._local >= b._local;
     }
 
+    /// <summary>
+    /// Less than or equal to operator
+    /// </summary>
+    /// <param name="a">left time</param>
+    /// <param name="b">right time</param>
+    /// <returns><see langword="true"/> if <paramref name="a"/> is less than or equal to <paramref name="b"/></returns>
     public static bool operator <=(Time a, Time b)
     {
         return a._local <= b._local;

@@ -170,7 +170,7 @@ public partial class Color : BindableBase
     /// Initialize a color with an alpha value
     /// </summary>
     /// <param name="alpha">Alpha value</param>
-    /// <returns>Color object set to the values provided<</returns>
+    /// <returns>Color object set to the values provided</returns>
     public static Color FromA(byte alpha)
     {
         return new Color { _alpha = alpha };
@@ -238,6 +238,7 @@ public partial class Color : BindableBase
         return (a.Luminance + 0.05) / (b.Luminance + 0.05);
     }
 
+    /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         return obj is Color color
@@ -247,16 +248,29 @@ public partial class Color : BindableBase
             && _alpha == color._alpha;
     }
 
+    /// <inheritdoc />
     public override int GetHashCode()
     {
         return HashCode.Combine(_red, _green, _blue, _alpha);
     }
 
+    /// <summary>
+    /// Equality operator
+    /// </summary>
+    /// <param name="left">left color</param>
+    /// <param name="right">right color</param>
+    /// <returns><see langword="true"/> if the colors are equal</returns>
     public static bool operator ==(Color? left, Color? right)
     {
         return left?.Equals(right) ?? false;
     }
 
+    /// <summary>
+    /// Inequality operator
+    /// </summary>
+    /// <param name="left">left color</param>
+    /// <param name="right">right color</param>
+    /// <returns><see langword="true"/> if the colors are not equal</returns>
     public static bool operator !=(Color? left, Color? right)
     {
         return !(left == right);
@@ -264,6 +278,12 @@ public partial class Color : BindableBase
 
     #region Operators
 
+    /// <summary>
+    /// Addition operator
+    /// </summary>
+    /// <param name="a">left color</param>
+    /// <param name="b">right color</param>
+    /// <returns>Sum of the two colors</returns>
     public static Color operator +(Color a, Color b)
     {
         return new Color
@@ -275,6 +295,12 @@ public partial class Color : BindableBase
         };
     }
 
+    /// <summary>
+    /// Subtraction operator
+    /// </summary>
+    /// <param name="a">left color</param>
+    /// <param name="b">right color</param>
+    /// <returns>Difference between the two colors</returns>
     public static Color operator -(Color a, Color b)
     {
         return new Color

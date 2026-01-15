@@ -2,6 +2,9 @@
 
 namespace AssCS.Utilities;
 
+/// <summary>
+/// Extensions for lists
+/// </summary>
 public static class ListExtensions
 {
     /// <param name="list">Sorted list</param>

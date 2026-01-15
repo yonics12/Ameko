@@ -21,6 +21,9 @@ public class OverrideBlock(ReadOnlySpan<char> data) : Block(data.ToString(), Blo
     /// </summary>
     public List<OverrideTag> Tags => field ??= ParseTags(_data.AsSpan());
 
+    /// <summary>
+    /// Text content of the block, including { }
+    /// </summary>
     public override string Text
     {
         get

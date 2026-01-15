@@ -445,11 +445,13 @@ public partial class Style(int id) : BindableBase
         };
     }
 
+    /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         return obj is Style style && Id == style.Id && IsCongruentWith(style);
     }
 
+    /// <inheritdoc />
     public override int GetHashCode()
     {
         var hash = new HashCode();
@@ -489,11 +491,23 @@ public partial class Style(int id) : BindableBase
             && _encoding == obj._encoding;
     }
 
+    /// <summary>
+    /// Equality operator
+    /// </summary>
+    /// <param name="left">left style</param>
+    /// <param name="right">right style</param>
+    /// <returns><see langword="true"/> if the styles are equal</returns>
     public static bool operator ==(Style? left, Style? right)
     {
         return left?.Equals(right) ?? false;
     }
 
+    /// <summary>
+    /// Inequality operator
+    /// </summary>
+    /// <param name="left">left style</param>
+    /// <param name="right">right style</param>
+    /// <returns><see langword="true"/> if the styles are not equal</returns>
     public static bool operator !=(Style? left, Style? right)
     {
         return !(left == right);

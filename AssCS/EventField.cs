@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MPL-2.0
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace AssCS;
 
+/// <summary>
+/// Fields in an <see cref="Event"/>
+/// </summary>
 [Flags]
 public enum EventField
 {
