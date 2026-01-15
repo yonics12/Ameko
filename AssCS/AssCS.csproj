@@ -4,6 +4,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>14</LangVersion>
+    <Authors>9volt</Authors>
+    <Description>Library for parsing, writing, and interacting with Advanced Substation Alpha (ASS) subtitles</Description>
+    <PackageProjectUrl>https://ameko.moe</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AmekoProject/Ameko/tree/master/AssCS</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CSharpier.MsBuild">
