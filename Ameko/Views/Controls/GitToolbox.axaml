@@ -80,6 +80,7 @@
                 <TextBlock Grid.Column="0"
                            Grid.Row="0"
                            Text="{x:Static i18n:Git.Git_StagedChanges}"
+                           FontWeight="Bold"
                            TextWrapping="Wrap"
                            Margin="0" />
                 <TextBlock Grid.Column="1"
@@ -124,6 +125,7 @@
                 <TextBlock Grid.Column="0"
                            Grid.Row="0"
                            Text="{x:Static i18n:Git.Git_UnstagedChanges}"
+                           FontWeight="Bold"
                            TextWrapping="Wrap" />
                 <TextBlock Grid.Column="1"
                            Grid.Row="0"
