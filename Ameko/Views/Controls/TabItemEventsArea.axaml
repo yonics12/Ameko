@@ -65,25 +65,21 @@
 	            </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <DataGridTextColumn Header="{x:Static i18n:Resources.EventsGrid_Header_Style}"
-                                FontFamily="{StaticResource ZenKakuGothicNew}"
                                 CanUserResize="False"
                                 Binding="{Binding Style,
 												  Mode=OneWay,
 												  Converter={StaticResource TextLengthConverter}}" />
 			<DataGridTextColumn Header="{x:Static i18n:Resources.EventsGrid_Header_Actor}"
-			                    FontFamily="{StaticResource ZenKakuGothicNew}"
 			                    Binding="{Binding Actor,
 												  Mode=OneWay,
 												  Converter={StaticResource TextLengthConverter}}"
 			                    IsVisible="{Binding Workspace.DisplayActorsColumn}" />
 			<DataGridTextColumn Header="{x:Static i18n:Resources.EventsGrid_Header_Effect}"
-			                    FontFamily="{StaticResource ZenKakuGothicNew}"
 			                    Binding="{Binding Effect,
 												  Mode=OneWay,
 												  Converter={StaticResource TextLengthConverter}}"
 			                    IsVisible="{Binding Workspace.DisplayEffectsColumn}" />
 			<DataGridTextColumn Header="{x:Static i18n:Resources.EventsGrid_Header_Content}"
-			                    FontFamily="{StaticResource ZenKakuGothicNew}"
 			                    Width="*"
 			                    Binding="{Binding Text,
 												  Mode=OneWay,

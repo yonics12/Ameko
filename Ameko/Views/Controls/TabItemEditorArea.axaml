@@ -27,7 +27,6 @@
                  IsReadOnly="True"
                  FontSize="{Binding Configuration.ReferenceFontSize}"
                  MaxLines="4"
-                 FontFamily="{StaticResource ZenKakuGothicNew}"
                  TextWrapping="Wrap"
                  IsVisible="{Binding Workspace.ReferenceFileManager.IsReferenceLoaded}"
                  Text="{Binding Workspace.ReferenceFileManager.CurrentLines}" />
@@ -75,7 +74,6 @@
                                  FilterMode="Contains"
                                  Watermark="{x:Static i18n:Resources.Editor_ActorAcBox_Watermark}"
                                  ToolTip.Tip="{x:Static i18n:Resources.Editor_ActorAcBox_ToolTip}"
-                                 FontFamily="{StaticResource ZenKakuGothicNew}"
                                  TextChanged="AnyControl_EventMetaChanged" />
                 <AutoCompleteBox Name="EffectAcBox"
                                  Grid.Column="4"
@@ -86,7 +84,6 @@
                                  FilterMode="Contains"
                                  Watermark="{x:Static i18n:Resources.Editor_EffectAcBox_Watermark}"
                                  ToolTip.Tip="{x:Static i18n:Resources.Editor_EffectAcBox_ToolTip}"
-                                 FontFamily="{StaticResource ZenKakuGothicNew}"
                                  TextChanged="AnyControl_EventMetaChanged" />
                 <TextBlock Name="MaxLineWidthBox"
                            Grid.Column="5"
@@ -225,7 +222,6 @@
                      SelectionEnd="{Binding EditBoxSelectionEnd, Mode=TwoWay}"
                      Margin="1"
                      MinLines="1"
-                     FontFamily="{StaticResource ZenKakuGothicNew}"
                      TextWrapping="Wrap"
                      IsUndoEnabled="False">
                 <TextBox.ContextMenu>

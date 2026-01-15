@@ -43,7 +43,6 @@
         <TextBlock DockPanel.Dock="Bottom"
                    FontSize="10"
                    Margin="5 0 0 0"
-                   FontFamily="{StaticResource ZenKakuGothicNew}"
                    Text="{Binding CurrentMessage}" />
         <Grid Name="MainWindowGrid">
             <Grid.ColumnDefinitions>

@@ -24,7 +24,7 @@
           IsEnabled="{Binding !IsExecuting}">
         <avaloniaEdit:TextEditor Grid.Row="0"
                                  Name="PlaygroundEditor"
-                                 FontFamily="{StaticResource MartianMono}"
+                                 FontFamily="{StaticResource SarasaMono}"
                                  FontSize="12"
                                  ShowLineNumbers="True"
                                  Document="{Binding Document}" />
