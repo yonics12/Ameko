@@ -393,6 +393,7 @@ public class Project : BindableBase
     /// Open a referenced document
     /// </summary>
     /// <param name="id">ID of the document to open</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     /// <returns>ID of the document or -1 on failure</returns>
     /// <remarks>
     /// A new <see cref="Workspace"/> containing the document and any supporting
@@ -422,11 +423,25 @@ public class Project : BindableBase
                 return null;
             }
 
-            var parser = new AssParser();
-            var document = parser.Parse(_fileSystem, item.Uri!);
+            var ext = Path.GetExtension(item.Uri!.LocalPath);
+            var document = ext switch
+            {
+                ".ass" => new AssParser().Parse(_fileSystem, item.Uri!),
+                ".srt" => new SrtParser().Parse(_fileSystem, item.Uri!),
+                ".txt" => new TxtParser().Parse(_fileSystem, item.Uri!),
+                _ => throw new ArgumentOutOfRangeException(nameof(id), "Invalid document type"),
+            };
 
             BeginSelectionChange();
             item.Workspace = _workspaceFactory.Create(document, item.Id, item.Uri);
+
+            if (ext != ".ass")
+            {
+                // Non-ass sourced documents need to be re-saved as an ass file
+                item.Workspace.SavePath = null;
+                item.Workspace.IsSaved = false;
+            }
+
             _loadedWorkspaces.Add(item.Workspace);
             WorkingSpace = item.Workspace;
             return item.Workspace;
@@ -932,6 +947,7 @@ public class Project : BindableBase
                     if (
                         fileSystem.Directory.GetDirectories(subDirectory).Length == 0
                         && fileSystem.Directory.GetFiles(subDirectory, "*.ass").Length == 0
+                        && fileSystem.Directory.GetFiles(subDirectory, "*.srt").Length == 0
                     )
                     {
                         logger.LogTrace(
@@ -949,7 +965,10 @@ public class Project : BindableBase
                 }
 
                 // Files
-                foreach (var file in fileSystem.Directory.EnumerateFiles(currentPath, "*.ass"))
+                var files = fileSystem
+                    .Directory.EnumerateFiles(currentPath, "*.ass")
+                    .Concat(fileSystem.Directory.EnumerateFiles(currentPath, "*.srt"));
+                foreach (var file in files)
                 {
                     var docItem = new DocumentItem { Id = NextId, Uri = new Uri(file) };
                     currentCollection.Add(docItem);
