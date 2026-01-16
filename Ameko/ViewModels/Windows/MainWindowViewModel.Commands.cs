@@ -256,6 +256,10 @@ public partial class MainWindowViewModel
                 await ShowInstallDictionaryDialog.Handle(vm);
                 _spellcheckService.RebuildDictionary();
             }
+            else
+            {
+                _spellcheckService.RebuildDictionary();
+            }
         });
     }
 
@@ -288,6 +292,10 @@ public partial class MainWindowViewModel
                         true
                     );
                     await ShowInstallDictionaryDialog.Handle(vm);
+                    _spellcheckService.RebuildDictionary();
+                }
+                else
+                {
                     _spellcheckService.RebuildDictionary();
                 }
             }
@@ -376,6 +384,7 @@ public partial class MainWindowViewModel
 
             ProjectProvider.Current = ProjectProvider.Create();
             _logger.LogDebug("Successfully closed project and opened a new one");
+            _spellcheckService.RebuildDictionary();
         });
     }
 
@@ -598,6 +607,7 @@ public partial class MainWindowViewModel
         {
             var vm = _vmFactory.Create<ProjectConfigDialogViewModel>();
             await ShowProjectConfigDialog.Handle(vm);
+            _spellcheckService.RebuildDictionary(); // Just in case :)
         });
     }
 
