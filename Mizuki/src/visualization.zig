@@ -257,6 +257,9 @@ fn DrawEventBounds(
     event_bounds: [*]i64,
     event_bounds_len: usize,
 ) void {
+    // Assert that we have a list of pairs
+    std.debug.assert((event_bounds_len & 1) == 0);
+
     var ei: usize = 0;
     while (ei < event_bounds_len) : (ei += 2) {
         const evt_start_ms: f64 = @floatFromInt(event_bounds[ei]);
@@ -351,8 +354,7 @@ fn DrawLine(
         y2 = tmp;
     }
 
-    if (y2 < 0 or y1 >= h) return;
-    if (y1 < 0) y1 = 0;
+    if (y1 >= h) return;
     if (y2 >= h) y2 = h - 1;
 
     const pixel_size = 4; // 32-bit

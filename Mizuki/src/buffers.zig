@@ -342,9 +342,10 @@ fn AllocateVideoFrame(width: usize, height: usize, pitch: usize) !*frames.FrameG
 
 /// Allocate a visualization frame
 fn AllocateVisualizationFrame(width: usize, height: usize) !*frames.Bitmap {
-    const pitch = width * 4; // BGRA
-    const total_bytes = height * pitch;
+    const pitch = try std.math.mul(usize, width, 4); // BGRA
+    const total_bytes = try std.math.mul(usize, height, pitch);
     const frame = try common.allocator.create(frames.Bitmap);
+    errdefer common.allocator.destroy(frame);
 
     frame.* = .{
         .data = undefined,
@@ -362,5 +363,6 @@ fn AllocateVisualizationFrame(width: usize, height: usize) !*frames.Bitmap {
 fn AllocateVisualizationBitmap(frame: *frames.Bitmap, total_bytes: usize) !void {
     const bmp = &frame;
     const pixel_buffer = try common.allocator.alloc(u8, total_bytes);
+    errdefer common.allocator.free(pixel_buffer);
     bmp.*.data = pixel_buffer.ptr;
 }
