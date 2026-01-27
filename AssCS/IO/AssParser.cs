@@ -77,8 +77,15 @@ public partial class AssParser : FileParser
             return;
 
         var style = Style.FromAss(doc.StyleManager.NextId, line);
-        if (style is not null)
-            doc.StyleManager.Add(style);
+        if (style is null)
+            return;
+
+        // This is apparently a case? Only the last one will be used for rendering
+        // so this should be fine.
+        if (doc.StyleManager.TryGet(style.Name, out _))
+            doc.StyleManager.Remove(style.Name);
+
+        doc.StyleManager.Add(style);
     }
 
     /// <summary>
