@@ -73,8 +73,12 @@ pub fn LoadVideo(
 
     if (indexer == null) {
         if (err_info.SubType == c.FFMS_ERROR_FILE_READ) {
+            const msg = std.mem.span(err_info.Buffer);
+            logger.Error(msg);
             return FfmsError.FileNotFound;
         } else {
+            const msg = std.mem.span(err_info.Buffer);
+            logger.Error(msg);
             return FfmsError.VideoNotSupported;
         }
     }
@@ -152,6 +156,14 @@ pub fn LoadVideo(
     ctx.video_source = c.FFMS_CreateVideoSource(file_name, video_track_number, index, -1, c.FFMS_SEEK_NORMAL, &err_info);
 
     if (ctx.video_source == null) {
+        std.debug.print(
+            "FFMS error type {}: {s}\n",
+            .{
+                err_info.ErrorType,
+                std.mem.span(err_info.Buffer),
+            },
+        );
+        logger.Error(std.mem.span(err_info.Buffer));
         return FfmsError.VideoTrackLoadingFailed;
     }
 
@@ -266,8 +278,12 @@ pub fn LoadAudio(
 
     if (indexer == null) {
         if (err_info.SubType == c.FFMS_ERROR_FILE_READ) {
+            const msg = std.mem.span(err_info.Buffer);
+            logger.Error(msg);
             return FfmsError.FileNotFound;
         } else {
+            const msg = std.mem.span(err_info.Buffer);
+            logger.Error(msg);
             return FfmsError.VideoNotSupported;
         }
     }

@@ -559,9 +559,11 @@ public class MediaController : BindableBase
 
         return await Task.Run(() =>
         {
-            if (_provider.LoadVideo(filePath, progressCallback) != 0)
+            var loadResult = _provider.LoadVideo(filePath, progressCallback);
+            if (loadResult != 0)
             {
                 // TODO: Handle error
+                _logger.LogError("Load video returned error code {ErrorCode}", loadResult);
                 return false;
             }
 

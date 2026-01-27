@@ -65,9 +65,10 @@ public unsafe class MizukiSourceProvider(
         }
         foreach (var candidate in libassCandidates)
         {
-            if (!NativeLibrary.TryLoad(candidate, out var handle))
-                continue;
-            NativeLibrary.Free(handle);
+            // if (!NativeLibrary.TryLoad(candidate, out var handle))
+            //     continue;
+            // NativeLibrary.Free(handle);
+            NativeLibrary.Load(candidate);
             libassExists = true;
             break;
         }

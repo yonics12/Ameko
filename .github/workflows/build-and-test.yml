@@ -109,18 +109,13 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          submodules: recursive
       - uses: mlugg/setup-zig@v2
         with:
           version: 0.15.1
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "${{ env.DOTNET_VERSION }}.x"
-
-      - name: Install dependencies
-        shell: bash
-        run: |
-          brew update
-          brew install libass ffms2
 
       - name: Build Mizuki
         shell: bash
@@ -146,8 +141,10 @@ jobs:
           chmod +x Ameko/bin/Release/net${{ env.DOTNET_VERSION }}/osx-arm64/publish/Ameko
 
           mkdir -p publish/Ameko.app/Contents/MacOS
+          mkdir -p publish/Ameko.app/Contents/Frameworks
           mkdir -p publish/Ameko.app/Contents/Resources
           cp -a Ameko/bin/Release/net${{ env.DOTNET_VERSION }}/osx-arm64/publish/* publish/Ameko.app/Contents/MacOS
+          cp -a Packaging/Ameko-Native-Bin/mac-arm64/* publish/Ameko.app/Contents/Frameworks
           cp Ameko/Assets/Icons/*.icns publish/Ameko.app/Contents/Resources
 
           PLIST=publish/Ameko.app/Contents/Info.plist
@@ -156,8 +153,13 @@ jobs:
           # Inject version into plist
           /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string '${{ needs.calculate-version.outputs.version }}'" "$PLIST"
           /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string '${{ needs.calculate-version.outputs.patch }}'" "$PLIST"
-
-          echo "You will need to install libass and ffms2 to run Ameko. Example: brew install libass ffms2" > "publish/DEPENDENCIES.txt"
+          
+          # Set RPath
+          install_name_tool -add_rpath @executable_path/../Frameworks publish/Ameko.app/Contents/MacOS/Ameko
+          
+          # Ad-hoc signing
+          codesign --force --deep --sign - publish/Ameko.app
+          
           echo "Because Ameko is unsigned, you will need to run the following in a terminal to open Ameko: xattr -cr ./Ameko.app" > "publish/OPENING.txt"
 
       - name: Upload Artifact
