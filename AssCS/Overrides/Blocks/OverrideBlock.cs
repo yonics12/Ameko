@@ -188,7 +188,10 @@ public class OverrideBlock(ReadOnlySpan<char> data) : Block(data.ToString(), Blo
             else if (IsTag(OverrideTags.Fs))
             {
                 if (args.Count == 0)
+                {
                     tags.Add(new OverrideTag.Fs((string)null!, OverrideTag.Fs.FsVariant.Absolute));
+                    continue;
+                }
                 var value = args[0];
                 if (args[0].Length > 0 && args[0][0] is '+' or '-')
                     tags.Add(new OverrideTag.Fs(value, OverrideTag.Fs.FsVariant.Relative));
