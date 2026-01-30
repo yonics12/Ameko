@@ -265,6 +265,9 @@ fn DrawEventBounds(
         const evt_start_ms: f64 = @floatFromInt(event_bounds[ei]);
         const evt_end_ms: f64 = @floatFromInt(event_bounds[ei + 1]);
 
+        if (evt_end_ms < evt_start_ms)
+            continue;
+
         if ((evt_start_ms < start_ms and evt_end_ms < start_ms) or (evt_start_ms > end_ms and evt_end_ms > end_ms))
             continue;
 
