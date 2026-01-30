@@ -180,7 +180,8 @@ pub fn ProcVizualizationFrame(
     // If there's no room, make space
     if (buffers.items.len >= ctx.max_viz_buffers) {
         const last = buffers.swapRemove(buffers.items.len - 1);
-        _ = ReleaseVisualizationFrame(last);
+        const free_buffer = last.*.width != width or last.*.height != height;
+        _ = ReleaseVisualizationFrame(last, free_buffer);
         try buffers.insert(common.allocator, 0, last);
     }
 
@@ -195,7 +196,9 @@ pub fn ProcVizualizationFrame(
     // Allocate the buffer
     if (result == null) { // Allocate a new buffer entirely
         result = try AllocateVisualizationFrame(@intCast(width), @intCast(height));
-    } else { // Allocate just the data field
+    } else if (result.?.*.width != width or result.?.*.height != height) { // Allocate new data field
+        result.?.*.width = width;
+        result.?.*.height = height;
         const pitch = width * 4; // BGRA
         const total_bytes = @as(usize, @intCast(height * pitch));
         try AllocateVisualizationBitmap(result.?, total_bytes);
@@ -290,14 +293,18 @@ pub fn ReleaseVideoFrame(frame: *frames.FrameGroup) c_int {
     return 0;
 }
 
-/// Mark a viz frame as invalid and free the data field so it can be reused
-pub fn ReleaseVisualizationFrame(frame: *frames.Bitmap) c_int {
+/// Mark a viz frame as invalid so it can be reused
+pub fn ReleaseVisualizationFrame(frame: *frames.Bitmap, free_buffer: bool) c_int {
     frame.valid = 0;
-    const total: usize = @intCast(frame.height * frame.*.pitch);
-    if (total != 0) {
-        common.allocator.free(frame.*.data[0..total]);
+
+    if (free_buffer) {
+        const total: usize = @intCast(frame.height * frame.*.pitch);
+        if (total != 0) {
+            common.allocator.free(frame.*.data[0..total]);
+        }
+        frame.data = undefined;
     }
-    frame.data = undefined;
+
     return 0;
 }
 
