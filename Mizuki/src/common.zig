@@ -2,7 +2,7 @@
 
 const std = @import("std");
 
-pub var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+pub var gpa: std.heap.GeneralPurposeAllocator(.{ .safety = true }) = .init;
 pub const allocator = gpa.allocator();
 
 /// Version of a backing library

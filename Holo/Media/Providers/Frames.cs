@@ -64,5 +64,6 @@ public struct Bitmap
     public int Width;
     public int Height;
     public int Pitch;
+    public int Capacity;
     public unsafe byte* Data;
 }
