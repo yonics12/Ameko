@@ -938,7 +938,8 @@ public class MediaController : BindableBase
         // Get audio visualization
         Bitmap* vizFrame = null;
 
-        if (IsAudioLoaded)
+        // Sanity checking so we're not updating for stupid small viewports
+        if (IsAudioLoaded && VisualizerWidth > 10 && VisualizerHeight > 10)
         {
             lock (_boundsLock)
             {
