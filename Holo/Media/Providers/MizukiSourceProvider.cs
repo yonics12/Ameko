@@ -262,12 +262,6 @@ public unsafe class MizukiSourceProvider(
     }
 
     /// <inheritdoc />
-    public int ReleaseVisualizationFrame(Bitmap* frame)
-    {
-        return External.ReleaseVisualizationFrame(frame);
-    }
-
-    /// <inheritdoc />
     public int[] GetKeyframes()
     {
         var ptr = External.GetKeyframes(_context);
@@ -483,9 +477,6 @@ internal static unsafe partial class External
 
     [LibraryImport("mizuki")]
     internal static unsafe partial int ReleaseFrame(FrameGroup* frame);
-
-    [LibraryImport("mizuki")]
-    internal static unsafe partial int ReleaseVisualizationFrame(Bitmap* frame);
 
     [LibraryImport("mizuki")]
     internal static partial int GetFrameCount(GlobalContext* context);

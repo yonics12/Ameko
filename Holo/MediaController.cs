@@ -843,15 +843,20 @@ public class MediaController : BindableBase
         {
             if (_nextVizFrame is not null)
             {
+                Interlocked.Increment(ref _nextVizFrame->Refcount);
+
                 _lastVizFrame = _nextVizFrame;
                 _nextVizFrame = null;
+            }
+            else if (_lastVizFrame is not null)
+            {
+                Interlocked.Increment(ref _lastVizFrame->Refcount);
             }
         }
 
         if (_lastVizFrame is null)
             throw new InvalidOperationException("Frame is unavailable");
 
-        Interlocked.Increment(ref _lastVizFrame->Refcount);
         return _lastVizFrame;
     }
 

@@ -6,6 +6,7 @@ const ffms = @import("ffms.zig");
 const libass = @import("libass.zig");
 const frames = @import("frames.zig");
 const common = @import("common.zig");
+const logger = @import("logger.zig");
 const context = @import("context.zig");
 const viz = @import("visualization.zig");
 
@@ -157,39 +158,49 @@ pub fn ProcVizualizationFrame(
         event_bounds,
         event_bounds_len,
     );
-    // _ = pixel_ms;
-    // _ = amplitude_scale;
-    // _ = start_time;
-    // _ = video_time;
-    // _ = audio_time;
-    // _ = event_bounds;
-    // _ = event_bounds_len;
     return result;
 }
 
 fn GetOrCreateVisualizationFrame(ctx: *context.BuffersContext, width: c_int, height: c_int) !*frames.Bitmap {
     var buffers = &ctx.viz_buffers.?;
 
-    // Try to find a usable buffer
+    // Mutex, just in case™
+    ctx.viz_mutex.lock();
+    defer ctx.viz_mutex.unlock();
+
+    // Check if there's room to add a new buffer
+    if (buffers.items.len < ctx.max_viz_buffers) {
+        const new_buffer = try AllocateVisualizationFrame(@intCast(width), @intCast(height));
+        try buffers.insert(common.allocator, 0, new_buffer);
+        return new_buffer;
+    }
+
+    // Try to find a usable buffer, starting at the end
     var idx = buffers.items.len;
     while (idx > 0) {
         idx -= 1;
         const buffer = buffers.items[idx];
-        if (buffer.refcount == 0 and buffer.width == width and buffer.height == height) {
+        if (buffer.refcount > 0) {
+            continue;
+        } else if (buffer.width == width and buffer.height == height) {
+            // Correct size, re-use the buffer
             if (idx != 0) {
-                std.log.debug("Moving frame {d} to 0", .{idx});
                 _ = buffers.swapRemove(idx);
                 try buffers.insert(common.allocator, 0, buffer);
             }
-            std.log.debug("Using frame {d}", .{idx});
             return buffer;
         } else {
-            std.log.debug("Frame at {d} has refcount {d}", .{ idx, buffer.refcount });
+            // Wrong size, remove & create one with the right size
+            _ = buffers.swapRemove(idx);
+            FreeVisualizationFrame(buffer);
+            const new_buffer = try AllocateVisualizationFrame(@intCast(width), @intCast(height));
+            try buffers.insert(common.allocator, 0, new_buffer);
+            return new_buffer;
         }
     }
 
-    // No usable buffers, so add a new one
-    std.log.debug("Inserting new frame", .{});
+    // No room and no free buffers, make a new one but this scenario is Not Good!!
+    logger.Warn("Visualization buffer pool exhausted and no free buffers!");
     const new_buffer = try AllocateVisualizationFrame(@intCast(width), @intCast(height));
     try buffers.insert(common.allocator, 0, new_buffer);
     return new_buffer;
@@ -270,13 +281,6 @@ pub fn InvalidateVideoFrame(frame: *frames.FrameGroup) c_int {
     return 0;
 }
 
-/// Mark a viz frame as invalid so it can be reused
-pub fn InvalidateVisualizationFrame(frame: *frames.Bitmap) c_int {
-    std.log.debug("Invalidating a frame!", .{});
-    frame.*.refcount = 0;
-    return 0;
-}
-
 /// Allocate a new frame buffer
 fn AllocateVideoFrame(width: usize, height: usize, pitch: usize) !*frames.FrameGroup {
     const total_bytes = height * pitch;
@@ -333,7 +337,16 @@ fn AllocateVisualizationFrame(width: usize, height: usize) !*frames.Bitmap {
         .refcount = 0,
     };
 
-    @memset(pixel_buffer[0..total_bytes], 0);
-
     return frame;
+}
+
+/// Free the viz frame
+fn FreeVisualizationFrame(frame: *frames.Bitmap) void {
+    std.debug.assert(frame.refcount <= 0);
+
+    const total = frame.capacity;
+    if (total != 0) {
+        common.allocator.free(frame.*.data[0..total]);
+    }
+    common.allocator.destroy(frame);
 }

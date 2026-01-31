@@ -128,12 +128,6 @@ public unsafe class NullSourceProvider : ISourceProvider
     }
 
     /// <inheritdoc />
-    public int ReleaseVisualizationFrame(Bitmap* frame)
-    {
-        return 0;
-    }
-
-    /// <inheritdoc />
     public int[] GetKeyframes()
     {
         return [];
