@@ -11,10 +11,12 @@ namespace TestingUtils;
 public class TestProjectFactory : IProjectProvider
 {
     /// <inheritdoc />
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler? PropertyChanged;
+#pragma warning restore CS0067
 
     /// <inheritdoc />
-    public Project Current { get; set; }
+    public Project Current { get; set; } = null!;
 
     /// <inheritdoc />
     public Project Create(bool isEmpty = false)
