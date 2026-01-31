@@ -152,6 +152,13 @@ public interface ISourceProvider
     unsafe int ReleaseFrame(FrameGroup* frame);
 
     /// <summary>
+    /// Release a frame
+    /// </summary>
+    /// <param name="frame">Pointer to frame to release</param>
+    /// <returns>0 on success</returns>
+    unsafe int ReleaseVisualizationFrame(Bitmap* frame);
+
+    /// <summary>
     /// List of keyframes
     /// </summary>
     /// <returns></returns>

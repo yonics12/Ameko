@@ -843,8 +843,14 @@ public class MediaController : BindableBase
         {
             if (_nextVizFrame is not null)
             {
+                var discard = _lastVizFrame;
                 _lastVizFrame = _nextVizFrame;
                 _nextVizFrame = null;
+
+                if (discard is not null && discard != _lastFrame)
+                {
+                    _provider.ReleaseVisualizationFrame(discard);
+                }
             }
         }
 

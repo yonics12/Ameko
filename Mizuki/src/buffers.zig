@@ -172,38 +172,23 @@ pub fn ProcVizualizationFrame(
 fn GetOrCreateVisualizationFrame(ctx: *context.BuffersContext, width: c_int, height: c_int) !*frames.Bitmap {
     var buffers = &ctx.viz_buffers.?;
 
-    // Lock the mutex for thread safety
-    ctx.mutex.lock();
-    defer ctx.mutex.unlock();
-
-    // Check if there's room to add a new buffer
-    if (buffers.items.len < ctx.max_viz_buffers) {
-        std.log.debug("Inserting new frame", .{});
-        const new_buffer = try AllocateVisualizationFrame(@intCast(width), @intCast(height));
-        try buffers.insert(common.allocator, 0, new_buffer);
-        return new_buffer;
+    // Try to find a usable buffer
+    for (buffers.items, 0..) |buffer, idx| {
+        if (buffer.valid == 0 and buffer.width == width and buffer.height == height) {
+            std.log.debug("Moving frame {d} to 0", .{idx});
+            _ = buffers.swapRemove(idx);
+            try buffers.insert(common.allocator, 0, buffer);
+            return buffer;
+        }
     }
 
-    const tail = buffers.getLast();
-    const tail_idx = buffers.items.len - 1;
+    // if (buffers.items.len < ctx.max_viz_buffers) {}
 
-    if (tail.width == width and tail.height == height) {
-        // Reuse existing buffer
-        std.log.debug("Moving frame {d} to 0", .{tail_idx});
-        _ = buffers.swapRemove(tail_idx);
-        try buffers.insert(common.allocator, 0, tail);
-        tail.*.valid = 0;
-        return tail;
-    } else {
-        // Create new buffer with desired size
-        std.log.debug("Removing frame {d} and inserting new frame", .{tail_idx});
-        const removed = buffers.swapRemove(tail_idx);
-        FreeVisualizationFrame(removed);
-
-        const new_frame = try AllocateVisualizationFrame(@intCast(width), @intCast(height));
-        try buffers.insert(common.allocator, 0, new_frame);
-        return new_frame;
-    }
+    // No usable buffers, so add a new one
+    std.log.debug("Inserting new frame", .{});
+    const new_buffer = try AllocateVisualizationFrame(@intCast(width), @intCast(height));
+    try buffers.insert(common.allocator, 0, new_buffer);
+    return new_buffer;
 }
 
 /// Get a frame
@@ -282,18 +267,10 @@ pub fn InvalidateVideoFrame(frame: *frames.FrameGroup) c_int {
 }
 
 /// Mark a viz frame as invalid so it can be reused
-fn InvalidateVisualizationFrame(frame: *frames.Bitmap) void {
+pub fn InvalidateVisualizationFrame(frame: *frames.Bitmap) c_int {
+    std.log.debug("Invalidating a frame!", .{});
     frame.*.valid = 0;
-}
-
-/// Free the viz frame
-fn FreeVisualizationFrame(frame: *frames.Bitmap) void {
-    const total = frame.capacity;
-    if (frame.data != null and total != 0) {
-        common.allocator.free(frame.*.data.?[0..total]);
-    }
-    frame.*.data = null;
-    common.allocator.destroy(frame);
+    return 0;
 }
 
 /// Allocate a new frame buffer
@@ -339,22 +316,18 @@ fn AllocateVideoFrame(width: usize, height: usize, pitch: usize) !*frames.FrameG
 fn AllocateVisualizationFrame(width: usize, height: usize) !*frames.Bitmap {
     const pitch = try std.math.mul(usize, width, 4); // BGRA
     const total_bytes = try std.math.mul(usize, height, pitch);
+
     const frame = try common.allocator.create(frames.Bitmap);
-    // errdefer common.allocator.destroy(frame);
+    const pixel_buffer = try common.allocator.alloc(u8, total_bytes);
 
     frame.* = .{
-        .data = null,
         .width = @intCast(width),
         .height = @intCast(height),
         .pitch = @intCast(pitch),
         .capacity = total_bytes,
-        .valid = 0,
+        .data = pixel_buffer.ptr,
+        .valid = 1,
     };
-
-    const pixel_buffer = try common.allocator.alloc(u8, total_bytes);
-    // errdefer common.allocator.free(pixel_buffer);
-
-    frame.*.data = pixel_buffer.ptr;
 
     @memset(pixel_buffer[0..total_bytes], 0);
 

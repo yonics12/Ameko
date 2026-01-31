@@ -194,6 +194,11 @@ pub export fn GetVisualization(
     };
 }
 
+/// Invalidate a visualization frame
+pub export fn ReleaseVisualizationFrame(frame: *frames.Bitmap) c_int {
+    return buffers.InvalidateVisualizationFrame(frame);
+}
+
 /// Get the number of frames in the video
 pub export fn GetFrameCount(g_ctx: *context.GlobalContext) c_int {
     return g_ctx.*.ffms.frame_count;

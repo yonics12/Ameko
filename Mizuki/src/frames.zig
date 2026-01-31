@@ -48,7 +48,7 @@ pub const Bitmap = extern struct {
     width: c_int,
     height: c_int,
     pitch: c_int,
-    data: ?[*]u8,
     capacity: usize,
+    data: ?[*]u8,
     valid: c_int = 0, // bool
 };
