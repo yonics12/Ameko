@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using Ameko.DataModels.OpenGl;
 using Avalonia;
 using Avalonia.Controls;
@@ -129,12 +130,16 @@ public class Visualizer : OpenGlControlBase
 
         _shader.SetUniform("texture0", 0);
 
-        var frame = MediaController.GetCurrentVizFrame();
+        var frame = MediaController.GetCurrentVizFrame(); // Increments refcount
+        if (frame == null)
+            return;
+
         var texWidth = (uint)frame->Width;
         var texHeight = (uint)frame->Height;
 
         _texture.Bind(TextureUnit.Texture0);
         _texture.SetTexture(texWidth, texHeight, frame->Data);
+        Interlocked.Decrement(ref frame->Refcount);
 
         _shader.Use();
 

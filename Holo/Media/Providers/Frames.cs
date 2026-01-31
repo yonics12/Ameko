@@ -66,5 +66,5 @@ public struct Bitmap
     public int Pitch;
     public nuint Capacity;
     public unsafe byte* Data;
-    public int Valid;
+    public int Refcount;
 }

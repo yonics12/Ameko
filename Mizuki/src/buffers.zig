@@ -122,7 +122,7 @@ pub fn Deinit(g_ctx: *context.GlobalContext) void {
         for (viz_buffers.items) |buffer| {
             const total: usize = buffer.*.capacity;
             if (total != 0) {
-                common.allocator.free(buffer.*.data.?[0..total]);
+                common.allocator.free(buffer.*.data[0..total]);
             }
             common.allocator.destroy(buffer);
         }
@@ -146,26 +146,24 @@ pub fn ProcVizualizationFrame(
     const ctx = &g_ctx.*.buffers;
     const result: *frames.Bitmap = try GetOrCreateVisualizationFrame(ctx, width, height);
 
-    // viz.RenderWaveform(
-    //     g_ctx,
-    //     result.?,
-    //     pixel_ms,
-    //     amplitude_scale,
-    //     start_time,
-    //     video_time,
-    //     audio_time,
-    //     event_bounds,
-    //     event_bounds_len,
-    // );
-    _ = pixel_ms;
-    _ = amplitude_scale;
-    _ = start_time;
-    _ = video_time;
-    _ = audio_time;
-    _ = event_bounds;
-    _ = event_bounds_len;
-
-    result.*.valid = 1;
+    viz.RenderWaveform(
+        g_ctx,
+        result,
+        pixel_ms,
+        amplitude_scale,
+        start_time,
+        video_time,
+        audio_time,
+        event_bounds,
+        event_bounds_len,
+    );
+    // _ = pixel_ms;
+    // _ = amplitude_scale;
+    // _ = start_time;
+    // _ = video_time;
+    // _ = audio_time;
+    // _ = event_bounds;
+    // _ = event_bounds_len;
     return result;
 }
 
@@ -173,16 +171,22 @@ fn GetOrCreateVisualizationFrame(ctx: *context.BuffersContext, width: c_int, hei
     var buffers = &ctx.viz_buffers.?;
 
     // Try to find a usable buffer
-    for (buffers.items, 0..) |buffer, idx| {
-        if (buffer.valid == 0 and buffer.width == width and buffer.height == height) {
-            std.log.debug("Moving frame {d} to 0", .{idx});
-            _ = buffers.swapRemove(idx);
-            try buffers.insert(common.allocator, 0, buffer);
+    var idx = buffers.items.len;
+    while (idx > 0) {
+        idx -= 1;
+        const buffer = buffers.items[idx];
+        if (buffer.refcount == 0 and buffer.width == width and buffer.height == height) {
+            if (idx != 0) {
+                std.log.debug("Moving frame {d} to 0", .{idx});
+                _ = buffers.swapRemove(idx);
+                try buffers.insert(common.allocator, 0, buffer);
+            }
+            std.log.debug("Using frame {d}", .{idx});
             return buffer;
+        } else {
+            std.log.debug("Frame at {d} has refcount {d}", .{ idx, buffer.refcount });
         }
     }
-
-    // if (buffers.items.len < ctx.max_viz_buffers) {}
 
     // No usable buffers, so add a new one
     std.log.debug("Inserting new frame", .{});
@@ -269,7 +273,7 @@ pub fn InvalidateVideoFrame(frame: *frames.FrameGroup) c_int {
 /// Mark a viz frame as invalid so it can be reused
 pub fn InvalidateVisualizationFrame(frame: *frames.Bitmap) c_int {
     std.log.debug("Invalidating a frame!", .{});
-    frame.*.valid = 0;
+    frame.*.refcount = 0;
     return 0;
 }
 
@@ -326,7 +330,7 @@ fn AllocateVisualizationFrame(width: usize, height: usize) !*frames.Bitmap {
         .pitch = @intCast(pitch),
         .capacity = total_bytes,
         .data = pixel_buffer.ptr,
-        .valid = 1,
+        .refcount = 0,
     };
 
     @memset(pixel_buffer[0..total_bytes], 0);
