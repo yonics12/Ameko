@@ -47,7 +47,7 @@ public unsafe class MizukiSourceProvider(
             : [];
 
         string[] libassCandidates =
-            OperatingSystem.IsWindows() ? ["libass.dll", "ass.dll"]
+            OperatingSystem.IsWindows() ? ["libass.dll", "ass.dll", "ass-9.dll"]
             : OperatingSystem.IsMacOS() ? ["libass.dylib", "ass.dylib"]
             : OperatingSystem.IsLinux() ? ["libass.so", "ass.so"]
             : [];
@@ -65,10 +65,9 @@ public unsafe class MizukiSourceProvider(
         }
         foreach (var candidate in libassCandidates)
         {
-            // if (!NativeLibrary.TryLoad(candidate, out var handle))
-            //     continue;
-            // NativeLibrary.Free(handle);
-            NativeLibrary.Load(candidate);
+            if (!NativeLibrary.TryLoad(candidate, out var handle))
+                continue;
+            NativeLibrary.Free(handle);
             libassExists = true;
             break;
         }
