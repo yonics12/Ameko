@@ -639,7 +639,19 @@ public partial class TabItemViewModel : ViewModelBase
         {
             if (!Workspace.MediaController.IsVideoLoaded)
                 return;
-            throw new NotImplementedException();
+
+            var time = Workspace.MediaController.CurrentTime ?? Time.Zero;
+            var result = Time.Maximum;
+
+            foreach (var e in Workspace.Document.EventManager.Events)
+            {
+                if (e.Start > time && e.Start < result)
+                    result = e.Start;
+                if (e.End > time && e.End < result)
+                    result = e.End;
+            }
+
+            Workspace.MediaController.SeekTo(result);
         });
     }
 
@@ -652,7 +664,19 @@ public partial class TabItemViewModel : ViewModelBase
         {
             if (!Workspace.MediaController.IsVideoLoaded)
                 return;
-            throw new NotImplementedException();
+
+            var time = Workspace.MediaController.CurrentTime ?? Time.Zero;
+            var result = Time.Minimum;
+
+            foreach (var e in Workspace.Document.EventManager.Events)
+            {
+                if (e.Start < time && e.Start > result)
+                    result = e.Start;
+                if (e.End < time && e.End > result)
+                    result = e.End;
+            }
+
+            Workspace.MediaController.SeekTo(result);
         });
     }
 

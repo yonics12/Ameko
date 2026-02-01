@@ -178,6 +178,16 @@ public class Time : BindableBase, IComparable<Time>
     public static Time Zero => new(TimeSpan.Zero);
 
     /// <summary>
+    /// Create a Time object with the maximum allowed value
+    /// </summary>
+    public static Time Maximum => new(TimeSpan.MaxValue);
+
+    /// <summary>
+    /// Create a Time object with the smallest allowed value
+    /// </summary>
+    public static Time Minimum => new(TimeSpan.MinValue);
+
+    /// <summary>
     /// Initialize a zero time
     /// </summary>
     public Time()
