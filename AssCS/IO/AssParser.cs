@@ -9,16 +9,14 @@ namespace AssCS.IO;
 /// <summary>
 /// Parse an ass document
 /// </summary>
-/// <param name="wysiwyg">
-/// Enables WYSIWYG mode. When enabled, no default entries will be provided. Not suitable for GUI applications.
-/// </param>
-public partial class AssParser(bool wysiwyg = false) : FileParser
+/// <param name="loadDefaults">When disabled, no default entries will be provided. Not suitable for GUI applications.</param>
+public partial class AssParser(bool loadDefaults = true) : FileParser
 {
     /// <inheritdoc />
     public override Document Parse(TextReader reader)
     {
         var doc = new Document(false);
-        if (!wysiwyg)
+        if (loadDefaults)
             doc.ScriptInfoManager.LoadDefault();
 
         ParseFunc parseState = ParseUnknown;
@@ -52,12 +50,12 @@ public partial class AssParser(bool wysiwyg = false) : FileParser
             parseState(data, doc);
         }
 
-        if (doc.StyleManager.Count == 0 && !wysiwyg)
+        if (doc.StyleManager.Count == 0 && loadDefaults)
             doc.StyleManager.LoadDefault();
-        if (doc.EventManager.Count == 0 && !wysiwyg)
+        if (doc.EventManager.Count == 0 && loadDefaults)
             doc.EventManager.LoadDefault();
 
-        if (!wysiwyg)
+        if (loadDefaults)
             doc.HistoryManager.Commit(ChangeType.Initial, [doc.EventManager.Head.Id]);
 
         return doc;
