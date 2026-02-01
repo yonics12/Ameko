@@ -30,6 +30,7 @@
     </PackageReference>
     <PackageReference Include="Avalonia.Themes.Simple" />
     <PackageReference Include="AvaloniaEdit.TextMate" />
+    <PackageReference Include="Ben.Demystifier" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="CS-Script" />
     <PackageReference Include="CSharpier.MsBuild">
