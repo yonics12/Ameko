@@ -9,13 +9,17 @@ namespace AssCS.IO;
 /// <summary>
 /// Parse an ass document
 /// </summary>
-public partial class AssParser : FileParser
+/// <param name="wysiwyg">
+/// Enables WYSIWYG mode. When enabled, no default entries will be provided. Not suitable for GUI applications.
+/// </param>
+public partial class AssParser(bool wysiwyg = false) : FileParser
 {
     /// <inheritdoc />
     public override Document Parse(TextReader reader)
     {
         var doc = new Document(false);
-        doc.ScriptInfoManager.LoadDefault();
+        if (!wysiwyg)
+            doc.ScriptInfoManager.LoadDefault();
 
         ParseFunc parseState = ParseUnknown;
 
@@ -48,12 +52,13 @@ public partial class AssParser : FileParser
             parseState(data, doc);
         }
 
-        if (doc.StyleManager.Count == 0)
+        if (doc.StyleManager.Count == 0 && !wysiwyg)
             doc.StyleManager.LoadDefault();
-        if (doc.EventManager.Count == 0)
+        if (doc.EventManager.Count == 0 && !wysiwyg)
             doc.EventManager.LoadDefault();
 
-        doc.HistoryManager.Commit(ChangeType.Initial, [doc.EventManager.Head.Id]);
+        if (!wysiwyg)
+            doc.HistoryManager.Commit(ChangeType.Initial, [doc.EventManager.Head.Id]);
 
         return doc;
     }
@@ -209,7 +214,6 @@ public partial class AssParser : FileParser
     private static void ParseUnknown(ReadOnlySpan<char> _1, Document _2)
     {
         // Do nothing
-        return;
     }
 
     [GeneratedRegex(@"^Data:\ *(\d+),([^,]+),(.)(.*)")]
