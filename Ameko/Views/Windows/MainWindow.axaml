@@ -182,6 +182,10 @@
                     <NativeMenuItem Header="{x:Static i18n:Resources.Menu_ShiftTimes}"
                                     Command="{Binding ShowShiftTimesDialogCommand}" />
                     <NativeMenuItemSeparator />
+                    <NativeMenuItem Header="{x:Static i18n:Resources.Menu_SnapFrame_Start}"
+                                    Command="{Binding SnapStartToCurrentFrameCommand}" />
+                    <NativeMenuItem Header="{x:Static i18n:Resources.Menu_SnapFrame_End}"
+                                    Command="{Binding SnapEndToCurrentFrameCommand}" />
                     <NativeMenuItem Header="{x:Static i18n:Resources.Menu_SnapKf_Start}"
                                     Command="{Binding SnapStartToKeyframeCommand}" />
                     <NativeMenuItem Header="{x:Static i18n:Resources.Menu_SnapKf_End}"

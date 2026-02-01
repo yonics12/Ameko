@@ -401,4 +401,10 @@
   <data name="Menu_Sort_Lines" xml:space="preserve">
         <value>Sor_t Lines...</value>
     </data>
+    <data name="Menu_SnapFrame_End" xml:space="preserve">
+        <value>Snap End to Current F_rame</value>
+    </data>
+    <data name="Menu_SnapFrame_Start" xml:space="preserve">
+        <value>Snap Start to _Current Frame</value>
+    </data>
 </root>

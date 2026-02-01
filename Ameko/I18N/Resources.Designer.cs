@@ -812,5 +812,17 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("Menu_Sort_Lines", resourceCulture);
             }
         }
+        
+        public static string Menu_SnapFrame_End {
+            get {
+                return ResourceManager.GetString("Menu_SnapFrame_End", resourceCulture);
+            }
+        }
+        
+        public static string Menu_SnapFrame_Start {
+            get {
+                return ResourceManager.GetString("Menu_SnapFrame_Start", resourceCulture);
+            }
+        }
     }
 }

@@ -717,6 +717,52 @@ public partial class MainWindowViewModel
     }
 
     /// <summary>
+    /// Snap start of active event to current frame
+    /// </summary>
+    /// <returns></returns>
+    private ReactiveCommand<Unit, Unit> CreateSnapStartToCurrentFrameCommand()
+    {
+        return ReactiveCommand.Create(() =>
+        {
+            var prj = ProjectProvider.Current;
+            var wsp = prj.WorkingSpace;
+            if (wsp is null)
+                return;
+
+            var mc = wsp.MediaController;
+            if (!mc.IsVideoLoaded)
+                return;
+            var @event = wsp.SelectionManager.ActiveEvent;
+
+            @event.Start = mc.VideoInfo.TimeFromFrame(mc.CurrentFrame);
+            wsp.Commit(@event, ChangeType.ModifyEventMeta);
+        });
+    }
+
+    /// <summary>
+    /// Snap end of active event to current frame
+    /// </summary>
+    /// <returns></returns>
+    private ReactiveCommand<Unit, Unit> CreateSnapEndToCurrentFrameCommand()
+    {
+        return ReactiveCommand.Create(() =>
+        {
+            var prj = ProjectProvider.Current;
+            var wsp = prj.WorkingSpace;
+            if (wsp is null)
+                return;
+
+            var mc = wsp.MediaController;
+            if (!mc.IsVideoLoaded)
+                return;
+            var @event = wsp.SelectionManager.ActiveEvent;
+
+            @event.End = mc.VideoInfo.TimeFromFrame(mc.CurrentFrame);
+            wsp.Commit(@event, ChangeType.ModifyEventMeta);
+        });
+    }
+
+    /// <summary>
     /// Display the Open Video dialog
     /// </summary>
     private ReactiveCommand<Unit, Unit> CreateOpenVideoCommand()
