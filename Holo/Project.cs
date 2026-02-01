@@ -12,6 +12,7 @@ using Holo.Configuration.Migration;
 using Holo.Models;
 using Holo.Providers;
 using Microsoft.Extensions.Logging;
+using NaturalSort.Extension;
 
 namespace Holo;
 
@@ -933,7 +934,10 @@ public class Project : BindableBase
                 var (currentPath, currentCollection) = stack.Pop();
 
                 // Subdirectories
-                foreach (var subDirectory in fileSystem.Directory.EnumerateDirectories(currentPath))
+                var sortedDirectories = fileSystem
+                    .Directory.EnumerateDirectories(currentPath)
+                    .OrderBy(p => p, StringComparer.CurrentCultureIgnoreCase.WithNaturalSort());
+                foreach (var subDirectory in sortedDirectories)
                 {
                     var dirName = fileSystem.Path.GetFileName(subDirectory);
 
@@ -965,10 +969,11 @@ public class Project : BindableBase
                 }
 
                 // Files
-                var files = fileSystem
+                var sortedFiles = fileSystem
                     .Directory.EnumerateFiles(currentPath, "*.ass")
-                    .Concat(fileSystem.Directory.EnumerateFiles(currentPath, "*.srt"));
-                foreach (var file in files)
+                    .Concat(fileSystem.Directory.EnumerateFiles(currentPath, "*.srt"))
+                    .OrderBy(p => p, StringComparer.CurrentCultureIgnoreCase.WithNaturalSort());
+                foreach (var file in sortedFiles)
                 {
                     var docItem = new DocumentItem { Id = NextId, Uri = new Uri(file) };
                     currentCollection.Add(docItem);
