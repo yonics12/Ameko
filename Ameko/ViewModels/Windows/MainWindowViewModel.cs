@@ -249,6 +249,8 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand OpenDocumentCommand { get; }
     public ICommand RenameDocumentCommand { get; }
     public ICommand RenameDirectoryCommand { get; }
+    public ICommand CreateFolderCommand { get; }
+    public ICommand MoveToFolderCommand { get; }
     public ICommand AttachReferenceFileNoGuiCommand { get; }
     public ICommand CheckSpellcheckDictionaryCommand { get; }
     #endregion
@@ -517,11 +519,13 @@ public partial class MainWindowViewModel : ViewModelBase
         OpenIssueTrackerCommand = CreateOpenIssueTrackerCommand();
         // Other
         RemoveDocumentFromProjectCommand = CreateRemoveDocumentFromProjectCommand();
-        RemoveDirectoryFromProjectCommand = CreateRemoveDirectoryFromProjectCommand();
+        RemoveDirectoryFromProjectCommand = CreateRemoveFolderFromProjectCommand();
         OpenDocumentCommand = CreateOpenDocumentCommand();
         AttachReferenceFileNoGuiCommand = CreateAttachReferenceFileNoGuiCommand();
         RenameDocumentCommand = CreateRenameDocumentCommand();
-        RenameDirectoryCommand = CreateRenameDirectoryCommand();
+        RenameDirectoryCommand = CreateRenameFolderCommand();
+        CreateFolderCommand = CreateCreateFolderCommand();
+        MoveToFolderCommand = CreateMoveToFolderCommand();
         CheckSpellcheckDictionaryCommand = CreateCheckSpellcheckDictionaryCommand();
         #endregion
 

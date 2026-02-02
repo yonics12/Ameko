@@ -1150,9 +1150,9 @@ public partial class MainWindowViewModel
     }
 
     /// <summary>
-    /// Remove directory from the project
+    /// Remove folder from the project
     /// </summary>
-    private ReactiveCommand<int, Unit> CreateRemoveDirectoryFromProjectCommand()
+    private ReactiveCommand<int, Unit> CreateRemoveFolderFromProjectCommand()
     {
         return ReactiveCommand.CreateFromTask(
             async (int id) =>
@@ -1179,9 +1179,9 @@ public partial class MainWindowViewModel
     }
 
     /// <summary>
-    /// Rename project directory
+    /// Rename project folder
     /// </summary>
-    private ReactiveCommand<int, Unit> CreateRenameDirectoryCommand()
+    private ReactiveCommand<int, Unit> CreateRenameFolderCommand()
     {
         return ReactiveCommand.CreateFromTask(
             async (int id) =>
@@ -1190,7 +1190,7 @@ public partial class MainWindowViewModel
                     return;
 
                 _logger.LogDebug(
-                    "Displaying input box for rename of directory {Id} ({DirItemTitle})",
+                    "Displaying input box for rename of folder {Id} ({DirItemTitle})",
                     id,
                     dirItem.Title
                 );
@@ -1254,6 +1254,55 @@ public partial class MainWindowViewModel
                 }
             }
         );
+    }
+
+    /// <summary>
+    /// Add a folder to an existing project folder
+    /// </summary>
+    private ReactiveCommand<int, Unit> CreateCreateFolderCommand()
+    {
+        return ReactiveCommand.CreateFromTask(
+            async (int parentId) =>
+            {
+                if (
+                    parentId != -1
+                    && ProjectProvider.Current.FindItemById(parentId) is not DirectoryItem
+                )
+                    return;
+
+                _logger.LogDebug(
+                    "Displaying input box for creation of folder in parent {Id}",
+                    parentId
+                );
+
+                var result = await _messageBoxService.ShowInputAsync(
+                    I18N.Other.MsgBox_NameDirectory_Title,
+                    I18N.Other.MsgBox_NameDirectory_Body,
+                    string.Empty,
+                    MsgBoxButtonSet.OkCancel,
+                    MsgBoxButton.Ok,
+                    MaterialIconKind.Rename
+                );
+
+                if (result is null)
+                    return;
+
+                var (boxResult, userInput) = result.Value;
+
+                if (boxResult != MsgBoxButton.Ok || string.IsNullOrWhiteSpace(userInput))
+                    return;
+
+                ProjectProvider.Current.AddDirectory(userInput, parentId);
+            }
+        );
+    }
+
+    /// <summary>
+    /// Move an item to a folder
+    /// </summary>
+    private ReactiveCommand<int, Unit> CreateMoveToFolderCommand()
+    {
+        return ReactiveCommand.CreateFromTask(async (int id) => { });
     }
 
     /// <summary>

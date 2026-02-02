@@ -824,5 +824,23 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("Menu_SnapFrame_Start", resourceCulture);
             }
         }
+        
+        public static string ProjectExplorer_ContextMenu_CreateFolder_Root {
+            get {
+                return ResourceManager.GetString("ProjectExplorer_ContextMenu_CreateFolder_Root", resourceCulture);
+            }
+        }
+        
+        public static string ProjectExplorer_ContextMenu_CreateFolder_Folder {
+            get {
+                return ResourceManager.GetString("ProjectExplorer_ContextMenu_CreateFolder_Folder", resourceCulture);
+            }
+        }
+        
+        public static string ProjectExplorer_ContextMenu_MoveToFolder {
+            get {
+                return ResourceManager.GetString("ProjectExplorer_ContextMenu_MoveToFolder", resourceCulture);
+            }
+        }
     }
 }

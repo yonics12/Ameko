@@ -407,4 +407,13 @@
     <data name="Menu_SnapFrame_Start" xml:space="preserve">
         <value>Snap Start to _Current Frame</value>
     </data>
+    <data name="ProjectExplorer_ContextMenu_MoveToFolder" xml:space="preserve">
+        <value>Move to Folder...</value>
+    </data>
+    <data name="ProjectExplorer_ContextMenu_CreateFolder_Folder" xml:space="preserve">
+        <value>Create New Folder Here...</value>
+    </data>
+    <data name="ProjectExplorer_ContextMenu_CreateFolder_Root" xml:space="preserve">
+        <value>Create New Root Folder...</value>
+    </data>
 </root>
