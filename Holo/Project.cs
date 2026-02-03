@@ -87,6 +87,7 @@ public class Project : BindableBase
     /// The path the <see cref="Document"/> is saved to,
     /// or <see langword="null"/> if the document has not been saved.
     /// </summary>
+    [MemberNotNullWhen(true, nameof(IsFile))]
     public Uri? SavePath
     {
         get => _savePath;
@@ -94,13 +95,18 @@ public class Project : BindableBase
     }
 
     /// <summary>
-    /// <see langword="true"/> if the <see cref="Document"/> has been saved and is up to date
+    /// <see langword="true"/> if the <see cref="Project"/> has been saved and is up to date
     /// </summary>
     public bool IsSaved
     {
         get;
         internal set => SetProperty(ref field, value);
     }
+
+    /// <summary>
+    /// <see langword="true"/> if the <see cref="Project"/> has a save path
+    /// </summary>
+    public bool IsFile => _savePath is not null;
 
     /// <summary>
     /// Next available ID for documents/workspaces
@@ -232,9 +238,7 @@ public class Project : BindableBase
     /// Project title/name
     /// </summary>
     public string Title =>
-        SavePath is not null
-            ? Path.GetFileNameWithoutExtension(SavePath.LocalPath)
-            : "Default Project";
+        IsFile ? Path.GetFileNameWithoutExtension(SavePath!.LocalPath) : "Default Project";
 
     /// <summary>
     /// Get a loaded <see cref="Workspace"/> by ID
@@ -321,6 +325,8 @@ public class Project : BindableBase
         BeginSelectionChange();
         _loadedWorkspaces.Add(wsp);
         WorkingSpace = wsp;
+        if (IsFile)
+            IsSaved = false;
         return wsp;
     }
 
@@ -347,6 +353,8 @@ public class Project : BindableBase
             else // Parent not found
                 _referencedItems.Add(dirItem);
         }
+
+        IsSaved = false;
         return dirItem;
     }
 
@@ -360,7 +368,10 @@ public class Project : BindableBase
     {
         _logger.LogTrace("Removing directory with id: {Id}", id);
         var dir = FindItemById(id);
-        return dir?.Type == ProjectItemType.Directory && RemoveItemById(id);
+        var result = dir?.Type == ProjectItemType.Directory && RemoveItemById(id);
+        if (result && IsFile)
+            IsSaved = false;
+        return result;
     }
 
     /// <summary>
@@ -387,7 +398,10 @@ public class Project : BindableBase
 
         BeginSelectionChange();
         _loadedWorkspaces.RemoveAll(w => w.Id == id);
-        return RemoveItemById(id);
+        var result = RemoveItemById(id);
+        if (result && IsFile)
+            IsSaved = false;
+        return result;
     }
 
     /// <summary>
@@ -419,6 +433,7 @@ public class Project : BindableBase
 
         newParent.Children.Add(item);
         (currentParent?.Children ?? _referencedItems).RemoveAll(c => c.Id == id);
+        IsSaved = false;
         return true;
     }
 
@@ -628,6 +643,7 @@ public class Project : BindableBase
 
             var content = JsonSerializer.Serialize(model, JsonOptions);
             writer.Write(content);
+            IsSaved = true;
             return true;
         }
         catch (Exception ex) when (ex is IOException or JsonException)
@@ -699,14 +715,11 @@ public class Project : BindableBase
     public List<ProjectItem> GetAllOfType(ProjectItemType type)
     {
         var result = new List<ProjectItem>();
-
-        var queue = new Queue<(ProjectItem item, ProjectItem? parent)>();
-        foreach (var item in _referencedItems)
-            queue.Enqueue((item, null));
+        var queue = new Queue<ProjectItem>(_referencedItems);
 
         while (queue.Count > 0)
         {
-            var (current, parent) = queue.Dequeue();
+            var current = queue.Dequeue();
 
             if (current.Type == type)
                 result.Add(current);
@@ -715,7 +728,7 @@ public class Project : BindableBase
                 continue;
 
             foreach (var child in current.Children)
-                queue.Enqueue((child, current));
+                queue.Enqueue(child);
         }
 
         return result;
