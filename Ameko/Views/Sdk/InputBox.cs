@@ -99,6 +99,7 @@ public partial class InputBox : Window
         };
         inputBox.SetValue(Grid.ColumnProperty, 1);
         inputBox.SetValue(Grid.RowProperty, 1);
+        inputBox.AttachedToVisualTree += (_, _) => inputBox.Focus();
         grid.Children.Add(inputBox);
 
         var okButton = new Button
