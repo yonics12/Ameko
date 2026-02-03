@@ -748,18 +748,27 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
             await ViewModel.IoService.SafeCloseWorkspace(wsp, ViewModel.SaveSubtitleAs, false);
         }
 
-        if (ViewModel.ProjectProvider.Current.LoadedWorkspaces.Count == 0)
-        {
-            _canClose = true;
-            Close();
-        }
-        else
+        if (ViewModel.ProjectProvider.Current.LoadedWorkspaces.Count != 0)
         {
             _logger.LogInformation(
                 "Quit aborted - {LoadedWorkspacesCount} workspaces remain open",
                 ViewModel.ProjectProvider.Current.LoadedWorkspaces.Count
             );
+            return;
         }
+
+        var projectClosed = await ViewModel.IoService.SafeCloseProject(
+            ViewModel.ProjectProvider.Current,
+            ViewModel.SaveProjectAs
+        );
+        if (!projectClosed)
+        {
+            _logger.LogInformation("Quit aborted - User canceled project closure");
+            return;
+        }
+
+        _canClose = true;
+        Close();
     }
 
     private void OnWindowClosed(object? sender, EventArgs e)

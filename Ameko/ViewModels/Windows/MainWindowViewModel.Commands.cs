@@ -369,18 +369,26 @@ public partial class MainWindowViewModel
         return ReactiveCommand.CreateFromTask(async () =>
         {
             _logger.LogDebug("Preparing to close project");
+            var prj = ProjectProvider.Current;
 
-            foreach (var wsp in ProjectProvider.Current.LoadedWorkspaces.ToArray())
+            foreach (var wsp in prj.LoadedWorkspaces.ToArray())
             {
                 await IoService.SafeCloseWorkspace(wsp, SaveSubtitleAs, false);
             }
 
-            if (ProjectProvider.Current.LoadedWorkspaces.Count > 0)
+            if (prj.LoadedWorkspaces.Count > 0)
             {
                 _logger.LogInformation(
                     "Closing project aborted - {LoadedWorkspacesCount} workspaces remain open",
-                    ProjectProvider.Current.LoadedWorkspaces.Count
+                    prj.LoadedWorkspaces.Count
                 );
+                return;
+            }
+
+            var canClose = await IoService.SafeCloseProject(prj, SaveProjectAs);
+            if (!canClose)
+            {
+                _logger.LogInformation("Closing project aborted - User canceled operation");
                 return;
             }
 
@@ -416,12 +424,22 @@ public partial class MainWindowViewModel
                 await IoService.SafeCloseWorkspace(wsp, SaveSubtitleAs, false);
             }
 
-            if (ProjectProvider.Current.LoadedWorkspaces.Count > 0)
+            if (ProjectProvider.Current.LoadedWorkspaces.Count != 0)
             {
                 _logger.LogInformation(
                     "Quit aborted - {LoadedWorkspacesCount} workspaces remain open",
                     ProjectProvider.Current.LoadedWorkspaces.Count
                 );
+                return;
+            }
+
+            var projectClosed = await IoService.SafeCloseProject(
+                ProjectProvider.Current,
+                SaveProjectAs
+            );
+            if (!projectClosed)
+            {
+                _logger.LogInformation("Quit aborted - User canceled project closure");
                 return;
             }
 

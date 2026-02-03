@@ -926,6 +926,7 @@ public class Project : BindableBase
                 _loadedWorkspaces
             );
 
+        IsSaved = true;
         if (isEmpty)
             return;
 

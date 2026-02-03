@@ -58,6 +58,14 @@ public interface IIoService
     );
 
     /// <summary>
+    /// Safely close a project, verifying save state
+    /// </summary>
+    /// <param name="prj">Project to close</param>
+    /// <param name="saveAs">SaveAs interaction</param>
+    /// <returns><see langword="true"/> if the project was closed</returns>
+    Task<bool> SafeCloseProject(Project prj, Interaction<string, Uri?> saveAs);
+
+    /// <summary>
     /// Save a project file, displaying a SaveFileDialog if needed
     /// </summary>
     /// <param name="interaction">Interaction to use for displaying the dialog</param>

@@ -210,4 +210,10 @@
     <data name="SelectFolderDialog_Button_Select" xml:space="preserve">
         <value>Select</value>
     </data>
+    <data name="MsgBox_SaveProject_Body" xml:space="preserve">
+        <value>{0} has unsaved changes. Do you want to save?</value>
+    </data>
+    <data name="MsgBox_SaveProject_Title" xml:space="preserve">
+        <value>Save project?</value>
+    </data>
 </root>

@@ -428,5 +428,17 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("SelectFolderDialog_Button_Select", resourceCulture);
             }
         }
+        
+        public static string MsgBox_SaveProject_Body {
+            get {
+                return ResourceManager.GetString("MsgBox_SaveProject_Body", resourceCulture);
+            }
+        }
+        
+        public static string MsgBox_SaveProject_Title {
+            get {
+                return ResourceManager.GetString("MsgBox_SaveProject_Title", resourceCulture);
+            }
+        }
     }
 }

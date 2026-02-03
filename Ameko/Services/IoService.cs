@@ -244,6 +244,42 @@ public class IoService(
     }
 
     /// <inheritdoc />
+    public async Task<bool> SafeCloseProject(Project prj, Interaction<string, Uri?> saveAs)
+    {
+        logger.LogDebug("Closing workspace {WspTitle}", prj.Title);
+        if (prj.IsSaved)
+            return true;
+
+        logger.LogTrace(
+            "Displaying message box because workspace {PrjTitle} is not saved",
+            prj.Title
+        );
+
+        var boxResult = await messageBoxService.ShowAsync(
+            I18N.Other.MsgBox_SaveProject_Title,
+            string.Format(I18N.Other.MsgBox_SaveProject_Body, prj.Title),
+            MsgBoxButtonSet.YesNoCancel,
+            MsgBoxButton.Yes,
+            MaterialIconKind.QuestionMark
+        );
+
+        switch (boxResult)
+        {
+            case MsgBoxButton.Yes:
+                var saved = await SaveProject(saveAs, prj);
+                if (saved)
+                    return true;
+
+                logger.LogInformation("Project close operation aborted");
+                return false;
+            case MsgBoxButton.No:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /// <inheritdoc />
     public async Task<bool> SaveProject(Interaction<string, Uri?> interaction, Project prj)
     {
         logger.LogDebug("Preparing to save project file {PrjTitle}", prj.Title);
