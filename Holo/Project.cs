@@ -391,6 +391,38 @@ public class Project : BindableBase
     }
 
     /// <summary>
+    /// Move a <see cref="ProjectItem"/> to a new parent
+    /// </summary>
+    /// <param name="id">ID of the item to move</param>
+    /// <param name="parentId">ID of the new parent</param>
+    /// <returns><see langword="true"/> on success</returns>
+    public bool MoveToParent(int id, int parentId)
+    {
+        _logger.LogTrace("Moving {Id} to new parent {ParentId}", id, parentId);
+
+        var item = FindItemById(id);
+        var currentParent = FindParentItemById(id);
+
+        if (item is null || parentId == id || (parentId < 0 && currentParent is null))
+            return false;
+
+        if (parentId < 0 && currentParent is not null)
+        {
+            _referencedItems.Add(item);
+            currentParent.Children.RemoveAll(c => c.Id == id);
+            return true;
+        }
+
+        var newParent = FindItemById(parentId);
+        if (newParent?.Type != ProjectItemType.Directory)
+            return false;
+
+        newParent.Children.Add(item);
+        (currentParent?.Children ?? _referencedItems).RemoveAll(c => c.Id == id);
+        return true;
+    }
+
+    /// <summary>
     /// Open a referenced document
     /// </summary>
     /// <param name="id">ID of the document to open</param>
@@ -629,6 +661,64 @@ public class Project : BindableBase
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Find the parent of a referenced <see cref="ProjectItem"/> by ID
+    /// </summary>
+    /// <param name="id">ID of the item to find the parent of</param>
+    /// <returns>The item's parent, or <see langword="null"/> if root level or not found</returns>
+    /// <remarks>Uses breadth-first search</remarks>
+    public ProjectItem? FindParentItemById(int id)
+    {
+        var queue = new Queue<(ProjectItem item, ProjectItem? parent)>();
+        foreach (var item in _referencedItems)
+            queue.Enqueue((item, null));
+
+        while (queue.Count > 0)
+        {
+            var (current, parent) = queue.Dequeue();
+
+            if (current.Id == id)
+                return parent;
+
+            if (current.Type != ProjectItemType.Directory)
+                continue;
+
+            foreach (var child in current.Children)
+                queue.Enqueue((child, current));
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Get all <see cref="ProjectItem"/>s with the given <paramref name="type"/>
+    /// </summary>
+    /// <param name="type">Type of item to find</param>
+    /// <returns>All items matching the type</returns>
+    public List<ProjectItem> GetAllOfType(ProjectItemType type)
+    {
+        var result = new List<ProjectItem>();
+
+        var queue = new Queue<(ProjectItem item, ProjectItem? parent)>();
+        foreach (var item in _referencedItems)
+            queue.Enqueue((item, null));
+
+        while (queue.Count > 0)
+        {
+            var (current, parent) = queue.Dequeue();
+
+            if (current.Type == type)
+                result.Add(current);
+
+            if (current.Type != ProjectItemType.Directory)
+                continue;
+
+            foreach (var child in current.Children)
+                queue.Enqueue((child, current));
+        }
+
+        return result;
     }
 
     /// <summary>

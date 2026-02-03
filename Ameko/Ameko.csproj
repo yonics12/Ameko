@@ -219,6 +219,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ScriptInfo.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Dialogs\SelectFolderDialog.axaml.cs">
+      <DependentUpon>SelectFolderDialog.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="I18N\Resources.resx">

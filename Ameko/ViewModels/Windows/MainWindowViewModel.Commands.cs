@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using Ameko.DataModels;
 using Ameko.ViewModels.Dialogs;
 using Ameko.Views.Dialogs;
 using Ameko.Views.Windows;
@@ -583,7 +584,7 @@ public partial class MainWindowViewModel
     }
 
     /// <summary>
-    ///Attach a reference file without a open file dialog
+    ///Attach a reference file without an open file dialog
     /// </summary>
     private ReactiveCommand<Uri, Unit> CreateAttachReferenceFileNoGuiCommand()
     {
@@ -1302,7 +1303,34 @@ public partial class MainWindowViewModel
     /// </summary>
     private ReactiveCommand<int, Unit> CreateMoveToFolderCommand()
     {
-        return ReactiveCommand.CreateFromTask(async (int id) => { });
+        return ReactiveCommand.CreateFromTask(
+            async (int id) =>
+            {
+                var prj = ProjectProvider.Current;
+                if (prj.FindItemById(id) is null)
+                    return;
+
+                _logger.LogDebug("Displaying input box to move item {Id} to a folder", id);
+
+                var folders = prj.GetAllOfType(ProjectItemType.Directory)
+                    .Where(d => d.Id != id)
+                    .Select(d => new FolderInformation { Id = d.Id, Name = d.Title })
+                    .ToList();
+                folders.Insert(
+                    0,
+                    new FolderInformation { Id = -1, Name = I18N.Other.SelectFolderDialog_Root }
+                );
+
+                var result = await ShowSelectFolderDialog.Handle(
+                    _vmFactory.Create<SelectFolderDialogViewModel>(folders)
+                );
+
+                if (result is null)
+                    return;
+
+                prj.MoveToParent(id, result.Id);
+            }
+        );
     }
 
     /// <summary>

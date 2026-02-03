@@ -90,6 +90,10 @@ public partial class MainWindowViewModel : ViewModelBase
 
     // Other
     public Interaction<InstallDictionaryDialogViewModel, Unit> ShowInstallDictionaryDialog { get; }
+    public Interaction<
+        SelectFolderDialogViewModel,
+        SelectFolderMessage?
+    > ShowSelectFolderDialog { get; }
     #endregion
 
     #region Commands
@@ -451,6 +455,8 @@ public partial class MainWindowViewModel : ViewModelBase
         OpenIssueTracker = new Interaction<Unit, Unit>();
         // Other
         ShowInstallDictionaryDialog = new Interaction<InstallDictionaryDialogViewModel, Unit>();
+        ShowSelectFolderDialog =
+            new Interaction<SelectFolderDialogViewModel, SelectFolderMessage?>();
         #endregion
 
         #region Commands

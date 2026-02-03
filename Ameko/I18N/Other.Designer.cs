@@ -404,5 +404,29 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("FileDialog_FileType_Kf", resourceCulture);
             }
         }
+        
+        public static string SelectFolderDialog_Title {
+            get {
+                return ResourceManager.GetString("SelectFolderDialog_Title", resourceCulture);
+            }
+        }
+        
+        public static string SelectFolderDialog_Body {
+            get {
+                return ResourceManager.GetString("SelectFolderDialog_Body", resourceCulture);
+            }
+        }
+        
+        public static string SelectFolderDialog_Root {
+            get {
+                return ResourceManager.GetString("SelectFolderDialog_Root", resourceCulture);
+            }
+        }
+        
+        public static string SelectFolderDialog_Button_Select {
+            get {
+                return ResourceManager.GetString("SelectFolderDialog_Button_Select", resourceCulture);
+            }
+        }
     }
 }

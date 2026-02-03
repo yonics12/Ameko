@@ -389,6 +389,16 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         interaction.SetOutput(Unit.Default);
     }
 
+    private async Task DoShowSelectFolderDialogAsync(
+        IInteractionContext<SelectFolderDialogViewModel, SelectFolderMessage?> interaction
+    )
+    {
+        _logger.LogDebug("Displaying Select Folder dialog");
+        var dialog = new SelectFolderDialog { DataContext = interaction.Input };
+        var result = await dialog.ShowDialog<SelectFolderMessage?>(this);
+        interaction.SetOutput(result);
+    }
+
     private async Task DoOpenIssueTrackerAsync(IInteractionContext<Unit, Unit> interaction)
     {
         const string issuesUrl = "https://github.com/9vult/Ameko/issues";
@@ -500,6 +510,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 ViewModel.OpenIssueTracker.RegisterHandler(DoOpenIssueTrackerAsync);
                 // Other
                 ViewModel.ShowInstallDictionaryDialog.RegisterHandler(DoShowInstallDictionaryDialogAsync);
+                ViewModel.ShowSelectFolderDialog.RegisterHandler(DoShowSelectFolderDialogAsync);
                 // csharpier-ignore-end
 
                 // Generate layouts menu and apply current layout
