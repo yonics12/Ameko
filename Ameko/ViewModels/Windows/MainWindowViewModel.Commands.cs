@@ -18,6 +18,7 @@ using Holo.Media.Providers;
 using Holo.Models;
 using Material.Icons;
 using Microsoft.Extensions.Logging;
+using NaturalSort.Extension;
 using ReactiveUI;
 
 namespace Ameko.ViewModels.Windows;
@@ -1315,6 +1316,7 @@ public partial class MainWindowViewModel
                 var folders = prj.GetAllOfType(ProjectItemType.Directory)
                     .Where(d => d.Id != id)
                     .Select(d => new FolderInformation { Id = d.Id, Name = d.Title })
+                    .OrderBy(d => d.Name, StringComparer.CurrentCultureIgnoreCase.WithNaturalSort())
                     .ToList();
                 folders.Insert(
                     0,
