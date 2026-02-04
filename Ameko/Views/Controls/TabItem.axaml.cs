@@ -227,10 +227,7 @@ public partial class TabItem : ReactiveUserControl<TabItemViewModel>
         if (file is null)
             return;
 
-        var dataObject = new DataTransfer();
-        dataObject.Add(DataTransferItem.CreateFile(file));
-
-        await window.Clipboard!.SetDataAsync(dataObject);
+        await window.Clipboard!.SetFileAsync(file);
     }
 
     public TabItem()
