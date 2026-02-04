@@ -816,15 +816,21 @@ public class MediaController : BindableBase
         {
             if (_nextFrame is not null)
             {
+                Interlocked.Increment(ref _nextFrame->Refcount);
+
                 _lastFrame = _nextFrame;
                 _nextFrame = null;
             }
+            else if (_lastFrame is not null)
+            {
+                Interlocked.Increment(ref _lastFrame->Refcount);
+            }
         }
 
-        if (_lastFrame is not null)
-            return _lastFrame;
+        if (_lastFrame is null)
+            throw new InvalidOperationException("Frame is unavailable");
 
-        throw new InvalidOperationException("Frame is unavailable");
+        return _lastFrame;
     }
 
     /// <summary>
@@ -855,7 +861,7 @@ public class MediaController : BindableBase
         }
 
         if (_lastVizFrame is null)
-            throw new InvalidOperationException("Frame is unavailable");
+            throw new InvalidOperationException("Visualization frame is unavailable");
 
         return _lastVizFrame;
     }
@@ -970,7 +976,9 @@ public class MediaController : BindableBase
         {
             var frame = _provider.GetFrame(frameToFetch, videoTime, false);
 
-            // Release previous _nextVizFrame
+            // Release previous _nextFrames
+            if (_nextFrame is not null && _nextFrame != frame)
+                Interlocked.Decrement(ref _nextFrame->Refcount);
             if (_nextVizFrame is not null && _nextVizFrame != vizFrame)
                 Interlocked.Decrement(ref _nextVizFrame->Refcount);
 

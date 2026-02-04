@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using Ameko.DataModels.OpenGl;
 using Avalonia;
 using Avalonia.OpenGL;
@@ -142,6 +143,8 @@ public class SilkRenderer : OpenGlControlBase
 
         _textureS.Bind(TextureUnit.Texture1);
         _textureS.SetTexture(texWidth, texHeight, frame->SubtitleFrame->Data);
+
+        Interlocked.Decrement(ref frame->Refcount);
 
         _shader.Use();
 

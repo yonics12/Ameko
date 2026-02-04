@@ -41,6 +41,7 @@ pub const AudioFrame = extern struct {
 pub const FrameGroup = extern struct {
     video_frame: *VideoFrame,
     subtitle_frame: *SubtitleFrame,
+    refcount: c_int = 0,
 };
 
 /// Generic bitmap

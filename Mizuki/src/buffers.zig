@@ -210,53 +210,41 @@ fn GetOrCreateVisualizationFrame(ctx: *context.BuffersContext, width: c_int, hei
 pub fn ProcVideoFrame(g_ctx: *context.GlobalContext, frame_number: c_int, timestamp: c_longlong, raw: c_int) ffms.FfmsError!*frames.FrameGroup {
     var ctx = &g_ctx.*.buffers;
     var buffers = &ctx.frame_buffers;
-
     _ = raw; // For sub-less frame
-    var result: ?*frames.FrameGroup = null;
 
-    // See if the frame is in the list of cached buffers already
+    // Is the frame already cached?
     for (buffers.items, 0..) |buffer, idx| {
+        // We can ignore refcount here - it only matters if we're modifying the frame
         if (buffer.*.video_frame.*.valid == 1 and buffer.*.video_frame.*.frame_number == frame_number) {
-            result = buffer;
-
             // Move buffer to the front of the list
             if (idx != 0) {
                 _ = buffers.swapRemove(idx);
                 try buffers.insert(common.allocator, 0, buffer);
             }
 
-            // Check if we need to (re)render the subtitles
-            if (!libass.VerifyHash(g_ctx, result.?.*.subtitle_frame)) {
-                try libass.GetFrame(g_ctx, timestamp, result.?.*.subtitle_frame);
+            // If the subtitles need to be re-rendered,
+            // we also need to make sure the frame can be modifie
+            if (!libass.VerifyHash(g_ctx, buffer.*.subtitle_frame)) {
+                if (buffer.refcount == 0) {
+                    // We're good to go
+                    try libass.GetFrame(g_ctx, timestamp, buffer.*.subtitle_frame);
+                } else {
+                    // we can't modify this frame, it's still in use
+                    continue;
+                }
             }
 
-            // TODO: Render to the buffer
-            return result.?;
+            return buffer;
         }
     }
 
     // The frame was not cached, so we need to find an invalidated buffer
     // (or create a new one if there's space in the cache)
+    var result: ?*frames.FrameGroup = null;
 
-    // If we're at the size limit, make space
-    if (ctx.total_size >= ctx.max_size) {
-        const last = buffers.swapRemove(buffers.items.len - 1);
-        _ = InvalidateVideoFrame(last);
-        try buffers.insert(common.allocator, 0, last);
-    }
-
-    // Find an invalidated buffer
-    for (buffers.items) |buffer| {
-        if (buffer.*.video_frame.*.valid == 0) {
-            result = buffer;
-            break;
-        }
-    }
-
-    // Allocate a new buffer
-    if (result == null) {
-        // Clone geometry from the first buffer
-        const reference = buffers.items[0];
+    // There's space, allocate a new buffer
+    if (ctx.total_size < ctx.max_size) {
+        const reference = buffers.items[0]; // Clone geometry from the first buffer
         result = try AllocateVideoFrame(
             @intCast(reference.*.video_frame.*.width),
             @intCast(reference.*.video_frame.*.height),
@@ -265,6 +253,40 @@ pub fn ProcVideoFrame(g_ctx: *context.GlobalContext, frame_number: c_int, timest
         try buffers.insert(common.allocator, 0, result.?);
         ctx.total_size += (result.?.*.video_frame.*.height * result.?.*.video_frame.*.pitch) * 2; // add size
     }
+
+    // The cache is full, search for a free buffer
+    if (result == null) {
+        var idx = buffers.items.len;
+        while (idx > 0) {
+            idx -= 1;
+            const buffer = buffers.items[idx];
+            if (buffer.refcount > 0) {
+                continue;
+            } else {
+                // move to front
+                _ = buffers.swapRemove(idx);
+                try buffers.insert(common.allocator, 0, buffer);
+                InvalidateVideoFrame(buffer);
+                result = buffer;
+                break;
+            }
+        }
+    }
+
+    // Fallback scenario - cache is full and no buffers are free
+    if (result == null) {
+        logger.Warn("Buffer pool exhausted and no free buffers!");
+        const reference = buffers.items[0]; // Clone geometry from the first buffer
+        result = try AllocateVideoFrame(
+            @intCast(reference.*.video_frame.*.width),
+            @intCast(reference.*.video_frame.*.height),
+            @intCast(reference.*.video_frame.*.pitch),
+        );
+        try buffers.insert(common.allocator, 0, result.?);
+        ctx.total_size += (result.?.*.video_frame.*.height * result.?.*.video_frame.*.pitch) * 2; // add size
+    }
+
+    // Get the goods
 
     try ffms.GetFrame(g_ctx, frame_number, result.?.*.video_frame);
     try libass.GetFrame(g_ctx, timestamp, result.?.*.subtitle_frame);
@@ -275,10 +297,9 @@ pub fn ProcVideoFrame(g_ctx: *context.GlobalContext, frame_number: c_int, timest
 }
 
 /// Mark a frame as invalid so it can be reused
-pub fn InvalidateVideoFrame(frame: *frames.FrameGroup) c_int {
+fn InvalidateVideoFrame(frame: *frames.FrameGroup) void {
     frame.video_frame.*.valid = 0;
     frame.subtitle_frame.*.valid = 0;
-    return 0;
 }
 
 /// Allocate a new frame buffer

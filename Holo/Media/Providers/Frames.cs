@@ -9,6 +9,7 @@ public unsafe struct FrameGroup
 {
     public VideoFrame* VideoFrame;
     public SubtitleFrame* SubtitleFrame;
+    public int Refcount;
 }
 
 [StructLayout(LayoutKind.Sequential)]
