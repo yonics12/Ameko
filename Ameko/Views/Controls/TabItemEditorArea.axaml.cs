@@ -61,6 +61,15 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
                     if (EditBox.SelectionEnd == EditBox.SelectionStart)
                         EditBox.SelectionEnd = length;
 
+                    // Swap if needed
+                    if (EditBox.SelectionEnd < EditBox.SelectionStart)
+                    {
+                        (EditBox.SelectionStart, EditBox.SelectionEnd) = (
+                            EditBox.SelectionEnd,
+                            EditBox.SelectionStart
+                        );
+                    }
+
                     ViewModel.MacosClipboardService.Set(
                         EditBox.Text[EditBox.SelectionStart..EditBox.SelectionEnd]
                     );
@@ -78,6 +87,15 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
                     var paste = ViewModel.MacosClipboardService.Get();
                     if (!string.IsNullOrEmpty(paste))
                     {
+                        // Swap if needed
+                        if (EditBox.SelectionEnd < EditBox.SelectionStart)
+                        {
+                            (EditBox.SelectionStart, EditBox.SelectionEnd) = (
+                                EditBox.SelectionEnd,
+                                EditBox.SelectionStart
+                            );
+                        }
+
                         EditBox.Text =
                             EditBox.Text[..EditBox.SelectionStart]
                             + paste
@@ -183,7 +201,7 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
         {
             this.GetObservable(ViewModelProperty)
                 .WhereNotNull()
-                .Subscribe(vm =>
+                .Subscribe(_ =>
                 {
                     // TODO: Keybinds
 
@@ -217,6 +235,15 @@ public partial class TabItemEditorArea : ReactiveUserControl<TabItemViewModel>
 
         if (text is not null && EditBox.Text is not null)
         {
+            // Swap if needed
+            if (EditBox.SelectionEnd < EditBox.SelectionStart)
+            {
+                (EditBox.SelectionStart, EditBox.SelectionEnd) = (
+                    EditBox.SelectionEnd,
+                    EditBox.SelectionStart
+                );
+            }
+
             // No selection → insert at caret
             if (EditBox.SelectionStart == EditBox.SelectionEnd)
             {
