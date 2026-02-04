@@ -92,15 +92,13 @@ public unsafe class NullSourceProvider : ISourceProvider
     }
 
     /// <inheritdoc />
-    public unsafe FrameGroup* GetFrame(int frameNumber, long timestamp, bool raw)
+    public FrameGroup* GetFrame(int frameNumber, long timestamp, bool raw)
     {
         return null;
     }
 
     /// <inheritdoc />
-    public unsafe AudioFrame* GetAudio(
-        ISourceProvider.IndexingProgressCallback? progressCallback = null
-    )
+    public AudioFrame* GetAudio(ISourceProvider.IndexingProgressCallback? progressCallback = null)
     {
         return null;
     }
@@ -119,12 +117,6 @@ public unsafe class NullSourceProvider : ISourceProvider
     )
     {
         return null;
-    }
-
-    /// <inheritdoc />
-    public unsafe int ReleaseFrame(FrameGroup* frame)
-    {
-        return 0;
     }
 
     /// <inheritdoc />

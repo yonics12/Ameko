@@ -255,12 +255,6 @@ public unsafe class MizukiSourceProvider(
     }
 
     /// <inheritdoc />
-    public int ReleaseFrame(FrameGroup* frame)
-    {
-        return External.ReleaseFrame(frame);
-    }
-
-    /// <inheritdoc />
     public int[] GetKeyframes()
     {
         var ptr = External.GetKeyframes(_context);
@@ -473,9 +467,6 @@ internal static unsafe partial class External
         long* eventBounds,
         int eventBoundsLength
     );
-
-    [LibraryImport("mizuki")]
-    internal static unsafe partial int ReleaseFrame(FrameGroup* frame);
 
     [LibraryImport("mizuki")]
     internal static partial int GetFrameCount(GlobalContext* context);
