@@ -131,9 +131,6 @@ public class NumberTextBox : TextBox
 
     public NumberTextBox()
     {
-        AddHandler(KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel);
-        AddHandler(TextInputEvent, OnTextInput, RoutingStrategies.Tunnel);
-        AddHandler(PointerWheelChangedEvent, OnPointerWheelChanged, RoutingStrategies.Tunnel);
         Text = Value.ToString(FormatString, NumberFormatInfo.InvariantInfo);
     }
 
@@ -158,13 +155,9 @@ public class NumberTextBox : TextBox
     /// <summary>
     /// Text input handler
     /// </summary>
-    /// <param name="sender">The textbox object</param>
     /// <param name="e">Input event args</param>
-    private void OnTextInput(object? sender, TextInputEventArgs e)
+    protected override void OnTextInput(TextInputEventArgs e)
     {
-        if (sender is not TextBox)
-            return;
-
         if (!string.IsNullOrWhiteSpace(e.Text))
             InsertText(e.Text);
 
@@ -174,18 +167,15 @@ public class NumberTextBox : TextBox
     /// <summary>
     /// Navigation handler
     /// </summary>
-    /// <param name="sender">The textbox object</param>
     /// <param name="e">Key event args</param>
-    private void OnKeyDown(object? sender, KeyEventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
-        if (sender is not TextBox)
-            return;
-
         // Movement
         switch (e.Key)
         {
-            // Backspace
+            // Backspace, Delete
             case Key.Back:
+            case Key.Delete:
                 base.OnKeyDown(e);
                 if (Text?.Length == 0)
                 {
@@ -193,6 +183,7 @@ public class NumberTextBox : TextBox
                     Text = Value.ToString(FormatString, NumberFormatInfo.InvariantInfo);
                     CaretIndex = Text.Length;
                 }
+                RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
                 return;
             // Left
             case Key.Left:
@@ -250,9 +241,8 @@ public class NumberTextBox : TextBox
     /// <summary>
     /// Scroll handler
     /// </summary>
-    /// <param name="sender">The textbox object</param>
     /// <param name="e">Scroll event args</param>
-    private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
+    protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
         // Increment
         if (e.Delta.Y > 0)
@@ -369,6 +359,10 @@ public class NumberTextBox : TextBox
             }
             else
             {
+                // Swap if needed
+                if (SelectionEnd < SelectionStart)
+                    (SelectionStart, SelectionEnd) = (SelectionEnd, SelectionStart);
+
                 var start = SelectionStart;
                 var end = SelectionEnd;
                 Text = Text[..start] + inserting + Text[end..];
@@ -382,5 +376,6 @@ public class NumberTextBox : TextBox
         var val = Math.Clamp(dec, Minimum, Maximum);
         Text = val.ToString(FormatString, NumberFormatInfo.InvariantInfo);
         Value = val;
+        RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
     }
 }

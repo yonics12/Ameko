@@ -12,22 +12,12 @@ public class TimeTextBox : TextBox
 {
     protected override Type StyleKeyOverride => typeof(TextBox);
 
-    public TimeTextBox()
-    {
-        AddHandler(KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel);
-        AddHandler(TextInputEvent, OnTextInput, RoutingStrategies.Tunnel);
-    }
-
     /// <summary>
     /// Text input handler
     /// </summary>
-    /// <param name="sender">The textbox object</param>
     /// <param name="e">Input event args</param>
-    private void OnTextInput(object? sender, TextInputEventArgs e)
+    protected override void OnTextInput(TextInputEventArgs e)
     {
-        if (sender is not TextBox)
-            return;
-
         if (!string.IsNullOrWhiteSpace(e.Text))
             InsertText(e.Text);
 
@@ -37,13 +27,9 @@ public class TimeTextBox : TextBox
     /// <summary>
     /// Navigation handler
     /// </summary>
-    /// <param name="sender">The textbox object</param>
     /// <param name="e">Key event args</param>
-    private void OnKeyDown(object? sender, KeyEventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
-        if (sender is not TextBox)
-            return;
-
         // Movement
         switch (e.Key)
         {
