@@ -28,6 +28,8 @@ public partial class SearchDialog : ReactiveWindow<SearchDialogViewModel>
             }
         };
 
+        GotFocus += (_, _) => QueryBox.Focus();
+
         this.WhenActivated(disposables =>
         {
             QueryBox.Focus();
