@@ -842,5 +842,11 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("ProjectExplorer_ContextMenu_MoveToFolder", resourceCulture);
             }
         }
+        
+        public static string Video_Button_Mute_ToolTip {
+            get {
+                return ResourceManager.GetString("Video_Button_Mute_ToolTip", resourceCulture);
+            }
+        }
     }
 }

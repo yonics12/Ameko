@@ -767,6 +767,19 @@ public class Project : BindableBase
     }
 
     /// <summary>
+    /// Get the relative path of a <see cref="DocumentItem"/> to the project
+    /// </summary>
+    /// <param name="item">Item to get the path of</param>
+    /// <returns>The relative path between the <paramref name="item"/> and the project</returns>
+    /// <remarks>Returns an empty string if a relative path is unavailable</remarks>
+    public string GetRelativePath(ProjectItem item)
+    {
+        if (SavePath is null || item.Uri is null)
+            return string.Empty;
+        return PathExtensions.GetRelativePath(SavePath.LocalPath, item.Uri.LocalPath);
+    }
+
+    /// <summary>
     /// Sets <see cref="IsSelectionChanging"/> to <see langword="true"/>
     /// </summary>
     private void BeginSelectionChange()

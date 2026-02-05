@@ -155,6 +155,9 @@ public partial class TabItemViewModel : ViewModelBase
     [KeybindTarget("ameko.video.rotate.counterclockwise", KeybindContext.Video)]
     public ICommand RotateCounterclockwiseCommand { get; }
 
+    [KeybindTarget("ameko.video.mute", KeybindContext.Video)]
+    public ICommand ToggleMuteCommand { get; }
+
     // Audio
     [KeybindTarget("ameko.audio.play.event", KeybindContext.Audio)]
     public ICommand PlayPauseAudioEventCommand { get; }
@@ -315,6 +318,7 @@ public partial class TabItemViewModel : ViewModelBase
         ZoomOutCommand = CreateZoomOutCommand();
         RotateClockwiseCommand = CreateRotateClockwiseCommand();
         RotateCounterclockwiseCommand = CreateRotateCounterclockwiseCommand();
+        ToggleMuteCommand = CreateToggleMuteCommand();
 
         // Audio
         PlayPauseAudioEventCommand = CreatePlayPauseAudioEventCommand();

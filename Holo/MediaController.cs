@@ -216,6 +216,19 @@ public class MediaController : BindableBase
         set => SetProperty(ref field, value);
     } = true;
 
+    public bool IsMuted
+    {
+        get;
+        set
+        {
+            if (_isVideoPlaying || _isAudioPlaying)
+                Pause();
+            SetProperty(ref field, value);
+            if (_isPaused)
+                Resume();
+        }
+    } = false;
+
     /// <summary>
     /// The current frame
     /// </summary>

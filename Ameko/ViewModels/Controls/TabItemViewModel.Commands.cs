@@ -812,6 +812,20 @@ public partial class TabItemViewModel : ViewModelBase
         });
     }
 
+    /// <summary>
+    /// Toggle mute
+    /// </summary>
+    /// <returns></returns>
+    private ReactiveCommand<Unit, Unit> CreateToggleMuteCommand()
+    {
+        return ReactiveCommand.Create(() =>
+        {
+            if (!Workspace.MediaController.IsVideoLoaded)
+                return;
+            Workspace.MediaController.IsMuted = !Workspace.MediaController.IsMuted;
+        });
+    }
+
     private ReactiveCommand<Unit, Unit> CreatePlayPauseAudioEventCommand()
     {
         return ReactiveCommand.Create(() =>
