@@ -78,7 +78,8 @@ sealed class Program
             .WithInterFont()
             .LogToTrace()
             .UseReactiveUI()
-            .With(new MacOSPlatformOptions { DisableDefaultApplicationMenuItems = true });
+            .With(new MacOSPlatformOptions { DisableDefaultApplicationMenuItems = true })
+            .With(new X11PlatformOptions { EnableIme = true });
 
     private static bool ShouldIgnoreUnhandledException(Exception ex)
     {

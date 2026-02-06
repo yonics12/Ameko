@@ -44,6 +44,24 @@ Potential features on Ameko's roadmap include:
 The inclusion of these features will likely rely on support from viewers like you! If you're interested in contributing
 to the project, please reach out!
 
+<h2 align="center">Running</h2>
+
+### Windows
+
+Ameko will run out-of-the-box on Windows.
+
+### macOS
+
+Ameko will run out-of-the-box on macOS, but you will need to run `xattr -cr Ameko.app` before macOS will let you run it
+for the first time.
+
+### Linux
+
+To open videos, ffms2 and libass will need to be installed.
+A [PKGBUILD](https://github.com/AmekoProject/Ameko/blob/master/Packaging/PKGBUILD) is provided for Arch distributions.
+
+To use an IME, you may need to set the `XMODIFIERS` environment variable; e.g: `XMODIFIERS=@im=fcitx`
+
 <h2 align="center">Development</h2>
 
 ### Bob the Builder
