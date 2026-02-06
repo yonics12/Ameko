@@ -417,4 +417,7 @@
     <data name="ProjectExplorer_ContextMenu_MoveToFolder" xml:space="preserve">
         <value>Move to Folder...</value>
     </data>
+    <data name="Video_Button_Mute_ToolTip" xml:space="preserve">
+        <value>Play audio with video</value>
+    </data>
 </root>

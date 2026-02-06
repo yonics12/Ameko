@@ -416,4 +416,7 @@
     <data name="ProjectExplorer_ContextMenu_CreateFolder_Root" xml:space="preserve">
         <value>Create New Root Folder...</value>
     </data>
+    <data name="Video_Button_Mute_ToolTip" xml:space="preserve">
+        <value>Play audio with video</value>
+    </data>
 </root>

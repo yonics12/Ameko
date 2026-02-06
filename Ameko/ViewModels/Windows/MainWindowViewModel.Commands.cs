@@ -1141,6 +1141,21 @@ public partial class MainWindowViewModel
     }
 
     /// <summary>
+    /// Show command palette
+    /// </summary>
+    private ReactiveCommand<Unit, Unit> CreateShowCommandPaletteCommand()
+    {
+        return ReactiveCommand.CreateFromTask(async () =>
+        {
+            var vm = _vmFactory.Create<CommandPaletteDialogViewModel>(
+                OpenDocumentCommand,
+                ExecuteScriptCommand
+            );
+            await ShowCommandPaletteDialog.Handle(vm);
+        });
+    }
+
+    /// <summary>
     /// Remove workspace from the project
     /// </summary>
     private ReactiveCommand<int, Unit> CreateRemoveDocumentFromProjectCommand()

@@ -17,9 +17,8 @@ public interface IKeybindService
     /// <summary>
     /// Register commands to be used by keybinds
     /// </summary>
-    /// <param name="viewModel">ViewModel containing the commands</param>
     /// <param name="contextId">Command context ID</param>
-    void RegisterCommands(ViewModelBase viewModel, int contextId);
+    void RegisterCommands(int contextId);
 
     /// <summary>
     /// Attach keybinds to a control

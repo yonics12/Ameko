@@ -89,6 +89,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public Interaction<Unit, Unit> OpenIssueTracker { get; }
 
     // Other
+    public Interaction<CommandPaletteDialogViewModel, Unit> ShowCommandPaletteDialog { get; }
     public Interaction<InstallDictionaryDialogViewModel, Unit> ShowInstallDictionaryDialog { get; }
     public Interaction<
         SelectFolderDialogViewModel,
@@ -98,130 +99,130 @@ public partial class MainWindowViewModel : ViewModelBase
 
     #region Commands
     // File
-    [KeybindTarget("ameko.document.new", "Ctrl+N", KeybindContext.Global)]
+    [Command("ameko.document.new", "Ctrl+N", KeybindContext.Global)]
     public ICommand NewCommand { get; }
 
-    [KeybindTarget("ameko.document.open", "Ctrl+O", KeybindContext.Global)]
+    [Command("ameko.document.open", "Ctrl+O", KeybindContext.Global)]
     public ICommand OpenSubtitleCommand { get; }
     public ICommand OpenSubtitleNoGuiCommand { get; }
     public ICommand OpenSubtitlesNoGuiCommand { get; }
 
-    [KeybindTarget("ameko.document.save", "Ctrl+S", KeybindContext.Global)]
+    [Command("ameko.document.save", "Ctrl+S", KeybindContext.Global)]
     public ICommand SaveSubtitleCommand { get; }
 
-    [KeybindTarget("ameko.document.saveAs", "Ctrl+Shift+S", KeybindContext.Global)]
+    [Command("ameko.document.saveAs", "Ctrl+Shift+S", KeybindContext.Global)]
     public ICommand SaveSubtitleAsCommand { get; }
 
-    [KeybindTarget("ameko.document.export", KeybindContext.Global)]
+    [Command("ameko.document.export", KeybindContext.Global)]
     public ICommand ExportSubtitleCommand { get; }
     public ICommand ClearRecentSubtitlesCommand { get; }
 
-    [KeybindTarget("ameko.project.open", KeybindContext.Global)]
+    [Command("ameko.project.open", KeybindContext.Global)]
     public ICommand OpenProjectCommand { get; }
     public ICommand OpenProjectNoGuiCommand { get; }
 
-    [KeybindTarget("ameko.project.openFolder", KeybindContext.Global)]
+    [Command("ameko.project.openFolder", KeybindContext.Global)]
     public ICommand OpenFolderAsProjectCommand { get; }
 
-    [KeybindTarget("ameko.project.save", KeybindContext.Global)]
+    [Command("ameko.project.save", KeybindContext.Global)]
     public ICommand SaveProjectCommand { get; }
     public ICommand ClearRecentProjectsCommand { get; }
 
-    [KeybindTarget("ameko.workspace.close", "Ctrl+W", KeybindContext.Global)]
+    [Command("ameko.workspace.close", "Ctrl+W", KeybindContext.Global)]
     public ICommand CloseTabCommand { get; }
 
-    [KeybindTarget("ameko.project.close", KeybindContext.Global)]
+    [Command("ameko.project.close", KeybindContext.Global)]
     public ICommand CloseProjectCommand { get; }
 
-    [KeybindTarget("ameko.application.quit", "Ctrl+Q", KeybindContext.Global)]
+    [Command("ameko.application.quit", "Ctrl+Q", KeybindContext.Global)]
     public ICommand QuitCommand { get; }
 
     // Edit
-    [KeybindTarget("ameko.document.undo", "Ctrl+Z", KeybindContext.Global)]
+    [Command("ameko.document.undo", "Ctrl+Z", KeybindContext.Global)]
     public ICommand UndoCommand { get; }
 
-    [KeybindTarget("ameko.document.redo", "Ctrl+Y", KeybindContext.Global)]
+    [Command("ameko.document.redo", "Ctrl+Y", KeybindContext.Global)]
     public ICommand RedoCommand { get; }
 
-    [KeybindTarget("ameko.document.search", "Ctrl+F", KeybindContext.Global)]
+    [Command("ameko.document.search", "Ctrl+F", KeybindContext.Global)]
     public ICommand ShowSearchDialogCommand { get; }
 
-    [KeybindTarget("ameko.document.spellcheck", "F7", KeybindContext.Global)]
+    [Command("ameko.document.spellcheck", "F7", KeybindContext.Global)]
     public ICommand ShowSpellcheckDialogCommand { get; }
 
     // Subtitle
-    [KeybindTarget("ameko.stylesManager.show", KeybindContext.Global)]
+    [Command("ameko.stylesManager.show", KeybindContext.Global)]
     public ICommand ShowStylesManagerCommand { get; }
 
-    [KeybindTarget("ameko.reference.attach", KeybindContext.Global)]
+    [Command("ameko.reference.attach", KeybindContext.Global)]
     public ICommand AttachReferenceFileCommand { get; }
 
-    [KeybindTarget("ameko.reference.detach", KeybindContext.Global)]
+    [Command("ameko.reference.detach", KeybindContext.Global)]
     public ICommand DetachReferenceFileCommand { get; }
 
-    [KeybindTarget("ameko.document.properties", KeybindContext.Global)]
+    [Command("ameko.document.properties", KeybindContext.Global)]
     public ICommand ShowScriptInfoDialogCommand { get; }
 
-    [KeybindTarget("ameko.document.sort", KeybindContext.Global)]
+    [Command("ameko.document.sort", KeybindContext.Global)]
     public ICommand ShowSortDialogCommand { get; }
 
-    [KeybindTarget("ameko.document.select", KeybindContext.Global)]
+    [Command("ameko.document.select", KeybindContext.Global)]
     public ICommand ShowSelectDialogCommand { get; }
 
     // Project
-    [KeybindTarget("ameko.project.config.show", KeybindContext.Global)]
+    [Command("ameko.project.config.show", KeybindContext.Global)]
     public ICommand ShowProjectConfigDialogCommand { get; }
 
     // Timing
-    [KeybindTarget("ameko.document.shiftTimes", "Ctrl+I", KeybindContext.Global)]
+    [Command("ameko.document.shiftTimes", "Ctrl+I", KeybindContext.Global)]
     public ICommand ShowShiftTimesDialogCommand { get; }
 
-    [KeybindTarget("ameko.event.snap.startKf", KeybindContext.Global)]
+    [Command("ameko.event.snap.startKf", KeybindContext.Global)]
     public ICommand SnapStartToKeyframeCommand { get; }
 
-    [KeybindTarget("ameko.event.snap.endKf", KeybindContext.Global)]
+    [Command("ameko.event.snap.endKf", KeybindContext.Global)]
     public ICommand SnapEndToKeyframeCommand { get; }
 
-    [KeybindTarget("ameko.event.snap.startFrame", "Ctrl+D3", KeybindContext.Global)]
+    [Command("ameko.event.snap.startFrame", "Ctrl+D3", KeybindContext.Global)]
     public ICommand SnapStartToCurrentFrameCommand { get; }
 
-    [KeybindTarget("ameko.event.snap.endFrame", "Ctrl+D4", KeybindContext.Global)]
+    [Command("ameko.event.snap.endFrame", "Ctrl+D4", KeybindContext.Global)]
     public ICommand SnapEndToCurrentFrameCommand { get; }
 
     // Video
-    [KeybindTarget("ameko.video.open", KeybindContext.Global)]
+    [Command("ameko.video.open", KeybindContext.Global)]
     public ICommand OpenVideoCommand { get; }
     public ICommand OpenVideoNoGuiCommand { get; }
 
-    [KeybindTarget("ameko.video.close", KeybindContext.Global)]
+    [Command("ameko.video.close", KeybindContext.Global)]
     public ICommand CloseVideoCommand { get; }
 
-    [KeybindTarget("ameko.video.openKeyframes", KeybindContext.Global)]
+    [Command("ameko.video.openKeyframes", KeybindContext.Global)]
     public ICommand OpenKeyframesCommand { get; }
 
-    [KeybindTarget("ameko.video.jump", "Ctrl+G", KeybindContext.Global)]
+    [Command("ameko.video.jump", "Ctrl+G", KeybindContext.Global)]
     public ICommand ShowJumpDialogCommand { get; }
 
-    [KeybindTarget("ameko.audio.open", KeybindContext.Global)]
+    [Command("ameko.audio.open", KeybindContext.Global)]
     public ICommand OpenAudioCommand { get; }
 
-    [KeybindTarget("ameko.audio.close", KeybindContext.Global)]
+    [Command("ameko.audio.close", KeybindContext.Global)]
     public ICommand CloseAudioCommand { get; }
 
-    [KeybindTarget("ameko.audio.changeTracks", KeybindContext.Global)]
+    [Command("ameko.audio.changeTracks", KeybindContext.Global)]
     public ICommand ChangeTracksCommand { get; }
 
     // Scripts
     // Command execution doesn't get a keybind. So sad :(
     public ICommand ExecuteScriptCommand { get; }
 
-    [KeybindTarget("ameko.scripts.reload", KeybindContext.Global)]
+    [Command("ameko.scripts.reload", KeybindContext.Global)]
     public ICommand ReloadScriptsCommand { get; }
 
-    [KeybindTarget("ameko.pkgMan.show", KeybindContext.Global)]
+    [Command("ameko.pkgMan.show", KeybindContext.Global)]
     public ICommand ShowPackageManagerCommand { get; }
 
-    [KeybindTarget("ameko.playground.show", KeybindContext.Global)]
+    [Command("ameko.playground.show", KeybindContext.Global)]
     public ICommand ShowPlaygroundWindowCommand { get; }
 
     // Layouts
@@ -229,25 +230,27 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand RefreshLayoutsCommand { get; }
 
     // Help
-    [KeybindTarget("ameko.help.show", "F1", KeybindContext.Global)]
+    [Command("ameko.help.show", "F1", KeybindContext.Global)]
     public ICommand ShowHelpWindowCommand { get; }
 
-    [KeybindTarget("ameko.logs.show", "Ctrl+L", KeybindContext.Global)]
+    [Command("ameko.logs.show", "Ctrl+L", KeybindContext.Global)]
     public ICommand ShowLogWindowCommand { get; }
 
-    [KeybindTarget("ameko.about.show", "Shift+F1", KeybindContext.Global)]
+    [Command("ameko.about.show", "Shift+F1", KeybindContext.Global)]
     public ICommand ShowAboutWindowCommand { get; }
 
-    [KeybindTarget("ameko.config.show", "Ctrl+OemComma", KeybindContext.Global)]
+    [Command("ameko.config.show", "Ctrl+OemComma", KeybindContext.Global)]
     public ICommand ShowConfigDialogCommand { get; }
 
-    [KeybindTarget("ameko.keybinds.show", KeybindContext.Global)]
+    [Command("ameko.keybinds.show", KeybindContext.Global)]
     public ICommand ShowKeybindsDialogCommand { get; }
 
-    [KeybindTarget("ameko.issues.open", KeybindContext.Global)]
+    [Command("ameko.issues.open", KeybindContext.Global)]
     public ICommand OpenIssueTrackerCommand { get; }
 
     // Other
+    [Command("ameko.commandPalette.show", "Ctrl+P", KeybindContext.Global)]
+    public ICommand ShowCommandPaletteCommand { get; }
     public ICommand RemoveDocumentFromProjectCommand { get; }
     public ICommand RemoveDirectoryFromProjectCommand { get; }
     public ICommand OpenDocumentCommand { get; }
@@ -454,6 +457,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ShowKeybindsDialog = new Interaction<KeybindsDialogViewModel, Unit>();
         OpenIssueTracker = new Interaction<Unit, Unit>();
         // Other
+        ShowCommandPaletteDialog = new Interaction<CommandPaletteDialogViewModel, Unit>();
         ShowInstallDictionaryDialog = new Interaction<InstallDictionaryDialogViewModel, Unit>();
         ShowSelectFolderDialog =
             new Interaction<SelectFolderDialogViewModel, SelectFolderMessage?>();
@@ -524,6 +528,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ShowKeybindsDialogCommand = CreateShowKeybindsDialogCommand();
         OpenIssueTrackerCommand = CreateOpenIssueTrackerCommand();
         // Other
+        ShowCommandPaletteCommand = CreateShowCommandPaletteCommand();
         RemoveDocumentFromProjectCommand = CreateRemoveDocumentFromProjectCommand();
         RemoveDirectoryFromProjectCommand = CreateRemoveFolderFromProjectCommand();
         OpenDocumentCommand = CreateOpenDocumentCommand();

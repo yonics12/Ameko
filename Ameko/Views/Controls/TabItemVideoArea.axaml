@@ -106,6 +106,16 @@
                         ToolTip.Tip="{x:Static i18n:Resources.Video_Button_DisableAutoSeek_ToolTip}"
                         Command="{Binding ToggleAutoSeekCommand}"
                         Classes="Small" />
+                <Button ToolTip.Tip="{x:Static i18n:Resources.Video_Button_Mute_ToolTip}"
+                        Command="{Binding ToggleMuteCommand}"
+                        Classes="Small">
+                    <StackPanel>
+                        <icons:MaterialIcon Kind="VolumeHigh"
+                                            IsVisible="{Binding !Workspace.MediaController.IsMuted}" />
+                        <icons:MaterialIcon Kind="VolumeOff"
+                                            IsVisible="{Binding Workspace.MediaController.IsMuted, FallbackValue=False}" />
+                    </StackPanel>
+                </Button>
                 <TextBox IsReadOnly="true"
                          FontFamily="{StaticResource MartianMono}"
                          Text="{Binding Workspace.MediaController.CurrentTime.MillisecondText,

@@ -24,6 +24,7 @@
     <PackageVersion Include="CS-Script" Version="4.11.2" />
     <PackageVersion Include="CSharpier.MsBuild" Version="1.2.1" />
     <PackageVersion Include="DiscordRichPresence" Version="1.6.1.70" />
+    <PackageVersion Include="FuzzySharp" Version="2.0.2" />
     <PackageVersion Include="GitInfo" Version="3.3.5" />
     <PackageVersion Include="Jint" Version="4.4.2" />
     <PackageVersion Include="LibGit2Sharp" Version="0.31.0" />

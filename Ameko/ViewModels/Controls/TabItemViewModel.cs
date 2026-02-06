@@ -46,158 +46,161 @@ public partial class TabItemViewModel : ViewModelBase
     #region Commands
 
     // Grid
-    [KeybindTarget("ameko.event.copy", "Ctrl+C", KeybindContext.Grid)]
+    [Command("ameko.event.copy", "Ctrl+C", KeybindContext.Grid)]
     public ICommand CopyEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.cut", "Ctrl+X", KeybindContext.Grid)]
+    [Command("ameko.event.cut", "Ctrl+X", KeybindContext.Grid)]
     public ICommand CutEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.paste", "Ctrl+V", KeybindContext.Grid)]
+    [Command("ameko.event.paste", "Ctrl+V", KeybindContext.Grid)]
     public ICommand PasteEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.pasteOver", "Ctrl+Shift+V", KeybindContext.Grid)]
+    [Command("ameko.event.pasteOver", "Ctrl+Shift+V", KeybindContext.Grid)]
     public ICommand PasteOverEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.copyPlaintext", KeybindContext.Grid)]
+    [Command("ameko.event.copyPlaintext", KeybindContext.Grid)]
     public ICommand CopyPlaintextEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.duplicate", "Ctrl+D", KeybindContext.Grid)]
+    [Command("ameko.event.duplicate", "Ctrl+D", KeybindContext.Grid)]
     public ICommand DuplicateEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.insertBefore", KeybindContext.Grid)]
+    [Command("ameko.event.insertBefore", KeybindContext.Grid)]
     public ICommand InsertEventBeforeCommand { get; }
 
-    [KeybindTarget("ameko.event.insertAfter", KeybindContext.Grid)]
+    [Command("ameko.event.insertAfter", KeybindContext.Grid)]
     public ICommand InsertEventAfterCommand { get; }
 
-    [KeybindTarget("ameko.event.insertBefore.videoTime", KeybindContext.Grid)]
+    [Command("ameko.event.insertBefore.videoTime", KeybindContext.Grid)]
     public ICommand InsertEventBeforeAtVideoTimeCommand { get; }
 
-    [KeybindTarget("ameko.event.insertAfter.videoTime", KeybindContext.Grid)]
+    [Command("ameko.event.insertAfter.videoTime", KeybindContext.Grid)]
     public ICommand InsertEventAfterAtVideoTimeCommand { get; }
 
-    [KeybindTarget("ameko.event.merge", KeybindContext.Grid)]
+    [Command("ameko.event.merge", KeybindContext.Grid)]
     public ICommand MergeEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.split", KeybindContext.Grid)]
+    [Command("ameko.event.split", KeybindContext.Grid)]
     public ICommand SplitEventsCommand { get; }
 
-    [KeybindTarget("ameko.event.split.keepTimes", KeybindContext.Grid)]
+    [Command("ameko.event.split.keepTimes", KeybindContext.Grid)]
     public ICommand SplitEventsKeepTimesCommand { get; }
 
-    [KeybindTarget("ameko.event.delete", "Shift+Delete", KeybindContext.Grid)]
+    [Command("ameko.event.delete", "Shift+Delete", KeybindContext.Grid)]
     public ICommand DeleteEventsCommand { get; }
 
     // I don't think this needs a binding?
     public ICommand GetOrCreateAfterCommand { get; }
     public ICommand ToggleTagCommand { get; }
 
-    [KeybindTarget("ameko.event.toggleComment", KeybindContext.Grid)]
+    [Command("ameko.event.toggleComment", KeybindContext.Grid)]
     public ICommand ToggleCommentCommand { get; }
     public ICommand ExecuteScriptCommand { get; }
 
     // Editor
-    [KeybindTarget("ameko.event.splitCursor", KeybindContext.Editor)]
+    [Command("ameko.event.splitCursor", KeybindContext.Editor)]
     public ICommand SplitEventsAtCursorCommand { get; }
 
-    [KeybindTarget("ameko.event.splitCursor.keepTimes", KeybindContext.Editor)]
+    [Command("ameko.event.splitCursor.keepTimes", KeybindContext.Editor)]
     public ICommand SplitEventsAtCursorKeepTimesCommand { get; }
 
-    [KeybindTarget("ameko.event.spellcheck", "Shift+F7", KeybindContext.Editor)]
+    [Command("ameko.event.spellcheck", "Shift+F7", KeybindContext.Editor)]
     public ICommand SpellcheckEventCommand { get; }
 
     // Video
-    [KeybindTarget("ameko.video.play", KeybindContext.Video)]
+    [Command("ameko.video.play", KeybindContext.Video)]
     public ICommand PlayPauseCommand { get; }
 
-    [KeybindTarget("ameko.video.stop", KeybindContext.Video)]
+    [Command("ameko.video.stop", KeybindContext.Video)]
     public ICommand StopPlayingCommand { get; }
 
-    [KeybindTarget("ameko.video.playSelection", KeybindContext.Video)]
+    [Command("ameko.video.playSelection", KeybindContext.Video)]
     public ICommand PlaySelectionCommand { get; }
 
-    [KeybindTarget("ameko.video.toggleAutoSeek", KeybindContext.Video)]
+    [Command("ameko.video.toggleAutoSeek", KeybindContext.Video)]
     public ICommand ToggleAutoSeekCommand { get; }
 
-    [KeybindTarget("ameko.video.frame.next", KeybindContext.Video)]
+    [Command("ameko.video.frame.next", KeybindContext.Video)]
     public ICommand NextFrameCommand { get; }
 
-    [KeybindTarget("ameko.video.frame.previous", KeybindContext.Video)]
+    [Command("ameko.video.frame.previous", KeybindContext.Video)]
     public ICommand PreviousFrameCommand { get; }
 
-    [KeybindTarget("ameko.video.boundary.next", KeybindContext.Video)]
+    [Command("ameko.video.boundary.next", KeybindContext.Video)]
     public ICommand NextBoundaryCommand { get; }
 
-    [KeybindTarget("ameko.video.boundary.previous", KeybindContext.Video)]
+    [Command("ameko.video.boundary.previous", KeybindContext.Video)]
     public ICommand PreviousBoundaryCommand { get; }
 
-    [KeybindTarget("ameko.video.keyframe.next", KeybindContext.Video)]
+    [Command("ameko.video.keyframe.next", KeybindContext.Video)]
     public ICommand NextKeyframeCommand { get; }
 
-    [KeybindTarget("ameko.video.keyframe.previous", KeybindContext.Video)]
+    [Command("ameko.video.keyframe.previous", KeybindContext.Video)]
     public ICommand PreviousKeyframeCommand { get; }
 
-    [KeybindTarget("ameko.video.active.start", "Ctrl+D1", KeybindContext.Video)]
+    [Command("ameko.video.active.start", "Ctrl+D1", KeybindContext.Video)]
     public ICommand ActiveStartCommand { get; }
 
-    [KeybindTarget("ameko.video.active.end", "Ctrl+D2", KeybindContext.Video)]
+    [Command("ameko.video.active.end", "Ctrl+D2", KeybindContext.Video)]
     public ICommand ActiveEndCommand { get; }
 
-    [KeybindTarget("ameko.video.zoom.in", "Ctrl+OemPlus", KeybindContext.Video)]
+    [Command("ameko.video.zoom.in", "Ctrl+OemPlus", KeybindContext.Video)]
     public ICommand ZoomInCommand { get; }
 
-    [KeybindTarget("ameko.video.zoom.out", "Ctrl+OemMinus", KeybindContext.Video)]
+    [Command("ameko.video.zoom.out", "Ctrl+OemMinus", KeybindContext.Video)]
     public ICommand ZoomOutCommand { get; }
 
-    [KeybindTarget("ameko.video.rotate.clockwise", KeybindContext.Video)]
+    [Command("ameko.video.rotate.clockwise", KeybindContext.Video)]
     public ICommand RotateClockwiseCommand { get; }
 
-    [KeybindTarget("ameko.video.rotate.counterclockwise", KeybindContext.Video)]
+    [Command("ameko.video.rotate.counterclockwise", KeybindContext.Video)]
     public ICommand RotateCounterclockwiseCommand { get; }
 
+    [Command("ameko.video.mute", KeybindContext.Video)]
+    public ICommand ToggleMuteCommand { get; }
+
     // Audio
-    [KeybindTarget("ameko.audio.play.event", KeybindContext.Audio)]
+    [Command("ameko.audio.play.event", KeybindContext.Audio)]
     public ICommand PlayPauseAudioEventCommand { get; }
 
-    [KeybindTarget("ameko.audio.play.before", KeybindContext.Audio)]
+    [Command("ameko.audio.play.before", KeybindContext.Audio)]
     public ICommand PlayAudioBeforeCommand { get; }
 
-    [KeybindTarget("ameko.audio.play.first", KeybindContext.Audio)]
+    [Command("ameko.audio.play.first", KeybindContext.Audio)]
     public ICommand PlayAudioFirstCommand { get; }
 
-    [KeybindTarget("ameko.audio.play.surround", KeybindContext.Audio)]
+    [Command("ameko.audio.play.surround", KeybindContext.Audio)]
     public ICommand PlayAudioSurroundCommand { get; }
 
-    [KeybindTarget("ameko.audio.play.last", KeybindContext.Audio)]
+    [Command("ameko.audio.play.last", KeybindContext.Audio)]
     public ICommand PlayAudioLastCommand { get; }
 
-    [KeybindTarget("ameko.audio.play.after", KeybindContext.Audio)]
+    [Command("ameko.audio.play.after", KeybindContext.Audio)]
     public ICommand PlayAudioAfterCommand { get; }
 
     // References
-    [KeybindTarget("ameko.reference.shift.forward", KeybindContext.Editor)]
+    [Command("ameko.reference.shift.forward", KeybindContext.Editor)]
     public ICommand ShiftReferenceForwardCommand { get; }
 
-    [KeybindTarget("ameko.reference.shift.backward", KeybindContext.Editor)]
+    [Command("ameko.reference.shift.backward", KeybindContext.Editor)]
     public ICommand ShiftReferenceBackwardCommand { get; }
 
     // Frame Saving & Copying
-    [KeybindTarget("ameko.frame.save", KeybindContext.Global)]
+    [Command("ameko.frame.save", KeybindContext.Global)]
     public ICommand SaveFrameCommand { get; }
 
-    [KeybindTarget("ameko.frame.save.video", KeybindContext.Global)]
+    [Command("ameko.frame.save.video", KeybindContext.Global)]
     public ICommand SaveFrameVideoOnlyCommand { get; }
 
-    [KeybindTarget("ameko.frame.save.subtitles", KeybindContext.Global)]
+    [Command("ameko.frame.save.subtitles", KeybindContext.Global)]
     public ICommand SaveFrameSubtitlesOnlyCommand { get; }
 
-    [KeybindTarget("ameko.frame.copy", KeybindContext.Global)]
+    [Command("ameko.frame.copy", KeybindContext.Global)]
     public ICommand CopyFrameCommand { get; }
 
-    [KeybindTarget("ameko.frame.copy.video", KeybindContext.Global)]
+    [Command("ameko.frame.copy.video", KeybindContext.Global)]
     public ICommand CopyFrameVideoOnlyCommand { get; }
 
-    [KeybindTarget("ameko.frame.copy.subtitles", KeybindContext.Global)]
+    [Command("ameko.frame.copy.subtitles", KeybindContext.Global)]
     public ICommand CopyFrameSubtitlesOnlyCommand { get; }
 
     #endregion
@@ -211,6 +214,7 @@ public partial class TabItemViewModel : ViewModelBase
 
     public IProjectProvider ProjectProvider { get; }
     public IConfiguration Configuration { get; }
+    public ICommandService CommandService { get; }
     public IKeybindService KeybindService { get; }
     public ILayoutProvider LayoutProvider { get; }
     public IMacOsClipboardService MacosClipboardService { get; }
@@ -242,6 +246,7 @@ public partial class TabItemViewModel : ViewModelBase
     public TabItemViewModel(
         IProjectProvider projectProvider,
         IConfiguration configuration,
+        ICommandService commandService,
         IKeybindService keybindService,
         IScriptService scriptService,
         ILayoutProvider layoutProvider,
@@ -315,6 +320,7 @@ public partial class TabItemViewModel : ViewModelBase
         ZoomOutCommand = CreateZoomOutCommand();
         RotateClockwiseCommand = CreateRotateClockwiseCommand();
         RotateCounterclockwiseCommand = CreateRotateCounterclockwiseCommand();
+        ToggleMuteCommand = CreateToggleMuteCommand();
 
         // Audio
         PlayPauseAudioEventCommand = CreatePlayPauseAudioEventCommand();
@@ -340,6 +346,7 @@ public partial class TabItemViewModel : ViewModelBase
         _ioService = ioService;
         ProjectProvider = projectProvider;
         Configuration = configuration;
+        CommandService = commandService;
         KeybindService = keybindService;
         LayoutProvider = layoutProvider;
         MacosClipboardService = macosClipboardService;

@@ -48,7 +48,9 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     private readonly IConfiguration _config;
     private readonly ISourceProvider _sourceProvider;
     private readonly SearchDialog _searchDialog;
+    private readonly CommandPaletteDialog _cmdPalette;
     private bool _isSearching;
+    private bool _isCmdPaletteOpen;
     private bool _canClose;
 
     /// <summary>
@@ -267,6 +269,24 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         interaction.SetOutput(Unit.Default);
     }
 
+    private void DoShowCommandPalette(
+        IInteractionContext<CommandPaletteDialogViewModel, Unit> interaction
+    )
+    {
+        _cmdPalette.DataContext ??= interaction.Input;
+
+        if (_isCmdPaletteOpen)
+        {
+            _cmdPalette.Activate();
+        }
+        else
+        {
+            _isCmdPaletteOpen = true;
+            _cmdPalette.Show();
+        }
+        interaction.SetOutput(Unit.Default);
+    }
+
     private async Task DoShowAttachReferenceFileDialogAsync(
         IInteractionContext<Unit, Uri?> interaction
     )
@@ -439,6 +459,17 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
             _isSearching = false;
         };
 
+        // Set up command palette
+        _cmdPalette = new CommandPaletteDialog();
+        _cmdPalette.Closing += (sender, args) =>
+        {
+            if (sender is not CommandPaletteDialog cmdP)
+                return;
+            args.Cancel = true;
+            cmdP.Hide();
+            _isCmdPaletteOpen = false;
+        };
+
         Closing += async (sender, args) => await OnWindowClosing(sender, args);
         Closed += OnWindowClosed;
 
@@ -509,6 +540,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 ViewModel.ShowKeybindsDialog.RegisterHandler(DoShowDialogAsync<KeybindsDialog, KeybindsDialogViewModel>);
                 ViewModel.OpenIssueTracker.RegisterHandler(DoOpenIssueTrackerAsync);
                 // Other
+                ViewModel.ShowCommandPaletteDialog.RegisterHandler(DoShowCommandPalette);
                 ViewModel.ShowInstallDictionaryDialog.RegisterHandler(DoShowInstallDictionaryDialogAsync);
                 ViewModel.ShowSelectFolderDialog.RegisterHandler(DoShowSelectFolderDialogAsync);
                 // csharpier-ignore-end

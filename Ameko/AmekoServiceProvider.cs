@@ -66,6 +66,7 @@ public class AmekoServiceProvider
         );
         services.AddSingleton<ICommandRegistrar, CommandRegistrar>();
         services.AddSingleton<IKeybindRegistrar, KeybindRegistrar>();
+        services.AddSingleton<ICommandService, CommandService>();
         services.AddSingleton<IKeybindService, KeybindService>();
         services.AddSingleton<AssOptionsBinder>();
 

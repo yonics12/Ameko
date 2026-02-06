@@ -6,6 +6,7 @@ using Ameko.Renderers;
 using Ameko.ViewModels.Controls;
 using Avalonia;
 using Avalonia.Input;
+using Holo.Models;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
 
@@ -23,13 +24,16 @@ public partial class TabItemAudioArea : ReactiveUserControl<TabItemViewModel>
                 .Subscribe(vm =>
                 {
                     // TODO: Don't do this!!
-                    var renderer = new OpenAlAudioRenderer(vm.Workspace.MediaController);
+                    var mc = vm.Workspace.MediaController;
+                    var renderer = new OpenAlAudioRenderer(mc);
                     renderer.Initialize();
-                    vm.Workspace.MediaController.OnPlaybackStart += (_, e) =>
+                    mc.OnPlaybackStart += (_, e) =>
                     {
-                        renderer.Play(e.StartTime, e.GoalTime);
+                        // Always play audio target, only play video target if not muted
+                        if (e.Target is PlaybackTarget.Audio || !mc.IsMuted)
+                            renderer.Play(e.StartTime, e.GoalTime);
                     };
-                    vm.Workspace.MediaController.OnPlaybackStop += (_, _) =>
+                    mc.OnPlaybackStop += (_, _) =>
                     {
                         renderer.Stop();
                     };

@@ -3,10 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Input;
-using Ameko.ViewModels;
-using Ameko.ViewModels.Windows;
 using Avalonia.Input;
 using Holo.Configuration.Keybinds;
 using Holo.Providers;
@@ -26,20 +23,11 @@ public class KeybindService : IKeybindService
     public IKeybindRegistrar KeybindRegistrar { get; }
 
     private readonly ICommandRegistrar _commandRegistrar;
-    private readonly MainWindowViewModel _mainWindowViewModel;
 
     /// <inheritdoc />
-    public void RegisterCommands(ViewModelBase viewModel, int contextId)
+    public void RegisterCommands(int contextId)
     {
-        _commandRegistrar.CreateContext(contextId);
-
-        var infos = ScanForCommands(viewModel)
-            .Concat(ScanForCommands(_mainWindowViewModel))
-            .ToList();
-        foreach (var info in infos)
-        {
-            _commandRegistrar.RegisterCommand(contextId, info.QualifiedName, info.Command);
-        }
+        var infos = _commandRegistrar.GetMetadataForContext(contextId);
 
         // Try registering these defaults
         var newBinds = KeybindRegistrar.RegisterKeybinds(
@@ -127,71 +115,21 @@ public class KeybindService : IKeybindService
         }
     }
 
-    private static IEnumerable<CommandMetadata> ScanForCommands(ViewModelBase viewModel)
-    {
-        // ReSharper disable once InconsistentNaming
-        var isMacOS = OperatingSystem.IsMacOS();
-        const string cmd = "Cmd";
-        const string ctrl = "Ctrl";
-
-        var type = viewModel.GetType();
-        var props = type.GetProperties(
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-        );
-
-        foreach (var prop in props)
-        {
-            if (!typeof(ICommand).IsAssignableFrom(prop.PropertyType))
-                continue;
-
-            var attrib = prop.GetCustomAttribute<KeybindTargetAttribute>();
-            if (attrib is null)
-                continue;
-
-            if (prop.GetValue(viewModel) is not ICommand command)
-                continue;
-
-            var defaultKey =
-                isMacOS && attrib.DefaultKey is not null
-                    ? attrib.DefaultKey.Replace(ctrl, cmd)
-                    : attrib.DefaultKey;
-
-            yield return new CommandMetadata
-            {
-                Command = command,
-                QualifiedName = attrib.QualifiedName,
-                DefaultKey = defaultKey,
-                DefaultContext = attrib.DefaultContext,
-            };
-        }
-    }
-
     /// <summary>
     /// Initialize the keybind scanner service
     /// </summary>
     /// <param name="keybindRegistrar">Keybind Registrar to use</param>
     /// <param name="commandRegistrar">Command Registrar to use</param>
-    /// <param name="mainWindowViewModel">Main Window's ViewModel</param>
     /// <param name="logger">Logger to use</param>
     /// <remarks>Initial scanning will commence automatically upon initialization</remarks>
     public KeybindService(
         IKeybindRegistrar keybindRegistrar,
         ICommandRegistrar commandRegistrar,
-        MainWindowViewModel mainWindowViewModel,
         ILogger<KeybindService> logger
     )
     {
         KeybindRegistrar = keybindRegistrar;
         _commandRegistrar = commandRegistrar;
-        _mainWindowViewModel = mainWindowViewModel;
         _logger = logger;
-    }
-
-    private class CommandMetadata
-    {
-        public required ICommand Command { get; init; }
-        public required string QualifiedName { get; init; }
-        public required string? DefaultKey { get; init; }
-        public required KeybindContext DefaultContext { get; init; }
     }
 }
