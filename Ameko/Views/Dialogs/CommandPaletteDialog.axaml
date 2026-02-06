@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        d:DesignWidth="350"
+        d:DesignWidth="500"
         d:DesignHeight="200"
 
         xmlns:converters="clr-namespace:Ameko.Converters"
@@ -16,7 +16,7 @@
         
         Focusable="True"
         CanResize="False"
-        Width="350"
+        Width="500"
         SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
         Icon="/Assets/Ameko-Simplified-BG-64.ico"
@@ -39,6 +39,7 @@
                     Content="{x:Static i18n:CommandPalette.CmdP_Button}"
                     Command="{Binding GoCommand}" />
         </Grid>
-        <ListBox ItemsSource="{Binding Results}"></ListBox>
+        <ListBox ItemsSource="{Binding Results}"
+                 SelectedItem="{Binding SelectedResult}" />
     </DockPanel>
 </Window>

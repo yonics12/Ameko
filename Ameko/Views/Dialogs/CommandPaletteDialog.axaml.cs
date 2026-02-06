@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
+using System;
 using System.Reactive.Disposables;
 using System.Reactive.Disposables.Fluent;
 using Ameko.ViewModels.Dialogs;
@@ -29,14 +30,24 @@ public partial class CommandPaletteDialog : ReactiveWindow<CommandPaletteDialogV
             }
         };
 
-        GotFocus += (_, __) =>
+        GotFocus += (_, _) =>
         {
+            QueryBox.Text ??= string.Empty;
+
             QueryBox.Focus();
+            QueryBox.SelectionStart = 0;
+            QueryBox.SelectionEnd = QueryBox.Text.Length;
         };
 
         this.WhenActivated(disposables =>
         {
+            QueryBox.Text ??= string.Empty;
+
             QueryBox.Focus();
+            QueryBox.SelectionStart = 0;
+            QueryBox.SelectionEnd = QueryBox.Text.Length;
+
+            ViewModel?.GoCommand.Subscribe(Close);
             Disposable.Create(() => { }).DisposeWith(disposables);
         });
     }

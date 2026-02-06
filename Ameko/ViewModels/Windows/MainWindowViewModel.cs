@@ -89,6 +89,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public Interaction<Unit, Unit> OpenIssueTracker { get; }
 
     // Other
+    public Interaction<CommandPaletteDialogViewModel, Unit> ShowCommandPaletteDialog { get; }
     public Interaction<InstallDictionaryDialogViewModel, Unit> ShowInstallDictionaryDialog { get; }
     public Interaction<
         SelectFolderDialogViewModel,
@@ -248,6 +249,8 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand OpenIssueTrackerCommand { get; }
 
     // Other
+    [KeybindTarget("ameko.commandPalette.show", "Ctrl+P", KeybindContext.Global)]
+    public ICommand ShowCommandPaletteCommand { get; }
     public ICommand RemoveDocumentFromProjectCommand { get; }
     public ICommand RemoveDirectoryFromProjectCommand { get; }
     public ICommand OpenDocumentCommand { get; }
@@ -454,6 +457,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ShowKeybindsDialog = new Interaction<KeybindsDialogViewModel, Unit>();
         OpenIssueTracker = new Interaction<Unit, Unit>();
         // Other
+        ShowCommandPaletteDialog = new Interaction<CommandPaletteDialogViewModel, Unit>();
         ShowInstallDictionaryDialog = new Interaction<InstallDictionaryDialogViewModel, Unit>();
         ShowSelectFolderDialog =
             new Interaction<SelectFolderDialogViewModel, SelectFolderMessage?>();
@@ -524,6 +528,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ShowKeybindsDialogCommand = CreateShowKeybindsDialogCommand();
         OpenIssueTrackerCommand = CreateOpenIssueTrackerCommand();
         // Other
+        ShowCommandPaletteCommand = CreateShowCommandPaletteCommand();
         RemoveDocumentFromProjectCommand = CreateRemoveDocumentFromProjectCommand();
         RemoveDirectoryFromProjectCommand = CreateRemoveFolderFromProjectCommand();
         OpenDocumentCommand = CreateOpenDocumentCommand();
