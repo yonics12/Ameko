@@ -6,6 +6,7 @@ using System.Reactive.Disposables.Fluent;
 using Ameko.ViewModels.Dialogs;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
 
@@ -37,6 +38,7 @@ public partial class CommandPaletteDialog : ReactiveWindow<CommandPaletteDialogV
             QueryBox.Focus();
             QueryBox.SelectionStart = 0;
             QueryBox.SelectionEnd = QueryBox.Text.Length;
+            ViewModel?.GenerateCommandSuggestions();
         };
 
         this.WhenActivated(disposables =>
@@ -48,12 +50,36 @@ public partial class CommandPaletteDialog : ReactiveWindow<CommandPaletteDialogV
             QueryBox.SelectionEnd = QueryBox.Text.Length;
 
             ViewModel?.GoCommand.Subscribe(Close);
+            ViewModel?.GenerateCommandSuggestions();
             Disposable.Create(() => { }).DisposeWith(disposables);
+
+            LostFocus += (_, _) => Close();
         });
     }
 
     private void QueryBox_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
         ViewModel?.GenerateSuggestions();
+    }
+
+    private void QueryBox_OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (ViewModel is null)
+            return;
+        switch (e.Key)
+        {
+            case Key.Down:
+                if (ViewModel.SelectedIndex >= ViewModel.Results.Count - 1)
+                    ViewModel.SelectedIndex = 0;
+                else
+                    ViewModel.SelectedIndex++;
+                break;
+            case Key.Up:
+                if (ViewModel.SelectedIndex <= 0)
+                    ViewModel.SelectedIndex = ViewModel.Results.Count - 1;
+                else
+                    ViewModel.SelectedIndex--;
+                break;
+        }
     }
 }

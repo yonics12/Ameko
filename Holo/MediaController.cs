@@ -900,9 +900,7 @@ public class MediaController : BindableBase
     /// <exception cref="InvalidOperationException">If the provider isn't initialized</exception>
     public void SetSubtitles(Document document)
     {
-        if (!_provider.IsInitialized)
-            throw new InvalidOperationException("Provider is not initialized");
-        if (!IsVideoLoaded)
+        if (!_provider.IsInitialized || !IsVideoLoaded)
             return;
 
         // TODO: preferably not create a new writer on each change

@@ -1147,7 +1147,10 @@ public partial class MainWindowViewModel
     {
         return ReactiveCommand.CreateFromTask(async () =>
         {
-            var vm = _vmFactory.Create<CommandPaletteDialogViewModel>(OpenDocumentCommand);
+            var vm = _vmFactory.Create<CommandPaletteDialogViewModel>(
+                OpenDocumentCommand,
+                ExecuteScriptCommand
+            );
             await ShowCommandPaletteDialog.Handle(vm);
         });
     }

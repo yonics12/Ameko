@@ -1,18 +1,21 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
+using System.Windows.Input;
+
 namespace Ameko.DataModels;
+
+public abstract record CommandPaletteResult;
 
 /// <summary>
 /// A single result for a query in the Command Palette
 /// </summary>
 /// <param name="Key">Unique identifier for the result</param>
-/// <param name="Name">Display name of the result</param>
-public record CommandPaletteResult(string Key, string Name)
+public record CommandCommandPaletteResult(string Key, ICommand Command) : CommandPaletteResult
 {
     /// <inheritdoc />
     public override string ToString()
     {
-        return $"{Name} ({Key})";
+        return Key;
     }
 
     /// <inheritdoc />
@@ -22,7 +25,7 @@ public record CommandPaletteResult(string Key, string Name)
     }
 
     /// <inheritdoc />
-    public virtual bool Equals(CommandPaletteResult? other)
+    public virtual bool Equals(CommandCommandPaletteResult? other)
     {
         return Key == other?.Key;
     }
@@ -34,13 +37,14 @@ public record CommandPaletteResult(string Key, string Name)
 /// <param name="Key">Unique identifier for the result</param>
 /// <param name="Name">Display name of the result</param>
 /// <param name="Id">Workspace ID in the project</param>
-public record DocumentCommandPaletteResult(string Key, string Name, int Id)
-    : CommandPaletteResult(Key, Name)
+public record DocumentCommandPaletteResult(string Key, string Name, int Id) : CommandPaletteResult
 {
     /// <inheritdoc />
     public override string ToString()
     {
-        return $"{Name} ({Key})";
+        if (!string.IsNullOrEmpty(Key))
+            return $"{Name} ({Key})";
+        return Name;
     }
 
     /// <inheritdoc />
@@ -52,6 +56,6 @@ public record DocumentCommandPaletteResult(string Key, string Name, int Id)
     /// <inheritdoc />
     public virtual bool Equals(DocumentCommandPaletteResult? other)
     {
-        return Key == other?.Key;
+        return Id == other?.Id;
     }
 }

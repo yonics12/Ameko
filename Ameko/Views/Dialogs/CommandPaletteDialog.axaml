@@ -32,7 +32,8 @@
                      AcceptsTab="False"
                      AcceptsReturn="False"
                      Text="{Binding Query}"
-                     TextChanged="QueryBox_OnTextChanged" />
+                     TextChanged="QueryBox_OnTextChanged"
+                     KeyDown="QueryBox_OnKeyDown"/>
             <Button Grid.Column="1"
                     IsDefault="True"
                     Classes="Primary"
@@ -40,6 +41,7 @@
                     Command="{Binding GoCommand}" />
         </Grid>
         <ListBox ItemsSource="{Binding Results}"
-                 SelectedItem="{Binding SelectedResult}" />
+                 SelectedItem="{Binding SelectedResult}"
+                 SelectedIndex="{Binding SelectedIndex}" />
     </DockPanel>
 </Window>
