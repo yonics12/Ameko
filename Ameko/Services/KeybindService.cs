@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Ameko.ViewModels;
 using Ameko.ViewModels.Windows;
 using Avalonia.Input;
+using Holo.Configuration;
 using Holo.Configuration.Keybinds;
 using Holo.Providers;
 using Microsoft.Extensions.Logging;
@@ -144,7 +145,7 @@ public class KeybindService : IKeybindService
             if (!typeof(ICommand).IsAssignableFrom(prop.PropertyType))
                 continue;
 
-            var attrib = prop.GetCustomAttribute<KeybindTargetAttribute>();
+            var attrib = prop.GetCustomAttribute<CommandAttribute>();
             if (attrib is null)
                 continue;
 
