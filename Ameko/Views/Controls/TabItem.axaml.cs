@@ -344,7 +344,8 @@ public partial class TabItem : ReactiveUserControl<TabItemViewModel>
         if (vm is null)
             return;
 
-        vm.KeybindService.RegisterCommands(vm, vm.Workspace.Id);
+        vm.CommandService.RegisterCommands(vm.Workspace.Id, vm);
+        vm.KeybindService.RegisterCommands(vm.Workspace.Id);
 
         vm.KeybindService.AttachKeybinds(
             KeybindContext.Grid,

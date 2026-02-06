@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 using System.Windows.Input;
+using Holo.Models;
 
 namespace Holo.Providers;
 
@@ -28,10 +29,9 @@ public interface ICommandRegistrar
     /// Register a command
     /// </summary>
     /// <param name="contextId">Context identifier</param>
-    /// <param name="qualifiedName">Uniquely-identifying name for the command</param>
-    /// <param name="command">Instance of a command</param>
+    /// <param name="info">Information about the command</param>
     /// <returns><see langword="true"/> if successful</returns>
-    bool RegisterCommand(int contextId, string qualifiedName, ICommand command);
+    bool RegisterCommand(int contextId, CommandMetadata info);
 
     /// <summary>
     /// Get the commands registered in a context
@@ -39,4 +39,11 @@ public interface ICommandRegistrar
     /// <param name="contextId">Context identifier</param>
     /// <returns>Mapping between command identifiers and instances</returns>
     IReadOnlyDictionary<string, ICommand> GetCommandsForContext(int contextId);
+
+    /// <summary>
+    /// Get information about commands registered in a context
+    /// </summary>
+    /// <param name="contextId">Context identifier</param>
+    /// <returns>Metadata about commands in the context</returns>
+    IReadOnlySet<CommandMetadata> GetMetadataForContext(int contextId);
 }

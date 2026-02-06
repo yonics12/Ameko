@@ -214,6 +214,7 @@ public partial class TabItemViewModel : ViewModelBase
 
     public IProjectProvider ProjectProvider { get; }
     public IConfiguration Configuration { get; }
+    public ICommandService CommandService { get; }
     public IKeybindService KeybindService { get; }
     public ILayoutProvider LayoutProvider { get; }
     public IMacOsClipboardService MacosClipboardService { get; }
@@ -245,6 +246,7 @@ public partial class TabItemViewModel : ViewModelBase
     public TabItemViewModel(
         IProjectProvider projectProvider,
         IConfiguration configuration,
+        ICommandService commandService,
         IKeybindService keybindService,
         IScriptService scriptService,
         ILayoutProvider layoutProvider,
@@ -344,6 +346,7 @@ public partial class TabItemViewModel : ViewModelBase
         _ioService = ioService;
         ProjectProvider = projectProvider;
         Configuration = configuration;
+        CommandService = commandService;
         KeybindService = keybindService;
         LayoutProvider = layoutProvider;
         MacosClipboardService = macosClipboardService;
