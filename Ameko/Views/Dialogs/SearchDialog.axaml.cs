@@ -28,11 +28,21 @@ public partial class SearchDialog : ReactiveWindow<SearchDialogViewModel>
             }
         };
 
-        GotFocus += (_, _) => QueryBox.Focus();
+        GotFocus += (_, _) =>
+        {
+            QueryBox.Text ??= string.Empty;
+            QueryBox.SelectionStart = 0;
+            QueryBox.SelectionEnd = QueryBox.Text.Length;
+            QueryBox.Focus();
+        };
 
         this.WhenActivated(disposables =>
         {
+            QueryBox.Text ??= string.Empty;
+            QueryBox.SelectionStart = 0;
+            QueryBox.SelectionEnd = QueryBox.Text.Length;
             QueryBox.Focus();
+
             Disposable.Create(() => { }).DisposeWith(disposables);
         });
     }
