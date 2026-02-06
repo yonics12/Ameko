@@ -474,11 +474,9 @@ public class MediaController : BindableBase
         if (!IsVideoLoaded || !IsAutoSeekEnabled)
             return;
         if (_isVideoPlaying || _isAudioPlaying)
-            Pause();
+            Stop();
         CurrentFrame = VideoInfo.FrameFromTime(@event.Start);
         VisualizerPositionMs = @event.Start.TotalMilliseconds;
-        if (_isPaused)
-            Resume();
     }
 
     /// <summary>
