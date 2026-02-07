@@ -5,17 +5,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Input;
 using Ameko.ViewModels;
-using Ameko.ViewModels.Windows;
 using Holo.Configuration;
 using Holo.Models;
 using Holo.Providers;
 
 namespace Ameko.Services;
 
-public class CommandService(
-    ICommandRegistrar commandRegistrar,
-    MainWindowViewModel mainWindowViewModel
-) : ICommandService
+public class CommandService(ICommandRegistrar commandRegistrar) : ICommandService
 {
     /// <inheritdoc />
     public void RegisterCommands(int contextId, ViewModelBase viewModel)
@@ -25,7 +21,12 @@ public class CommandService(
         {
             commandRegistrar.RegisterCommand(contextId, info);
         }
-        foreach (var info in DiscoverCommands(mainWindowViewModel))
+
+        if (contextId == -1)
+            return;
+
+        // Add MainWindow commands to the context
+        foreach (var info in commandRegistrar.GetMetadataForContext(-1))
         {
             commandRegistrar.RegisterCommand(contextId, info);
         }

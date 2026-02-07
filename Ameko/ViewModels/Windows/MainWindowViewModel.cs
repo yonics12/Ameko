@@ -398,7 +398,8 @@ public partial class MainWindowViewModel : ViewModelBase
         IMessageService messageService,
         ISpellcheckService spellCheckService,
         ITabFactory tabFactory,
-        IViewModelFactory vmFactory
+        IViewModelFactory vmFactory,
+        ICommandService commandService
     )
     {
         _logger = logger;
@@ -540,6 +541,9 @@ public partial class MainWindowViewModel : ViewModelBase
         CheckSpellcheckDictionaryCommand = CreateCheckSpellcheckDictionaryCommand();
         #endregion
 
+        // Register commands ASAP so they can be used for keybinds
+        commandService.RegisterCommands(-1, this);
+
         ScriptMenuItems = [];
         ScriptService.OnReload += (_, _) => GenerateScriptsMenu();
 
@@ -553,8 +557,8 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             var flag =
                 args.PropertyName
-                is nameof(Persistence.RecentDocuments)
-                    or nameof(Persistence.RecentProjects);
+                    is nameof(Persistence.RecentDocuments)
+                        or nameof(Persistence.RecentProjects);
             if (flag)
             {
                 GenerateRecentsMenus();
