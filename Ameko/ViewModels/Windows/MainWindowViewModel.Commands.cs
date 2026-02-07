@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using Ameko.DataModels;
+using Ameko.Messages;
 using Ameko.ViewModels.Dialogs;
 using Ameko.Views.Dialogs;
 using Ameko.Views.Windows;
@@ -242,6 +243,7 @@ public partial class MainWindowViewModel
             if (!await IoService.OpenProjectFile(uri, SaveSubtitleAs))
                 return;
 
+            MessageBus.Current.SendMessage(new WorkingSpaceChangedMessage());
             var culture = ProjectProvider.Current.SpellcheckCulture;
             if (culture is not null && !_spellcheckService.IsDictionaryInstalled(culture))
             {
@@ -278,6 +280,7 @@ public partial class MainWindowViewModel
                 if (!await IoService.OpenProjectFile(uri, SaveSubtitleAs))
                     return;
 
+                MessageBus.Current.SendMessage(new WorkingSpaceChangedMessage());
                 var culture = ProjectProvider.Current.SpellcheckCulture;
                 if (culture is not null && !_spellcheckService.IsDictionaryInstalled(culture))
                 {
@@ -321,6 +324,7 @@ public partial class MainWindowViewModel
             }
 
             _ = await IoService.OpenProjectDirectory(uri, SaveSubtitleAs);
+            MessageBus.Current.SendMessage(new WorkingSpaceChangedMessage());
         });
     }
 
@@ -356,6 +360,10 @@ public partial class MainWindowViewModel
 
                     _logger.LogDebug("Closing tab {WspTitle}", wsp.Title);
                     await IoService.SafeCloseWorkspace(wsp, SaveSubtitleAs, !isLoadedProject);
+
+                    // If a project is open, send message in case working wsp is now null
+                    if (isLoadedProject)
+                        MessageBus.Current.SendMessage(new WorkingSpaceChangedMessage());
                 }
             }
         );

@@ -43,7 +43,7 @@ public class DiscordRpcService
                 _client.SetPresence(
                     new RichPresence
                     {
-                        Details = $"Editing {wspName}.ass",
+                        Details = wspName is not null ? $"Editing {wspName}.ass" : string.Empty,
                         State = $"in {prjName}.aproj",
                         Timestamps = _timestamps,
                     }
