@@ -123,10 +123,10 @@
                 <ComboBox Grid.Column="1"
                           Grid.Row="1"
                           Width="200"
-                          ItemsSource="{Binding DictionaryService.InstalledDictionaries}"
+                          ItemsSource="{Binding AvailableLanguages}"
                           SelectedValue="{Binding Config.SpellcheckCulture}"
-                          DisplayMemberBinding="{Binding Lang.Name}"
-                          SelectedValueBinding="{Binding Lang.Locale}" />
+                          DisplayMemberBinding="{Binding Name}"
+                          SelectedValueBinding="{Binding Locale}" />
                 <Label Grid.Column="0"
                        Grid.Row="2"
                        VerticalAlignment="Center"

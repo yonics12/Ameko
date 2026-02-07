@@ -41,6 +41,9 @@ public partial class ConfigDialogViewModel(
             new(SaveFrames.WithSubtitles, I18N.Config.Config_SaveFrames_WithSubtitles),
         ];
 
+    public IReadOnlyList<SpellcheckLanguage> AvailableLanguages { get; } =
+        SpellcheckLanguage.AvailableLanguages;
+
     public IConfiguration Config { get; } = config;
     public ICultureService CultureService { get; } = cultureService;
     public IDictionaryService DictionaryService { get; } = dictionaryService;

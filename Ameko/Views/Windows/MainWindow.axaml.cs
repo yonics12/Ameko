@@ -568,8 +568,8 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 {
                     var flag =
                         args.PropertyName
-                            is nameof(ViewModel.Persistence.RecentDocuments)
-                                or nameof(ViewModel.Persistence.RecentProjects);
+                        is nameof(ViewModel.Persistence.RecentDocuments)
+                            or nameof(ViewModel.Persistence.RecentProjects);
                     if (flag)
                     {
                         GenerateRecentsMenus();
@@ -587,6 +587,11 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
             }
 
             ViewModel?.CheckSpellcheckDictionaryCommand.Execute(null);
+            ViewModel?.Configuration.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName == nameof(IConfiguration.SpellcheckCulture))
+                    ViewModel?.CheckSpellcheckDictionaryCommand.Execute(null);
+            };
 
             Disposable.Create(() => { }).DisposeWith(disposables);
         });
