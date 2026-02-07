@@ -18,13 +18,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfigDialog_Title" xml:space="preserve">
-        <value>Configuration</value>
+        <value>Cấu hình</value>
     </data>
   <data name="Config_RpcLevel_Disabled" xml:space="preserve">
-        <value>Disabled</value>
+        <value>Bật</value>
     </data>
   <data name="Config_RpcLevel_Enabled" xml:space="preserve">
-        <value>Enabled</value>
+        <value>Tắt</value>
     </data>
   <data name="Config_RpcLevel_TimeOnly" xml:space="preserve">
         <value>Time Only</value>
@@ -35,7 +35,7 @@
   <data name="Config_PropFields_None" xml:space="preserve">
         <value>No fields</value>
     </data>
-    <data name="Config_PropFields_NonText" xml:space="preserve">
+  <data name="Config_PropFields_NonText" xml:space="preserve">
         <value>Metadata fields only</value>
     </data>
   <data name="Config_Theme_Default" xml:space="preserve">
@@ -54,13 +54,13 @@
         <value>With Video</value>
     </data>
   <data name="Config_Label_CpsWarnThreshold" xml:space="preserve">
-        <value>CPS warn threshold</value>
+        <value>Ngưỡng cảnh báo CPS</value>
     </data>
   <data name="Config_Label_CpsWhitespace" xml:space="preserve">
-        <value>CPS includes whitespace?</value>
+        <value>CPS bao gồm khoảng trắng?</value>
     </data>
   <data name="Config_Label_CpsPunctuation" xml:space="preserve">
-        <value>CPS includes punctuation?</value>
+        <value>CPS bao gồm dấu câu?</value>
     </data>
   <data name="Config_Label_SoftLinebreaks" xml:space="preserve">
         <value>Use soft linebreaks?</value>
@@ -83,7 +83,7 @@
   <data name="Config_Label_PropagateChanges" xml:space="preserve">
         <value>Propagate changes for</value>
     </data>
-    <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
+  <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
         <value>Controls how changes made to the active event's properties are replicated to other selected events</value>
     </data>
   <data name="Config_Label_AutosaveEnabled" xml:space="preserve">
@@ -126,7 +126,7 @@
         <value>Line Width includes whitespace?</value>
     </data>
   <data name="Config_Label_RestartRequired" xml:space="preserve">
-        <value>Restart required</value>
+        <value>Cần khởi động lại</value>
     </data>
   <data name="ProjectConfigDialog_Title" xml:space="preserve">
         <value>Project Configuration</value>
@@ -141,7 +141,7 @@
         <value>Remove</value>
     </data>
   <data name="Config_CustomWordBox_Watermark" xml:space="preserve">
-        <value>Add a word to the dictionary</value>
+        <value>Thêm từ vào từ điển</value>
     </data>
   <data name="Config_Label_AutoloadAudioTracks" xml:space="preserve">
         <value>Autoload audio tracks?</value>

@@ -197,22 +197,22 @@
   <data name="FileDialog_FileType_Kf" xml:space="preserve">
         <value>Keyframe Files</value>
     </data>
-    <data name="SelectFolderDialog_Title" xml:space="preserve">
+  <data name="SelectFolderDialog_Title" xml:space="preserve">
         <value>Select Folder</value>
     </data>
-    <data name="SelectFolderDialog_Body" xml:space="preserve">
+  <data name="SelectFolderDialog_Body" xml:space="preserve">
         <value>Select a folder:</value>
     </data>
-    <data name="SelectFolderDialog_Root" xml:space="preserve">
+  <data name="SelectFolderDialog_Root" xml:space="preserve">
         <value>/ (root)</value>
     </data>
-    <data name="SelectFolderDialog_Button_Select" xml:space="preserve">
+  <data name="SelectFolderDialog_Button_Select" xml:space="preserve">
         <value>Select</value>
     </data>
-    <data name="MsgBox_SaveProject_Title" xml:space="preserve">
-        <value>Save project?</value>
-    </data>
-    <data name="MsgBox_SaveProject_Body" xml:space="preserve">
+  <data name="MsgBox_SaveProject_Body" xml:space="preserve">
         <value>{0} has unsaved changes. Do you want to save?</value>
+    </data>
+  <data name="MsgBox_SaveProject_Title" xml:space="preserve">
+        <value>Save project?</value>
     </data>
 </root>

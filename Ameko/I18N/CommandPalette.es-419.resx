@@ -17,16 +17,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutWindow_Title" xml:space="preserve">
-        <value>Về Ameko</value>
+  <data name="CommandPalette_Title" xml:space="preserve">
+        <value>Command Palette</value>
     </data>
-  <data name="AboutWindow_AssetsTab" xml:space="preserve">
-        <value>Tài nguyên</value>
+  <data name="CmdP_Label" xml:space="preserve">
+        <value></value>
     </data>
-  <data name="AboutWindow_GeneralTab" xml:space="preserve">
-        <value>Thông tin chung</value>
-    </data>
-  <data name="AboutWindow_LibrariesTab" xml:space="preserve">
-        <value>Thư viện</value>
+  <data name="CmdP_Button" xml:space="preserve">
+        <value>Go</value>
     </data>
 </root>

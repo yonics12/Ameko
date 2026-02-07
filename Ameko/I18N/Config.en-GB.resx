@@ -35,7 +35,7 @@
   <data name="Config_PropFields_None" xml:space="preserve">
         <value>No fields</value>
     </data>
-    <data name="Config_PropFields_NonText" xml:space="preserve">
+  <data name="Config_PropFields_NonText" xml:space="preserve">
         <value>Metadata fields only</value>
     </data>
   <data name="Config_Theme_Default" xml:space="preserve">
@@ -83,7 +83,7 @@
   <data name="Config_Label_PropagateChanges" xml:space="preserve">
         <value>Propagate changes for</value>
     </data>
-    <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
+  <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
         <value>Controls how changes made to the active event's properties are replicated to other selected events</value>
     </data>
   <data name="Config_Label_AutosaveEnabled" xml:space="preserve">
