@@ -261,7 +261,7 @@ public class ScriptService : IScriptService
             );
 
             // Fire event
-            OnReload?.Invoke(this, EventArgs.Empty);
+            Reloaded?.Invoke(this, EventArgs.Empty);
         });
 
         // Display message box (if manually invoked)
@@ -275,7 +275,7 @@ public class ScriptService : IScriptService
     }
 
     /// <inheritdoc />
-    public event EventHandler<EventArgs>? OnReload;
+    public event EventHandler<EventArgs>? Reloaded;
 
     public ScriptService(
         ILogger<ScriptService> logger,

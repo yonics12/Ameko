@@ -27,13 +27,13 @@ public partial class TabItemAudioArea : ReactiveUserControl<TabItemViewModel>
                     var mc = vm.Workspace.MediaController;
                     var renderer = new OpenAlAudioRenderer(mc);
                     renderer.Initialize();
-                    mc.OnPlaybackStart += (_, e) =>
+                    mc.PlaybackStarted += (_, e) =>
                     {
                         // Always play audio target, only play video target if not muted
                         if (e.Target is PlaybackTarget.Audio || !mc.IsMuted)
                             renderer.Play(e.StartTime, e.GoalTime);
                     };
-                    mc.OnPlaybackStop += (_, _) =>
+                    mc.PlaybackStopped += (_, _) =>
                     {
                         renderer.Stop();
                     };

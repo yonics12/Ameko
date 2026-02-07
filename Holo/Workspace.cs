@@ -352,7 +352,7 @@ public class Workspace : BindableBase
             return;
         // Also alert if last write time is null
         _lastExternalModificationAlertTime = DateTimeOffset.Now;
-        OnFileModifiedExternally?.Invoke(this, EventArgs.Empty);
+        FileModifiedExternally?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -405,8 +405,8 @@ public class Workspace : BindableBase
         };
 
         // TODO: Should this be here or elsewhere?
-        document.HistoryManager.OnChangeMade += (_, _) => MediaController.SetSubtitles(document);
+        document.HistoryManager.ChangeMade += (_, _) => MediaController.SetSubtitles(document);
     }
 
-    public event EventHandler<EventArgs>? OnFileModifiedExternally;
+    public event EventHandler<EventArgs>? FileModifiedExternally;
 }

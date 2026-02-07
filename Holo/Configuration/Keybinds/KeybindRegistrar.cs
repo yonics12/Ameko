@@ -32,7 +32,7 @@ public class KeybindRegistrar(IFileSystem fileSystem, ILogger<KeybindRegistrar> 
     {
         var result = _keybinds.TryAdd(keybind.QualifiedName, keybind);
         if (result)
-            OnKeybindsChanged?.Invoke(this, EventArgs.Empty);
+            KeybindsChanged?.Invoke(this, EventArgs.Empty);
         return result;
     }
 
@@ -47,7 +47,7 @@ public class KeybindRegistrar(IFileSystem fileSystem, ILogger<KeybindRegistrar> 
         }
 
         if (changed)
-            OnKeybindsChanged?.Invoke(this, EventArgs.Empty);
+            KeybindsChanged?.Invoke(this, EventArgs.Empty);
 
         if (save && changed)
             Save();
@@ -59,7 +59,7 @@ public class KeybindRegistrar(IFileSystem fileSystem, ILogger<KeybindRegistrar> 
     {
         var result = _keybinds.TryRemove(qualifiedName, out _);
         if (result)
-            OnKeybindsChanged?.Invoke(this, EventArgs.Empty);
+            KeybindsChanged?.Invoke(this, EventArgs.Empty);
         return result;
     }
 
@@ -98,7 +98,7 @@ public class KeybindRegistrar(IFileSystem fileSystem, ILogger<KeybindRegistrar> 
         }
 
         if (changed)
-            OnKeybindsChanged?.Invoke(this, EventArgs.Empty);
+            KeybindsChanged?.Invoke(this, EventArgs.Empty);
         return true;
     }
 
@@ -113,7 +113,7 @@ public class KeybindRegistrar(IFileSystem fileSystem, ILogger<KeybindRegistrar> 
 
         target.OverrideKey = null;
         target.OverrideContext = null;
-        OnKeybindsChanged?.Invoke(this, EventArgs.Empty);
+        KeybindsChanged?.Invoke(this, EventArgs.Empty);
         return true;
     }
 
@@ -127,7 +127,7 @@ public class KeybindRegistrar(IFileSystem fileSystem, ILogger<KeybindRegistrar> 
             target.OverrideContext = null;
             target.IsEnabled = true;
         }
-        OnKeybindsChanged?.Invoke(this, EventArgs.Empty);
+        KeybindsChanged?.Invoke(this, EventArgs.Empty);
         return true;
     }
 
@@ -260,10 +260,10 @@ public class KeybindRegistrar(IFileSystem fileSystem, ILogger<KeybindRegistrar> 
         }
         finally
         {
-            OnKeybindsChanged?.Invoke(this, EventArgs.Empty);
+            KeybindsChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
     /// <inheritdoc />
-    public event EventHandler<EventArgs>? OnKeybindsChanged;
+    public event EventHandler<EventArgs>? KeybindsChanged;
 }

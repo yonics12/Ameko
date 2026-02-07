@@ -545,10 +545,10 @@ public partial class MainWindowViewModel : ViewModelBase
         #endregion
 
         ScriptMenuItems = [];
-        ScriptService.OnReload += (_, _) => GenerateScriptsMenu();
+        ScriptService.Reloaded += (_, _) => GenerateScriptsMenu();
 
         LayoutMenuItems = [];
-        LayoutProvider.OnLayoutChanged += (_, _) => GenerateLayoutsMenu();
+        LayoutProvider.LayoutChanged += (_, _) => GenerateLayoutsMenu();
         GenerateLayoutsMenu();
 
         RecentDocumentMenuItems = [];
@@ -557,8 +557,8 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             var flag =
                 args.PropertyName
-                is nameof(Persistence.RecentDocuments)
-                    or nameof(Persistence.RecentProjects);
+                    is nameof(Persistence.RecentDocuments)
+                        or nameof(Persistence.RecentProjects);
             if (flag)
             {
                 GenerateRecentsMenus();

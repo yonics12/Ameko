@@ -269,13 +269,13 @@ public partial class TabItem : ReactiveUserControl<TabItemViewModel>
                     // csharpier-ignore-end
 
                     // Register keybinds
-                    vm.KeybindService.KeybindRegistrar.OnKeybindsChanged += (_, _) =>
+                    vm.KeybindService.KeybindRegistrar.KeybindsChanged += (_, _) =>
                     {
                         AttachKeybinds(vm);
                     };
 
                     // Apply layouts
-                    vm.LayoutProvider.OnLayoutChanged += (_, args) =>
+                    vm.LayoutProvider.LayoutChanged += (_, args) =>
                     {
                         ApplyLayout(vm, args.Layout);
                     };

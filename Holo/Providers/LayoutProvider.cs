@@ -31,7 +31,7 @@ public class LayoutProvider : BindableBase, ILayoutProvider
                 return;
             SetProperty(ref _currentLayout, value);
             _persistence.LayoutName = value.Name;
-            OnLayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(value));
+            LayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(value));
         }
     }
 
@@ -74,14 +74,14 @@ public class LayoutProvider : BindableBase, ILayoutProvider
         if (_layouts.Any(l => l.Name == _persistence.LayoutName))
         {
             _currentLayout = _layouts.First(l => l.Name == _persistence.LayoutName);
-            OnLayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(Current));
+            LayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(Current));
             return;
         }
 
         if (_layouts.Count > 0)
         {
             Current = _layouts[0];
-            OnLayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(Current));
+            LayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(Current));
             return;
         }
 
@@ -112,7 +112,7 @@ public class LayoutProvider : BindableBase, ILayoutProvider
                 using var writer = new StreamWriter(writeFs);
                 var content = TomletMain.TomlStringFrom(layout);
                 writer.Write(content);
-                OnLayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(layout));
+                LayoutChanged?.Invoke(this, new ILayoutProvider.LayoutChangedEventArgs(layout));
             }
             catch (Exception e)
             {
@@ -125,7 +125,7 @@ public class LayoutProvider : BindableBase, ILayoutProvider
     }
 
     /// <inheritdoc />
-    public event EventHandler<ILayoutProvider.LayoutChangedEventArgs>? OnLayoutChanged;
+    public event EventHandler<ILayoutProvider.LayoutChangedEventArgs>? LayoutChanged;
 
     /// <summary>
     /// Initialize the layout provider

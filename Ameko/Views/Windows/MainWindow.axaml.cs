@@ -549,7 +549,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 // Generate layouts menu and apply current layout
                 ApplyLayout(ViewModel, ViewModel.LayoutProvider.Current);
                 GenerateLayoutsMenu();
-                ViewModel.LayoutProvider.OnLayoutChanged += (_, args) =>
+                ViewModel.LayoutProvider.LayoutChanged += (_, args) =>
                 {
                     ApplyLayout(ViewModel, args.Layout);
                     GenerateLayoutsMenu();
@@ -557,7 +557,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 
                 // Generate scripts menu
                 GenerateScriptsMenu();
-                ViewModel.ScriptService.OnReload += (_, _) =>
+                ViewModel.ScriptService.Reloaded += (_, _) =>
                 {
                     GenerateScriptsMenu();
                 };
@@ -582,7 +582,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                     .Current.Listen<WorkingSpaceChangedMessage>()
                     .Subscribe(_ => AttachKeybinds(ViewModel));
                 // Update keybinds when keybinds change
-                ViewModel.KeybindService.KeybindRegistrar.OnKeybindsChanged += (_, _) =>
+                ViewModel.KeybindService.KeybindRegistrar.KeybindsChanged += (_, _) =>
                     AttachKeybinds(ViewModel);
             }
 

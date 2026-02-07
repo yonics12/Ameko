@@ -25,7 +25,7 @@ public interface ILayoutProvider
     /// Event fired when changing layouts
     /// </summary>
     /// <remarks>Also fired when reloading completes</remarks>
-    event EventHandler<LayoutChangedEventArgs>? OnLayoutChanged;
+    event EventHandler<LayoutChangedEventArgs>? LayoutChanged;
 
     public class LayoutChangedEventArgs(Layout? layout) : EventArgs
     {

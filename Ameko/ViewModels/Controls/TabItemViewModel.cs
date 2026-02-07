@@ -364,7 +364,7 @@ public partial class TabItemViewModel : ViewModelBase
             }
         };
 
-        Workspace.OnFileModifiedExternally += async (_, _) =>
+        Workspace.FileModifiedExternally += async (_, _) =>
         {
             var result = await ShowFileModifiedDialog.Handle(
                 new FileModifiedDialogViewModel(Workspace.Title)

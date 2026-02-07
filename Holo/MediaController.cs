@@ -293,7 +293,7 @@ public class MediaController : BindableBase
         IsPaused = false;
         _videoPlayback.Stop();
         _audioPlayback.Stop();
-        OnPlaybackStop?.Invoke(this, EventArgs.Empty);
+        PlaybackStopped?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -309,7 +309,7 @@ public class MediaController : BindableBase
         IsAudioPlaying = false;
         _videoPlayback.Stop();
         _audioPlayback.Stop();
-        OnPlaybackStop?.Invoke(this, EventArgs.Empty);
+        PlaybackStopped?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -331,7 +331,7 @@ public class MediaController : BindableBase
             VideoInfo.MillisecondsFromFrame(_currentVideoFrame),
             VideoInfo.MillisecondsFromFrame(_destinationFrame)
         );
-        OnPlaybackStart?.Invoke(this, e);
+        PlaybackStarted?.Invoke(this, e);
 
         _videoPlayback.Start();
         IsVideoPlaying = true;
@@ -369,7 +369,7 @@ public class MediaController : BindableBase
             VideoInfo.MillisecondsFromFrame(_currentVideoFrame),
             VideoInfo.MillisecondsFromFrame(_destinationFrame)
         );
-        OnPlaybackStart?.Invoke(this, e);
+        PlaybackStarted?.Invoke(this, e);
 
         _videoPlayback.Start();
         IsVideoPlaying = true;
@@ -389,7 +389,7 @@ public class MediaController : BindableBase
         _videoPlayback.IntervalIndex = _currentVideoFrame;
         _currentAudioFrame = -1; // Hide
 
-        OnPlaybackStart?.Invoke(
+        PlaybackStarted?.Invoke(
             this,
             new PlaybackStartEventArgs(
                 PlaybackTarget.Video,
@@ -541,7 +541,7 @@ public class MediaController : BindableBase
             VideoInfo.MillisecondsFromFrame(_currentAudioFrame),
             VideoInfo.MillisecondsFromFrame(_destinationFrame)
         );
-        OnPlaybackStart?.Invoke(this, e);
+        PlaybackStarted?.Invoke(this, e);
 
         _audioPlayback.Start();
         IsAudioPlaying = true;
@@ -1034,6 +1034,6 @@ public class MediaController : BindableBase
     }
 
     public event Action? FrameReady;
-    public event EventHandler<PlaybackStartEventArgs>? OnPlaybackStart;
-    public event EventHandler<EventArgs>? OnPlaybackStop;
+    public event EventHandler<PlaybackStartEventArgs>? PlaybackStarted;
+    public event EventHandler<EventArgs>? PlaybackStopped;
 }

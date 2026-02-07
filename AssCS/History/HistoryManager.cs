@@ -267,11 +267,11 @@ public class HistoryManager(
     {
         RaisePropertyChanged(nameof(CanUndo));
         RaisePropertyChanged(nameof(CanRedo));
-        OnChangeMade?.Invoke(this, EventArgs.Empty);
+        ChangeMade?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
     /// Event raised when a commit or other operation occurs
     /// </summary>
-    public event EventHandler<EventArgs>? OnChangeMade;
+    public event EventHandler<EventArgs>? ChangeMade;
 }
