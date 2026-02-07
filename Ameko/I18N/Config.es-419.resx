@@ -35,7 +35,7 @@
   <data name="Config_PropFields_None" xml:space="preserve">
         <value>Ningún campo</value>
     </data>
-    <data name="Config_PropFields_NonText" xml:space="preserve">
+  <data name="Config_PropFields_NonText" xml:space="preserve">
         <value>Solo campos de metadatos</value>
     </data>
   <data name="Config_Theme_Default" xml:space="preserve">
@@ -54,102 +54,102 @@
         <value>Con el video</value>
     </data>
   <data name="Config_Label_CpsWarnThreshold" xml:space="preserve">
-        <value>CPS warn threshold</value>
+        <value>Umbral de advertencia de CPS</value>
     </data>
   <data name="Config_Label_CpsWhitespace" xml:space="preserve">
-        <value>CPS includes whitespace?</value>
+        <value>¿CPS incluye caracteres vacíos?</value>
     </data>
   <data name="Config_Label_CpsPunctuation" xml:space="preserve">
-        <value>CPS includes punctuation?</value>
+        <value>¿CPS incluye signos de puntuación?</value>
     </data>
   <data name="Config_Label_SoftLinebreaks" xml:space="preserve">
-        <value>Use soft linebreaks?</value>
+        <value>¿Usar saltos de línea suaves?</value>
     </data>
   <data name="Config_Label_SoftLinebreaks_ToolTip" xml:space="preserve">
-        <value>Use \n for linebreaks instead of \N</value>
+        <value>Usar \n en lugar de \N para los saltos de línea</value>
     </data>
   <data name="Config_Label_DefaultLayer" xml:space="preserve">
-        <value>Default layer</value>
+        <value>Capa por defecto</value>
     </data>
   <data name="Config_Label_DisplayLanguage" xml:space="preserve">
-        <value>Display language</value>
+        <value>Lenguaje de visualización</value>
     </data>
   <data name="Config_Label_SpellcheckLanguage" xml:space="preserve">
-        <value>Spellcheck language</value>
+        <value>Lenguaje de la corrección automática</value>
     </data>
   <data name="Config_Label_RichPresence" xml:space="preserve">
-        <value>Rich Presence</value>
+        <value>Presencia enriquecida</value>
     </data>
   <data name="Config_Label_PropagateChanges" xml:space="preserve">
-        <value>Propagate changes for</value>
+        <value>Desplegar los cambios en</value>
     </data>
-    <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
-        <value>Controls how changes made to the active event's properties are replicated to other selected events</value>
+  <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
+        <value>Controla cómo los cambios realizados hecho en las propiedades de los eventos activos serán desplegados a otros eventos seleccionados</value>
     </data>
   <data name="Config_Label_AutosaveEnabled" xml:space="preserve">
-        <value>Autosave enabled?</value>
+        <value>¿Activar autoguardado?</value>
     </data>
   <data name="Config_Label_SaveFrames" xml:space="preserve">
-        <value>Save frames</value>
+        <value>Guardar frames</value>
     </data>
   <data name="Config_Label_AutosaveInterval" xml:space="preserve">
-        <value>Autosave interval (sec)</value>
+        <value>Intervalo de autoguardado (segundos)</value>
     </data>
   <data name="Config_Label_Theme" xml:space="preserve">
-        <value>Theme</value>
+        <value>Tema</value>
     </data>
   <data name="Config_Label_EditorFs" xml:space="preserve">
-        <value>Editor font size</value>
+        <value>Tamaño de fuente del editor</value>
     </data>
   <data name="Config_Label_GridFs" xml:space="preserve">
-        <value>Grid font size</value>
+        <value>Tamaño de fuente de la grilla</value>
     </data>
   <data name="Config_Label_ReferenceFs" xml:space="preserve">
-        <value>Reference file font size</value>
+        <value>Tamaño de fuente del archivo de referencia</value>
     </data>
   <data name="Config_Label_GridPadding" xml:space="preserve">
-        <value>Grid padding</value>
+        <value>Relleno de la grilla</value>
     </data>
   <data name="Config_Header_Ssa" xml:space="preserve">
         <value>SubStation Alpha</value>
     </data>
   <data name="Config_Header_Behavior" xml:space="preserve">
-        <value>Behavior</value>
+        <value>Comportamiento</value>
     </data>
   <data name="Config_Header_Appearance" xml:space="preserve">
-        <value>Appearance</value>
+        <value>Apariencia</value>
     </data>
   <data name="Config_Label_LineWidthPunctuation" xml:space="preserve">
-        <value>Line Width includes punctuation?</value>
+        <value>¿El ancho de las líneas incluye puntuaciones?</value>
     </data>
   <data name="Config_Label_LineWidthWhitespace" xml:space="preserve">
-        <value>Line Width includes whitespace?</value>
+        <value>¿El ancho de las líneas incluye espacios?</value>
     </data>
   <data name="Config_Label_RestartRequired" xml:space="preserve">
-        <value>Restart required</value>
+        <value>Se necesita reiniciar</value>
     </data>
   <data name="ProjectConfigDialog_Title" xml:space="preserve">
-        <value>Project Configuration</value>
+        <value>Configuración del proyecto</value>
     </data>
   <data name="Config_Header_Spellchecking" xml:space="preserve">
-        <value>Spellchecking</value>
+        <value>Corrección automática</value>
     </data>
   <data name="Config_Button_Add" xml:space="preserve">
-        <value>Add</value>
+        <value>Añadir</value>
     </data>
   <data name="Config_Button_Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>Remover</value>
     </data>
   <data name="Config_CustomWordBox_Watermark" xml:space="preserve">
-        <value>Add a word to the dictionary</value>
+        <value>Añadir palabra al diccionario</value>
     </data>
   <data name="Config_Label_AutoloadAudioTracks" xml:space="preserve">
-        <value>Autoload audio tracks?</value>
+        <value>¿Autocargar la pista de audio?</value>
     </data>
   <data name="Config_Label_AutoloadAudioTracks_ToolTip" xml:space="preserve">
-        <value>Automatically load the last-loaded track when there are multiple audio tracks available</value>
+        <value>Carga automáticamente la última pista de audio cargada cuando sucede que hay múltiples pistas de audio disponibles</value>
     </data>
   <data name="Config_Label_IndexCacheExpiration" xml:space="preserve">
-        <value>Index cache expiration (days)</value>
+        <value>Tiempo de expiración de la caché indexada (días)</value>
     </data>
 </root>

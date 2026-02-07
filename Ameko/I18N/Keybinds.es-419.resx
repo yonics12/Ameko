@@ -54,6 +54,15 @@
         <value>Quitar</value>
     </data>
   <data name="Keybinds_Button_Reset" xml:space="preserve">
-        <value>Reset Defaults</value>
+        <value>Restaurar por defecto</value>
+    </data>
+  <data name="Keybinds_MsgBox_Conflict_Title" xml:space="preserve">
+        <value>¡Conflicto de atajos detectado!</value>
+    </data>
+  <data name="Keybinds_MsgBox_Conflict_Body" xml:space="preserve">
+        <value>Los siguientes atajos de teclado tienen conflictos: {0}</value>
+    </data>
+  <data name="Keybinds_Button_ClearOverride_ToolTip" xml:space="preserve">
+        <value>Borrar la sobreescritura</value>
     </data>
 </root>

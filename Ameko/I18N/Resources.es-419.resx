@@ -285,7 +285,7 @@
         <value>_Adjuntar un archivo de referencia...</value>
     </data>
   <data name="Menu_ReferenceFile_Detach" xml:space="preserve">
-        <value>_Detach Reference File</value>
+        <value>_Separar archivo de referencia</value>
     </data>
   <data name="Menu_Spellcheck" xml:space="preserve">
         <value>Comprobar _ortografía...</value>
@@ -336,69 +336,87 @@
         <value>Guardar fotograma (solo subtítulos)</value>
     </data>
   <data name="Video_Indexing" xml:space="preserve">
-        <value>Indexing...</value>
+        <value>Indexando...</value>
     </data>
   <data name="Menu_CloseVideo" xml:space="preserve">
-        <value>_Close Video</value>
+        <value>_Cerrar video</value>
     </data>
   <data name="Menu_IssueTracker" xml:space="preserve">
-        <value>_Issue Tracker</value>
+        <value>_Rastreador de problemas</value>
     </data>
   <data name="Editor_Menu_SplitLineAtCursor" xml:space="preserve">
-        <value>Split Line at Cursor</value>
+        <value>Dividir líneas en el cursor</value>
     </data>
   <data name="Editor_Menu_SplitLineAtCursorKeepTimes" xml:space="preserve">
-        <value>Split Line at Cursor (Keep Times)</value>
+        <value>Dividir líneas en el cursor (Manteniendo tiempos)</value>
     </data>
   <data name="Editor_Menu_SpellcheckLine" xml:space="preserve">
-        <value>Spellcheck This Line</value>
+        <value>Corregir automáticamente esta línea</value>
     </data>
   <data name="EventsGrid_Menu_InsertBeforeAtVideoTime" xml:space="preserve">
-        <value>Insert Before at Video Time</value>
+        <value>Insertar antes del tiempo de video</value>
     </data>
   <data name="EventsGrid_Menu_InsertAfterAtVideoTime" xml:space="preserve">
-        <value>Insert After at Video Time</value>
+        <value>Insertar después del tiempo de video</value>
     </data>
   <data name="Audio_HorizontalScale_ToolTip" xml:space="preserve">
-        <value>Horizontal Scale</value>
+        <value>Escala horizontal</value>
     </data>
   <data name="Audio_VerticalScale_ToolTip" xml:space="preserve">
-        <value>Vertical Scale</value>
+        <value>Escala vertical</value>
     </data>
   <data name="Menu_Audio" xml:space="preserve">
         <value>_Audio</value>
     </data>
   <data name="Menu_OpenAudio" xml:space="preserve">
-        <value>_Open Audio...</value>
+        <value>A_brir audio...</value>
     </data>
   <data name="Menu_CloseAudio" xml:space="preserve">
-        <value>_Close Audio</value>
+        <value>_Cerrar audio</value>
     </data>
   <data name="Menu_ChangeTracks" xml:space="preserve">
-        <value>Change _Tracks...</value>
+        <value>Cambiar _pistas...</value>
     </data>
   <data name="Menu_RecentSubtitles" xml:space="preserve">
-        <value>Recent Subtitl_es</value>
+        <value>_Subtítulos recientes</value>
     </data>
   <data name="Menu_RecentProjects" xml:space="preserve">
-        <value>Recent Proje_cts</value>
+        <value>Pro_yectos recientes</value>
     </data>
   <data name="Menu_RecentClear" xml:space="preserve">
-        <value>Clear</value>
+        <value>Limpiar</value>
     </data>
   <data name="Menu_SnapKf_Start" xml:space="preserve">
-        <value>Snap _Start to Nearest Keyframe</value>
+        <value>Ajustar _inicio al keyframe más cercano</value>
     </data>
   <data name="Menu_SnapKf_End" xml:space="preserve">
-        <value>Snap _End to Nearest Keyframe</value>
+        <value>Ajustar _final al keyframe más cercano</value>
     </data>
   <data name="Menu_OpenKeyframes" xml:space="preserve">
-        <value>Open _Keyframes...</value>
+        <value>Abrir _keyframes...</value>
     </data>
   <data name="Menu_SelectLines" xml:space="preserve">
-        <value>Select _Lines...</value>
+        <value>Seleccionar _líneas...</value>
     </data>
   <data name="Menu_Sort_Lines" xml:space="preserve">
-        <value>Sor_t Lines...</value>
+        <value>Ordena_r líneas...</value>
+    </data>
+  <data name="Menu_SnapFrame_End" xml:space="preserve">
+        <value>Snap End to Current F_rame</value>
+    </data>
+  <data name="Menu_SnapFrame_Start" xml:space="preserve">
+        <value>Snap Start to _Current Frame</value>
+    </data>
+  <data name="ProjectExplorer_ContextMenu_CreateFolder_Root" xml:space="preserve">
+        <value>Create New Root Folder...</value>
+    </data>
+  <data name="ProjectExplorer_ContextMenu_CreateFolder_Folder" xml:space="preserve">
+        <value>Create New Folder Here...</value>
+    </data>
+  <data name="ProjectExplorer_ContextMenu_MoveToFolder" xml:space="preserve">
+        <value>Move to Folder...</value>
+    </data>
+  <data name="Video_Button_Mute_ToolTip" xml:space="preserve">
+        <value>Play audio with video</value>
     </data>
 </root>
