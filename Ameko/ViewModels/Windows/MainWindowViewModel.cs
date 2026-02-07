@@ -38,6 +38,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public IConfiguration Configuration { get; }
     public IPersistence Persistence { get; }
     public IScriptService ScriptService { get; }
+    public IKeybindService KeybindService { get; }
     public ILayoutProvider LayoutProvider { get; }
 
     public bool DisplayInWindowMenu { get; } = !OperatingSystem.IsMacOS();
@@ -393,6 +394,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ILayoutProvider layoutProvider,
         IProjectProvider projectProvider,
         IScriptService scriptService,
+        IKeybindService keybindService,
         IDictionaryService dictionaryService,
         IMessageBoxService messageBoxService,
         IMessageService messageService,
@@ -410,6 +412,7 @@ public partial class MainWindowViewModel : ViewModelBase
         LayoutProvider = layoutProvider;
         ProjectProvider = projectProvider;
         ScriptService = scriptService;
+        KeybindService = keybindService;
 
         _dictionaryService = dictionaryService;
         _messageBoxService = messageBoxService;
@@ -541,9 +544,6 @@ public partial class MainWindowViewModel : ViewModelBase
         CheckSpellcheckDictionaryCommand = CreateCheckSpellcheckDictionaryCommand();
         #endregion
 
-        // Register commands ASAP so they can be used for keybinds
-        commandService.RegisterCommands(-1, this);
-
         ScriptMenuItems = [];
         ScriptService.OnReload += (_, _) => GenerateScriptsMenu();
 
@@ -557,14 +557,17 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             var flag =
                 args.PropertyName
-                    is nameof(Persistence.RecentDocuments)
-                        or nameof(Persistence.RecentProjects);
+                is nameof(Persistence.RecentDocuments)
+                    or nameof(Persistence.RecentProjects);
             if (flag)
             {
                 GenerateRecentsMenus();
             }
         };
         GenerateRecentsMenus();
+
+        // Register commands ASAP so they can be used for keybinds
+        commandService.RegisterCommands(-1, this);
 
         _messageService.MessageReady += (_, msg) => CurrentMessage = msg.Content;
         _messageService.QueueDrained += (_, _) => CurrentMessage = string.Empty;

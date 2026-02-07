@@ -76,7 +76,7 @@ public class Keybind(string qualifiedName, string? defaultKey, KeybindContext de
     /// </summary>
     [JsonIgnore]
     public bool IsActive =>
-        !IsEnabled || DefaultContext != KeybindContext.None || string.IsNullOrEmpty(Key);
+        IsEnabled && Context != KeybindContext.None && !string.IsNullOrEmpty(Key);
 
     /// <summary>
     /// If the keybind is for a builtin command

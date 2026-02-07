@@ -21,6 +21,7 @@ using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using DynamicData;
 using Holo.Configuration;
+using Holo.Configuration.Keybinds;
 using Holo.Media.Providers;
 using Holo.Models;
 using Microsoft.Extensions.Logging;
@@ -567,13 +568,22 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 {
                     var flag =
                         args.PropertyName
-                        is nameof(ViewModel.Persistence.RecentDocuments)
-                            or nameof(ViewModel.Persistence.RecentProjects);
+                            is nameof(ViewModel.Persistence.RecentDocuments)
+                                or nameof(ViewModel.Persistence.RecentProjects);
                     if (flag)
                     {
                         GenerateRecentsMenus();
                     }
                 };
+
+                AttachKeybinds(ViewModel);
+                // Update keybinds when WorkingSpace changes
+                MessageBus
+                    .Current.Listen<WorkingSpaceChangedMessage>()
+                    .Subscribe(_ => AttachKeybinds(ViewModel));
+                // Update keybinds when keybinds change
+                ViewModel.KeybindService.KeybindRegistrar.OnKeybindsChanged += (_, _) =>
+                    AttachKeybinds(ViewModel);
             }
 
             ViewModel?.CheckSpellcheckDictionaryCommand.Execute(null);
@@ -582,6 +592,22 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         });
 
         _logger.LogInformation("Done!");
+    }
+
+    private void AttachKeybinds(MainWindowViewModel? vm)
+    {
+        if (vm is null)
+            return;
+
+        var contextId = vm.ProjectProvider.Current.WorkingSpace?.Id ?? -1;
+        vm.KeybindService.AttachKeybinds(KeybindContext.Global, this, contextId);
+        vm.KeybindService.AttachScriptKeybinds(
+            vm.ExecuteScriptCommand,
+            KeybindContext.Global,
+            this
+        );
+
+        _logger.LogInformation("Attached global keybinds for context {Context}", contextId);
     }
 
     private void ApplyLayout(MainWindowViewModel? vm, Layout? layout)
