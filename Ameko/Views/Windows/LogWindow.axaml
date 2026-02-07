@@ -27,6 +27,7 @@
              ItemsSource="{Binding LogEntries}"
              FontFamily="{StaticResource MartianMono}"
              SelectedItem="{Binding SelectedLog}"
+             SelectedItems="{Binding SelectedLogs}"
              SelectionMode="Multiple"
              AutoScrollToSelectedItem="True"
              FontSize="10"
@@ -43,6 +44,12 @@
                 </TextBlock>
             </DataTemplate>
         </ListBox.ItemTemplate>
+        <ListBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="{x:Static i18n:Resources.EventsGrid_Menu_Copy}"
+                          Command="{Binding CopySelectionCommand}" />
+            </ContextMenu>
+        </ListBox.ContextMenu>
     </ListBox>
     <Window.Styles>
         <Style Selector="ListBoxItem">

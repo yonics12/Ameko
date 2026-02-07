@@ -32,7 +32,7 @@ public class LogColorConverter : IMultiValueConverter
         switch (level)
         {
             case LogLevel.Warning:
-                return new SolidColorBrush(Colors.Yellow);
+                return new SolidColorBrush(Colors.Gold);
             case LogLevel.Error:
             case LogLevel.Critical:
                 return new SolidColorBrush(Colors.Red);

@@ -4,4 +4,4 @@ using Microsoft.Extensions.Logging;
 
 namespace Holo.Models;
 
-public record LogEntry(LogLevel Level, string Message);
+public record LogEntry(LogLevel Level, DateTimeOffset Timestamp, string Message);

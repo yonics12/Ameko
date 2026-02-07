@@ -92,11 +92,14 @@ internal class LogProvider : ILogProvider
 
             if (_syncContext is not null)
             {
-                _syncContext.Post(_ => entries.Add(new LogEntry(logLevel, message)), null);
+                _syncContext.Post(
+                    _ => entries.Add(new LogEntry(logLevel, logEvent.TimeStamp, message)),
+                    null
+                );
             }
             else
             {
-                entries.Add(new LogEntry(logLevel, message)); // Fallback
+                entries.Add(new LogEntry(logLevel, logEvent.TimeStamp, message)); // Fallback
             }
         }
 
