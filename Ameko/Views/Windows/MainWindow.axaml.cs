@@ -33,7 +33,18 @@ namespace Ameko.Views.Windows;
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     private static readonly string[] ScriptExtensions = [".ass", ".srt", ".txt"];
-    private static readonly string[] VideoExtensions = [".mkv", ".mp4", ".m4v", ".mov"];
+    private static readonly string[] VideoExtensions =
+    [
+        ".mkv",
+        ".mp4",
+        ".m4v",
+        ".mov",
+        ".webm",
+        ".avi",
+        ".wmv",
+        "ts",
+        "vob",
+    ];
     private static readonly string[] AudioExtensions =
     [
         ".mkv",
@@ -329,7 +340,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 [
                     new FilePickerFileType(I18N.Other.FileDialog_FileType_Video)
                     {
-                        Patterns = ["*.mkv", "*.mp4", "*.m4v", "*.mov"],
+                        Patterns = VideoExtensions.Select(e => $"*{e}").ToArray(),
                     },
                 ],
             }
@@ -353,7 +364,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 [
                     new FilePickerFileType(I18N.Other.FileDialog_FileType_Audio)
                     {
-                        Patterns = ["*.mkv", "*.mp4", "*.mp3", "*.flac", "*.ogg", "*.opus"],
+                        Patterns = AudioExtensions.Select(e => $"*{e}").ToArray(),
                     },
                 ],
             }
