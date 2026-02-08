@@ -60,7 +60,7 @@ internal class LogProvider : ILogProvider
             FileName = Path.Combine(
                 Directories.StateHome,
                 "logs",
-                $"{DateTime.Now:yyyy-MM-dd}.json"
+                $"{DateTime.Now:yyyy-MM-dd}.jsonl"
             ),
         };
 
