@@ -98,6 +98,8 @@ public partial class SpellcheckService(
     public void RebuildDictionary()
     {
         var culture = projectProvider.Current.SpellcheckCulture ?? configuration.SpellcheckCulture;
+        if (string.IsNullOrEmpty(culture))
+            return;
         CurrentLanguage =
             SpellcheckLanguage.AvailableLanguages.FirstOrDefault(l => l.Locale == culture)
             ?? CurrentLanguage;
@@ -140,6 +142,9 @@ public partial class SpellcheckService(
     /// <inheritdoc />
     public bool IsDictionaryInstalled(string culture)
     {
+        if (string.IsNullOrEmpty(culture))
+            return true; // Ignore
+
         logger.LogDebug("Checking if {Culture} dictionary is installed...", culture);
         if (!dictionaryService.TryGetDictionary(culture, out _))
         {
