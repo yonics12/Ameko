@@ -137,7 +137,9 @@ public partial class StylesManagerWindowViewModel : ViewModelBase
 
                 var clone = style.Clone();
 
-                var vm = _vmFactory.Create<StyleEditorDialogViewModel>(style, manager, document!);
+                var vm = document is not null
+                    ? _vmFactory.Create<StyleEditorDialogViewModel>(style, manager, document)
+                    : _vmFactory.Create<StyleEditorDialogViewModel>(style, manager);
                 var result = await ShowStyleEditorWindow.Handle(vm);
 
                 // Revert if aborted
@@ -171,7 +173,9 @@ public partial class StylesManagerWindowViewModel : ViewModelBase
 
                 var style = new Style(manager.NextId) { Name = string.Empty };
 
-                var vm = _vmFactory.Create<StyleEditorDialogViewModel>(style, manager, document!);
+                var vm = document is not null
+                    ? _vmFactory.Create<StyleEditorDialogViewModel>(style, manager, document)
+                    : _vmFactory.Create<StyleEditorDialogViewModel>(style, manager);
                 var result = await ShowStyleEditorWindow.Handle(vm);
 
                 // Abort if aborted

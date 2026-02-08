@@ -78,6 +78,20 @@ public partial class StyleEditorDialogViewModel : ViewModelBase
     /// <param name="vmFactory">ViewModel factory</param>
     /// <param name="style">Style being edited</param>
     /// <param name="manager">Manager the <paramref name="style"/> belongs to</param>
+    public StyleEditorDialogViewModel(
+        IViewModelFactory vmFactory,
+        Style style,
+        StyleManager manager
+    )
+        // ReSharper disable once IntroduceOptionalParameters.Global
+        : this(vmFactory, style, manager, null) { }
+
+    /// <summary>
+    /// Initialize a style editor
+    /// </summary>
+    /// <param name="vmFactory">ViewModel factory</param>
+    /// <param name="style">Style being edited</param>
+    /// <param name="manager">Manager the <paramref name="style"/> belongs to</param>
     /// <param name="document">Document the manager belongs to, if applicable</param>
     public StyleEditorDialogViewModel(
         IViewModelFactory vmFactory,
