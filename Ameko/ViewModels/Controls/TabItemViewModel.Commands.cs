@@ -62,7 +62,11 @@ public partial class TabItemViewModel : ViewModelBase
                 Event? @event;
                 if (Event.ValidateAssString(line))
                 {
-                    @event = Event.FromAss(Workspace.Document.EventManager.NextId, line.Trim());
+                    @event = Event.FromAss(
+                        Workspace.Document.EventManager.NextId,
+                        line.Trim(),
+                        Workspace.Document.Version // TODO: Detect event version
+                    );
                 }
                 else
                 {
@@ -120,7 +124,7 @@ public partial class TabItemViewModel : ViewModelBase
                 {
                     if (Event.ValidateAssString(line))
                     {
-                        var @event = Event.FromAss(-1, line.Trim());
+                        var @event = Event.FromAss(-1, line.Trim(), Workspace.Document.Version); // TODO: Detect event version
                         if (@event is not null)
                             target.SetFields(fields, @event);
                     }
@@ -135,7 +139,11 @@ public partial class TabItemViewModel : ViewModelBase
                 {
                     if (Event.ValidateAssString(line))
                     {
-                        target = Event.FromAss(Workspace.Document.EventManager.NextId, line.Trim());
+                        target = Event.FromAss(
+                            Workspace.Document.EventManager.NextId,
+                            line.Trim(),
+                            Workspace.Document.Version // TODO: Detect event version
+                        );
                     }
                     else
                     {

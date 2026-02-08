@@ -94,7 +94,7 @@ public class Globals : BindableBase, IGlobals
             var model = new GlobalsModel
             {
                 Version = GlobalsModelBase.CurrentApiVersion,
-                Styles = StyleManager.Styles.Select(s => s.AsAss()).ToArray(),
+                Styles = StyleManager.Styles.Select(s => s.AsAss(AssVersion.V400P)).ToArray(), // TODO: Detect style version
                 Colors = Colors.Select(s => s.AsStyleColor()).ToArray(),
                 CustomWords = CustomWords.ToArray(),
             };
@@ -150,7 +150,11 @@ public class Globals : BindableBase, IGlobals
             }
 
             var g = new Globals(fileSystem, logger);
-            foreach (var style in model.Styles.Select(s => Style.FromAss(g.StyleManager.NextId, s)))
+            foreach (
+                var style in model.Styles.Select(s =>
+                    Style.FromAss(g.StyleManager.NextId, s, AssVersion.V400P) // TODO: Detect style version
+                )
+            )
                 if (style is not null)
                     g.StyleManager.Add(style);
 

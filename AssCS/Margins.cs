@@ -5,49 +5,120 @@ namespace AssCS;
 /// <summary>
 /// Margins within the video frame
 /// </summary>
-/// <param name="left">Left margin</param>
-/// <param name="right">Right margin</param>
-/// <param name="vertical">Top and bottom margin</param>
-public class Margins(int left, int right, int vertical) : BindableBase
+public class Margins : BindableBase
 {
-    private int _left = left;
-    private int _right = right;
-    private int _vertical = vertical;
-
     /// <summary>
-    /// Left margin
+    /// Specifies the Left margin
     /// </summary>
     public int Left
     {
-        get => _left;
-        set => SetProperty(ref _left, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
     /// <summary>
-    /// Right margin
+    /// Specifies the Right margin
     /// </summary>
     public int Right
     {
-        get => _right;
-        set => SetProperty(ref _right, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
     /// <summary>
-    /// Top and bottom margin
+    /// Specifies the vertical margin
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Used in <see cref="AssVersion.V400P"/> and earlier.
+    /// For <see cref="AssVersion.V400PP"/> and later, use <see cref="Top"/> and <see cref="Bottom"/>.
+    /// </para>
+    /// </remarks>
+    /// <seealso cref="Top"/>
+    /// <seealso cref="Bottom"/>
     public int Vertical
     {
-        get => _vertical;
-        set => SetProperty(ref _vertical, value);
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    /// <summary>
+    /// Specifies the Top margin
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Used in <see cref="AssVersion.V400PP"/> and later.
+    /// For <see cref="AssVersion.V400P"/> and earlier, use <see cref="Vertical"/>.
+    /// </para>
+    /// </remarks>
+    /// <seealso cref="Vertical"/>
+    public int Top
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    /// <summary>
+    /// Specifies the Bottom margin
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Used in <see cref="AssVersion.V400PP"/> and later.
+    /// For <see cref="AssVersion.V400P"/> and earlier, use <see cref="Vertical"/>.
+    /// </para>
+    /// </remarks>
+    /// <seealso cref="Vertical"/>
+    public int Bottom
+    {
+        get;
+        set => SetProperty(ref field, value);
     }
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         return obj is Margins margins
-            && _left == margins._left
-            && _right == margins._right
-            && _vertical == margins._vertical;
+            && Left == margins.Left
+            && Right == margins.Right
+            && Vertical == margins.Vertical
+            && Top == margins.Top
+            && Bottom == margins.Bottom;
+    }
+
+    /// <summary>
+    /// Margins within the video frame
+    /// </summary>
+    /// <param name="left">Left margin</param>
+    /// <param name="right">Right margin</param>
+    /// <param name="vertical">Vertical margin</param>
+    /// <remarks>
+    /// This constructor is for use with <see cref="AssVersion.V400P"/> and earlier.
+    /// For <see cref="AssVersion.V400PP"/> and later, use <see cref="Margins(int, int, int, int)"/>
+    /// </remarks>
+    public Margins(int left, int right, int vertical)
+    {
+        Left = left;
+        Right = right;
+        Vertical = vertical;
+    }
+
+    /// <summary>
+    /// Margins within the video frame
+    /// </summary>
+    /// <param name="left">Left margin</param>
+    /// <param name="right">Right margin</param>
+    /// <param name="top">Top margin</param>
+    /// <param name="bottom">Bottom margin</param>
+    /// <remarks>
+    /// This constructor is for use with <see cref="AssVersion.V400PP"/> and later.
+    /// For <see cref="AssVersion.V400P"/> and earlier, use <see cref="Margins(int, int, int)"/>
+    /// </remarks>
+    public Margins(int left, int right, int top, int bottom)
+    {
+        Left = left;
+        Right = right;
+        Top = top;
+        Bottom = bottom;
     }
 
     /// <inheritdoc />

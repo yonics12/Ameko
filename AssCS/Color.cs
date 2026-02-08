@@ -91,24 +91,39 @@ public partial class Color : BindableBase
     /// <exception cref="ArgumentException">If the data is malformed</exception>
     public static Color FromAss(string data)
     {
+        var isHex = false;
+
         var span = data.AsSpan();
         span = span.TrimStart();
         while (span[0] is '&' or 'H')
+        {
+            isHex = true;
             span = span[1..];
+        }
         while (span[^1] is '&' or 'H')
+        {
+            isHex = true;
             span = span[..^1];
+        }
 
-        int value;
+        var length = span.Length;
+        uint value;
         try
         {
-            value = Convert.ToInt32(span.ToString(), 16);
+            if (isHex)
+                value = unchecked((uint)Convert.ToInt32(span.ToString(), 16));
+            else
+            {
+                value = unchecked((uint)Convert.ToInt32(span.ToString(), 10));
+                length = 8; // Treat this as an ABGR value
+            }
         }
         catch
         {
             value = 0;
         }
 
-        return span.Length switch
+        return length switch
         {
             2 => new Color { _alpha = (byte)value }, // Alpha only
             8 => new Color // ABGR

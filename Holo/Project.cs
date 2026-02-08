@@ -620,7 +620,7 @@ public class Project : BindableBase
             {
                 Version = ProjectModelBase.CurrentApiVersion,
                 ReferencedDocuments = ConvertToModels(_referencedItems, dir),
-                Styles = StyleManager.Styles.Select(s => s.AsAss()).ToArray(),
+                Styles = StyleManager.Styles.Select(s => s.AsAss(AssVersion.V400P)).ToArray(), // TODO: Detect style version
                 Colors = Colors.Select(c => c.AsStyleColor()).ToArray(),
                 Cps = _cps,
                 CpsIncludesWhitespace = _cpsIncludesWhitespace,
@@ -1025,7 +1025,7 @@ public class Project : BindableBase
                 ScriptConfiguration = model.ScriptConfiguration;
 
                 model
-                    .Styles.Select(s => Style.FromAss(StyleManager.NextId, s))
+                    .Styles.Select(s => Style.FromAss(StyleManager.NextId, s, AssVersion.V400P)) // TODO: Detect style version
                     .Where(s => s is not null)
                     .ToList()
                     .ForEach(StyleManager.Add!);

@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MPL-2.0
 
+using System.Diagnostics.CodeAnalysis;
 using AssCS.Utilities;
 
 namespace AssCS.IO;
@@ -9,10 +10,19 @@ namespace AssCS.IO;
 /// </summary>
 /// <param name="document">Document to write</param>
 /// <param name="consumer">Program or library requesting writes</param>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public class AssWriter(Document document, ConsumerInfo consumer) : FileWriter
 {
+    private const string EventFormatV400 =
+        "Format: Marked, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text";
     private const string EventFormatV400P =
         "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text";
+    private const string EventFormatV400PP =
+        "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginT, MarginB, Effect, Text";
+
+    private const string StyleFormatV400 =
+        "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, TertiaryColour, BackColour, "
+        + "Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, AlphaLevel, Encoding";
     private const string StyleFormatV400P =
         "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, "
         + "BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding";
@@ -75,11 +85,23 @@ public class AssWriter(Document document, ConsumerInfo consumer) : FileWriter
             _ => "[V4+ Styles]",
         };
         writer.WriteLine(header);
-        writer.WriteLine(StyleFormatV400P); // TODO: Style versioning
+        switch (document.Version)
+        {
+            case AssVersion.V400:
+                writer.WriteLine(StyleFormatV400);
+                break;
+            case AssVersion.V400P:
+                writer.WriteLine(StyleFormatV400P);
+                break;
+            case AssVersion.V400PP:
+                break;
+            default:
+                throw new FormatException("Unknown style version");
+        }
 
         foreach (var style in document.StyleManager.Styles)
         {
-            writer.WriteLine(style.AsAss()); // TODO: Style versioning
+            writer.WriteLine(style.AsAss(document.Version));
         }
         writer.WriteLine();
     }
@@ -93,11 +115,19 @@ public class AssWriter(Document document, ConsumerInfo consumer) : FileWriter
     private void WriteEvents(TextWriter writer)
     {
         writer.WriteLine("[Events]");
-        writer.WriteLine(EventFormatV400P); // TODO: Event versioning
+        writer.WriteLine(
+            document.Version switch
+            {
+                AssVersion.V400 => EventFormatV400,
+                AssVersion.V400P => EventFormatV400P,
+                AssVersion.V400PP => EventFormatV400PP,
+                _ => throw new FormatException("Unknown event format"),
+            }
+        );
 
         foreach (var @event in document.EventManager.Events)
         {
-            writer.WriteLine(@event.AsAss());
+            writer.WriteLine(@event.AsAss(document.Version));
         }
 
         writer.WriteLine();

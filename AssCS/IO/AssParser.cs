@@ -75,11 +75,7 @@ public partial class AssParser(bool loadDefaults = true) : FileParser
     /// <param name="doc">Document to add the parsed line to</param>
     private static void ParseStyle(ReadOnlySpan<char> line, Document doc)
     {
-        // TODO: Style versioning
-        if (doc.Version != AssVersion.V400P)
-            return;
-
-        var style = Style.FromAss(doc.StyleManager.NextId, line);
+        var style = Style.FromAss(doc.StyleManager.NextId, line, doc.Version);
         if (style is null)
             return;
 
@@ -98,11 +94,7 @@ public partial class AssParser(bool loadDefaults = true) : FileParser
     /// <param name="doc">Document to add the parsed line to</param>
     private static void ParseEvent(ReadOnlySpan<char> line, Document doc)
     {
-        // TODO: Event versioning
-        if (doc.Version != AssVersion.V400P)
-            return;
-
-        var @event = Event.FromAss(doc.EventManager.NextId, line);
+        var @event = Event.FromAss(doc.EventManager.NextId, line, doc.Version);
         if (@event is not null)
             doc.EventManager.AddLast(@event);
     }

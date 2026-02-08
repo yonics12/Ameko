@@ -282,6 +282,12 @@ public partial class Event(int id) : BindableBase, IEntry
                 case EventField.MarginVertical:
                     Margins.Vertical = other.Margins.Vertical;
                     break;
+                case EventField.MarginTop:
+                    Margins.Top = other.Margins.Top;
+                    break;
+                case EventField.MarginBottom:
+                    Margins.Bottom = other.Margins.Bottom;
+                    break;
                 case EventField.Effect:
                     Effect = other.Effect;
                     break;
@@ -322,6 +328,10 @@ public partial class Event(int id) : BindableBase, IEntry
             result |= EventField.MarginRight;
         if (Margins.Vertical != other.Margins.Vertical)
             result |= EventField.MarginVertical;
+        if (Margins.Top != other.Margins.Top)
+            result |= EventField.MarginTop;
+        if (Margins.Bottom != other.Margins.Bottom)
+            result |= EventField.MarginBottom;
         if (Effect != other.Effect)
             result |= EventField.Effect;
         if (Text != other.Text)
@@ -332,15 +342,30 @@ public partial class Event(int id) : BindableBase, IEntry
     /// <summary>
     /// Get the ass representation of this event
     /// </summary>
+    /// <param name="version">Event format version</param>
     /// <returns>Ass-formatted string</returns>
-    public string AsAss()
+    public string AsAss(AssVersion version)
     {
         var extradatas =
             LinkedExtradatas.Count > 0 ? $"{{{string.Join("=", LinkedExtradatas)}}}" : "";
         var textContent = !Effect.StartsWith("code") ? Text : TransformCodeToAss();
 
-        return $"{(IsComment ? Comment : Dialogue)} {Layer},{Start.AsAss()},{End.AsAss()},{Style},{Actor},"
-            + $"{Margins.Left},{Margins.Right},{Margins.Vertical},{Effect},{extradatas}"
+        var margins = version switch
+        {
+            AssVersion.V400 or AssVersion.V400P =>
+                $"{_margins.Left},{_margins.Right},{_margins.Vertical}",
+            AssVersion.V400PP =>
+                $"{_margins.Left},{_margins.Right},{_margins.Top},{_margins.Bottom}",
+            _ => throw new FormatException("Unknown event version"),
+        };
+        var layer = version switch
+        {
+            AssVersion.V400 => $"Marked={Layer}",
+            _ => Layer.ToString(),
+        };
+
+        return $"{(IsComment ? Comment : Dialogue)} {layer},{Start.AsAss()},{End.AsAss()},{Style},{Actor},"
+            + $"{margins},{Effect},{extradatas}"
             + $"{textContent}";
     }
 
@@ -349,10 +374,10 @@ public partial class Event(int id) : BindableBase, IEntry
     /// </summary>
     /// <param name="id">ID of the event to create</param>
     /// <param name="data">Ass-formatted string</param>
+    /// <param name="version">Event format version</param>
     /// <returns>Event object represented by the string</returns>
-    public static Event? FromAss(int id, ReadOnlySpan<char> data)
+    public static Event? FromAss(int id, ReadOnlySpan<char> data, AssVersion version)
     {
-        // TODO: Parse format string
         data = data.TrimStart();
         var isComment = false;
         if (data.StartsWith(Comment))
@@ -372,16 +397,30 @@ public partial class Event(int id) : BindableBase, IEntry
         var result = new Event(id)
         {
             _isComment = isComment,
-            Layer = ParseInt(ref data),
+            Layer = version switch
+            {
+                AssVersion.V400 => ParseSkip(ref data, 0), // Marked=0
+                _ => ParseInt(ref data),
+            },
             Start = Time.FromAss(ParseString(ref data)),
             End = Time.FromAss(ParseString(ref data)),
             Style = ParseString(ref data),
             Actor = ParseString(ref data),
-            Margins = new Margins(
-                left: ParseInt(ref data),
-                right: ParseInt(ref data),
-                vertical: ParseInt(ref data)
-            ),
+            Margins = version switch
+            {
+                AssVersion.V400 or AssVersion.V400P => new Margins(
+                    left: ParseInt(ref data),
+                    right: ParseInt(ref data),
+                    vertical: ParseInt(ref data)
+                ),
+                AssVersion.V400PP => new Margins(
+                    left: ParseInt(ref data),
+                    right: ParseInt(ref data),
+                    top: ParseInt(ref data),
+                    bottom: ParseInt(ref data)
+                ),
+                _ => throw new FormatException("Unknown event format"),
+            },
             Effect = ParseString(ref data),
             Text = data.ToString(),
         };
@@ -411,6 +450,8 @@ public partial class Event(int id) : BindableBase, IEntry
                 Left = e.Margins.Left,
                 Right = e.Margins.Right,
                 Vertical = e.Margins.Vertical,
+                Top = e.Margins.Top,
+                Bottom = e.Margins.Bottom,
             },
             _effect = e.Effect,
             _text = e.Text,
@@ -431,7 +472,14 @@ public partial class Event(int id) : BindableBase, IEntry
             End = Time.FromTime(End),
             Style = Style,
             Actor = Actor,
-            Margins = new Margins(Margins.Left, Margins.Right, Margins.Vertical),
+            Margins =
+            {
+                Left = Margins.Left,
+                Right = Margins.Right,
+                Vertical = Margins.Vertical,
+                Top = Margins.Top,
+                Bottom = Margins.Bottom,
+            },
             Effect = Effect,
             Text = Text,
             LinkedExtradatas = [.. LinkedExtradatas],
@@ -453,7 +501,14 @@ public partial class Event(int id) : BindableBase, IEntry
             End = Time.FromTime(End),
             Style = Style,
             Actor = Actor,
-            Margins = new Margins(Margins.Left, Margins.Right, Margins.Vertical),
+            Margins =
+            {
+                Left = Margins.Left,
+                Right = Margins.Right,
+                Vertical = Margins.Vertical,
+                Top = Margins.Top,
+                Bottom = Margins.Bottom,
+            },
             Effect = Effect,
             Text = Text,
             LinkedExtradatas = [.. LinkedExtradatas],
@@ -612,7 +667,7 @@ public partial class Event(int id) : BindableBase, IEntry
                 endTag = new OverrideTag.U(state);
                 break;
             case "s":
-                state = (blocks.FindTag(blockN, tag, "") as OverrideTag.S)?.Value ?? state;
+                state = (blocks.FindTag(blockN, tag) as OverrideTag.S)?.Value ?? state;
                 startTag = new OverrideTag.S(!state);
                 endTag = new OverrideTag.S(state);
                 break;
@@ -757,9 +812,7 @@ public partial class Event(int id) : BindableBase, IEntry
     /// <returns>List of extradata IDs</returns>
     private static List<int> ParseExtradata(string data)
     {
-        if (data.Length < 2)
-            return [];
-        if (!data.StartsWith("{="))
+        if (data.Length < 2 || !data.StartsWith("{="))
             return [];
         var match = ExtradataRegex().Match(data);
         if (!match.Success)
@@ -773,6 +826,22 @@ public partial class Event(int id) : BindableBase, IEntry
             var id = Convert.ToInt32(rawId);
             result.Add(id);
         }
+        return result;
+    }
+
+    /// <summary>
+    /// Skip parsing, return a generic value
+    /// </summary>
+    /// <param name="data">Incoming data</param>
+    /// <param name="result">Value to return</param>
+    /// <typeparam name="T">Type of value to return</typeparam>
+    /// <remarks>Having <paramref name="result"/> allows for use in <see langword="switch"/> expressions</remarks>
+    private static T? ParseSkip<T>(ref ReadOnlySpan<char> data, T? result)
+    {
+        var q = data.IndexOf(',');
+        if (q < 0)
+            q = data.Length;
+        data = data[(q < data.Length ? q + 1 : q)..];
         return result;
     }
 

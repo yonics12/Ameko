@@ -19,8 +19,10 @@ public enum EventField
     MarginLeft = 64,
     MarginRight = 128,
     MarginVertical = 256,
-    Effect = 512,
-    Text = 1024,
+    MarginTop = 512,
+    MarginBottom = 1024,
+    Effect = 2048,
+    Text = 4096,
     All =
         Comment
         | Layer
@@ -31,6 +33,8 @@ public enum EventField
         | MarginLeft
         | MarginRight
         | MarginVertical
+        | MarginTop
+        | MarginBottom
         | Effect
         | Text,
 }

@@ -15,7 +15,6 @@ using AssCS;
 using AssCS.History;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Input.Platform;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
@@ -61,7 +60,10 @@ public partial class TabItem : ReactiveUserControl<TabItemViewModel>
             return;
         }
 
-        var output = string.Join(Environment.NewLine, selection.Select(e => e.AsAss()));
+        var output = string.Join(
+            Environment.NewLine,
+            selection.Select(e => e.AsAss(interaction.Input.Workspace.Document.Version))
+        );
         await window.Clipboard!.SetTextAsync(output);
         interaction.SetOutput(output);
     }

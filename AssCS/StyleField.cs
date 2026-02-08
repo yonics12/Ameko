@@ -33,6 +33,8 @@ public enum StyleField
     MarginRight = 1 << 20,
     MarginVertical = 1 << 21,
     Encoding = 1 << 22,
+    IsRelative = 1 << 23,
+    AlphaLevel = 1 << 24,
     All =
         Name
         | FontFamily
@@ -56,5 +58,7 @@ public enum StyleField
         | MarginLeft
         | MarginRight
         | MarginVertical
-        | Encoding,
+        | Encoding
+        | IsRelative
+        | AlphaLevel,
 }

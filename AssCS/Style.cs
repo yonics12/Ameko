@@ -8,7 +8,7 @@ namespace AssCS;
 /// A style in a subtitle document
 /// </summary>
 /// <param name="id">ID of the style</param>
-public partial class Style(int id) : BindableBase
+public class Style(int id) : BindableBase
 {
     private const string StyleHeader = "Style:";
     private const double Tolerance = 0.001;
@@ -33,7 +33,9 @@ public partial class Style(int id) : BindableBase
     private double _shadowDistance = 2.0d;
     private int _alignment = 2;
     private Margins _margins = new(20, 20, 20);
+    private int _alphaLevel;
     private int _encoding = 1;
+    private bool _isRelative;
 
     /// <summary>
     /// Style ID
@@ -225,12 +227,34 @@ public partial class Style(int id) : BindableBase
     }
 
     /// <summary>
+    /// Alpha level
+    /// </summary>
+    /// <remarks>Only used in <see cref="AssVersion.V400"/> scripts and it's not actually used</remarks>
+    public int AlphaLevel
+    {
+        get => _alphaLevel;
+        set => SetProperty(ref _alphaLevel, value);
+    }
+
+    /// <summary>
     /// Character encoding
     /// </summary>
     public int Encoding
     {
         get => _encoding;
         set => SetProperty(ref _encoding, value);
+    }
+
+    /// <summary>
+    /// Force relative positioning. Use <see langword="true"/> for typesetting and <see langword="false"/> for dialogue.
+    /// </summary>
+    /// <remarks>
+    /// This property is only permitted for <see cref="AssVersion.V400PP"/> and higher.
+    /// </remarks>
+    public bool IsRelative
+    {
+        get => _isRelative;
+        set => SetProperty(ref _isRelative, value);
     }
 
     /// <summary>
@@ -313,6 +337,12 @@ public partial class Style(int id) : BindableBase
                 case StyleField.Encoding:
                     Encoding = other.Encoding;
                     break;
+                case StyleField.IsRelative:
+                    IsRelative = other.IsRelative;
+                    break;
+                case StyleField.AlphaLevel:
+                    AlphaLevel = other.AlphaLevel;
+                    break;
                 case StyleField.None:
                 default:
                     break;
@@ -323,16 +353,35 @@ public partial class Style(int id) : BindableBase
     /// <summary>
     /// Get the ass representation of this style
     /// </summary>
+    /// <param name="version">Style format version</param>
     /// <returns>Ass-formatted string</returns>
-    public string AsAss()
+    public string AsAss(AssVersion version)
     {
         var cleanName = _name.Replace(',', ';');
         var cleanFont = _fontFamily.Replace(',', ';');
-        return $"Style: {cleanName},{cleanFont},{_fontSize},"
-            + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
-            + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{(_isUnderline ? -1 : 0)},{(_isStrikethrough ? -1 : 0)},"
-            + $"{_scaleX},{_scaleY},{_spacing},{_angle},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
-            + $"{_margins.Left},{_margins.Right},{_margins.Vertical},{_encoding}";
+
+        switch (version)
+        {
+            case AssVersion.V400:
+                return $"Style: {cleanName},{cleanFont},{_fontSize},"
+                    + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
+                    + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
+                    + $"{_margins.Left},{_margins.Right},{_margins.Vertical},{_alphaLevel},{_encoding}";
+            case AssVersion.V400P:
+                return $"Style: {cleanName},{cleanFont},{_fontSize},"
+                    + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
+                    + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{(_isUnderline ? -1 : 0)},{(_isStrikethrough ? -1 : 0)},"
+                    + $"{_scaleX},{_scaleY},{_spacing},{_angle},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
+                    + $"{_margins.Left},{_margins.Right},{_margins.Vertical},{_encoding}";
+            case AssVersion.V400PP:
+                return $"Style: {cleanName},{cleanFont},{_fontSize},"
+                    + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
+                    + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{(_isUnderline ? -1 : 0)},{(_isStrikethrough ? -1 : 0)},"
+                    + $"{_scaleX},{_scaleY},{_spacing},{_angle},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
+                    + $"{_margins.Left},{_margins.Right},{_margins.Top},{_margins.Bottom},{_encoding},{(_isRelative ? 1 : 0)}";
+            default:
+                throw new FormatException("Unknown style version");
+        }
     }
 
     /// <summary>
@@ -340,45 +389,106 @@ public partial class Style(int id) : BindableBase
     /// </summary>
     /// <param name="id">ID of the style</param>
     /// <param name="data">Ass-formatted string</param>
+    /// <param name="version">Style format version</param>
     /// <returns>Style object represented by the string</returns>
     /// <exception cref="ArgumentException">If the data is malformed</exception>
-    public static Style? FromAss(int id, ReadOnlySpan<char> data)
+    public static Style? FromAss(int id, ReadOnlySpan<char> data, AssVersion version)
     {
-        // TODO: Parse format string
         data = data.TrimStart();
         if (!data.StartsWith(StyleHeader))
             return null;
 
         data = data[StyleHeader.Length..];
 
-        return new Style(id)
+        switch (version)
         {
-            _name = ParseString(ref data),
-            _fontFamily = ParseString(ref data),
-            _fontSize = ParseDouble(ref data),
-            _primaryColor = Color.FromAss(ParseString(ref data)),
-            _secondaryColor = Color.FromAss(ParseString(ref data)),
-            _outlineColor = Color.FromAss(ParseString(ref data)),
-            _shadowColor = Color.FromAss(ParseString(ref data)),
-            _isBold = ParseInt(ref data) != 0,
-            _isItalic = ParseInt(ref data) != 0,
-            _isUnderline = ParseInt(ref data) != 0,
-            _isStrikethrough = ParseInt(ref data) != 0,
-            _scaleX = ParseDouble(ref data),
-            _scaleY = ParseDouble(ref data),
-            _spacing = ParseDouble(ref data),
-            _angle = ParseDouble(ref data),
-            _borderStyle = ParseInt(ref data),
-            _borderThickness = ParseDouble(ref data),
-            _shadowDistance = ParseDouble(ref data),
-            _alignment = ParseInt(ref data),
-            _margins = new Margins(
-                left: ParseInt(ref data),
-                right: ParseInt(ref data),
-                vertical: ParseInt(ref data)
-            ),
-            _encoding = ParseInt(ref data),
-        };
+            case AssVersion.V400:
+                return new Style(id)
+                {
+                    _name = ParseString(ref data),
+                    _fontFamily = ParseString(ref data),
+                    _fontSize = ParseDouble(ref data),
+                    _primaryColor = Color.FromAss(ParseString(ref data)),
+                    _secondaryColor = Color.FromAss(ParseString(ref data)),
+                    _outlineColor = Color.FromAss(ParseString(ref data)),
+                    _shadowColor = Color.FromAss(ParseString(ref data)),
+                    _isBold = ParseInt(ref data) != 0,
+                    _isItalic = ParseInt(ref data) != 0,
+                    _borderStyle = ParseInt(ref data),
+                    _borderThickness = ParseDouble(ref data),
+                    _shadowDistance = ParseDouble(ref data),
+                    _alignment = ParseInt(ref data),
+                    _margins = new Margins(
+                        left: ParseInt(ref data),
+                        right: ParseInt(ref data),
+                        vertical: ParseInt(ref data)
+                    ),
+                    _alphaLevel = ParseInt(ref data),
+                    _encoding = ParseInt(ref data),
+                };
+            case AssVersion.V400P:
+                return new Style(id)
+                {
+                    _name = ParseString(ref data),
+                    _fontFamily = ParseString(ref data),
+                    _fontSize = ParseDouble(ref data),
+                    _primaryColor = Color.FromAss(ParseString(ref data)),
+                    _secondaryColor = Color.FromAss(ParseString(ref data)),
+                    _outlineColor = Color.FromAss(ParseString(ref data)),
+                    _shadowColor = Color.FromAss(ParseString(ref data)),
+                    _isBold = ParseInt(ref data) != 0,
+                    _isItalic = ParseInt(ref data) != 0,
+                    _isUnderline = ParseInt(ref data) != 0,
+                    _isStrikethrough = ParseInt(ref data) != 0,
+                    _scaleX = ParseDouble(ref data),
+                    _scaleY = ParseDouble(ref data),
+                    _spacing = ParseDouble(ref data),
+                    _angle = ParseDouble(ref data),
+                    _borderStyle = ParseInt(ref data),
+                    _borderThickness = ParseDouble(ref data),
+                    _shadowDistance = ParseDouble(ref data),
+                    _alignment = ParseInt(ref data),
+                    _margins = new Margins(
+                        left: ParseInt(ref data),
+                        right: ParseInt(ref data),
+                        vertical: ParseInt(ref data)
+                    ),
+                    _encoding = ParseInt(ref data),
+                };
+            case AssVersion.V400PP:
+                return new Style(id)
+                {
+                    _name = ParseString(ref data),
+                    _fontFamily = ParseString(ref data),
+                    _fontSize = ParseDouble(ref data),
+                    _primaryColor = Color.FromAss(ParseString(ref data)),
+                    _secondaryColor = Color.FromAss(ParseString(ref data)),
+                    _outlineColor = Color.FromAss(ParseString(ref data)),
+                    _shadowColor = Color.FromAss(ParseString(ref data)),
+                    _isBold = ParseInt(ref data) != 0,
+                    _isItalic = ParseInt(ref data) != 0,
+                    _isUnderline = ParseInt(ref data) != 0,
+                    _isStrikethrough = ParseInt(ref data) != 0,
+                    _scaleX = ParseDouble(ref data),
+                    _scaleY = ParseDouble(ref data),
+                    _spacing = ParseDouble(ref data),
+                    _angle = ParseDouble(ref data),
+                    _borderStyle = ParseInt(ref data),
+                    _borderThickness = ParseDouble(ref data),
+                    _shadowDistance = ParseDouble(ref data),
+                    _alignment = ParseInt(ref data),
+                    _margins = new Margins(
+                        left: ParseInt(ref data),
+                        right: ParseInt(ref data),
+                        top: ParseInt(ref data),
+                        bottom: ParseInt(ref data)
+                    ),
+                    _encoding = ParseInt(ref data),
+                    _isRelative = ParseBool(ref data),
+                };
+            default:
+                throw new FormatException("Unknown style version");
+        }
     }
 
     /// <summary>
@@ -405,12 +515,22 @@ public partial class Style(int id) : BindableBase
             _scaleX = data.ScaleX,
             _scaleY = data.ScaleY,
             _spacing = data.Spacing,
+            _angle = data.Angle,
             _borderStyle = data.BorderStyle,
             _borderThickness = data.BorderThickness,
             _shadowDistance = data.ShadowDistance,
             _alignment = data.Alignment,
-            _margins = new Margins(data.Margins.Left, data.Margins.Right, data.Margins.Vertical),
+            _margins =
+            {
+                Left = data.Margins.Left,
+                Right = data.Margins.Right,
+                Vertical = data.Margins.Vertical,
+                Top = data.Margins.Top,
+                Bottom = data.Margins.Bottom,
+            },
+            _alphaLevel = data.AlphaLevel,
             _encoding = data.Encoding,
+            _isRelative = data.IsRelative,
         };
     }
 
@@ -436,12 +556,22 @@ public partial class Style(int id) : BindableBase
             ScaleX = ScaleX,
             ScaleY = ScaleY,
             Spacing = Spacing,
+            Angle = Angle,
             BorderStyle = BorderStyle,
             BorderThickness = BorderThickness,
             ShadowDistance = ShadowDistance,
             Alignment = Alignment,
-            Margins = new Margins(Margins.Left, Margins.Right, Margins.Vertical),
+            Margins =
+            {
+                Left = Margins.Left,
+                Right = Margins.Right,
+                Vertical = Margins.Vertical,
+                Top = Margins.Top,
+                Bottom = Margins.Bottom,
+            },
+            AlphaLevel = AlphaLevel,
             Encoding = Encoding,
+            IsRelative = IsRelative,
         };
     }
 
@@ -488,7 +618,9 @@ public partial class Style(int id) : BindableBase
             && Math.Abs(_shadowDistance - obj._shadowDistance) < Tolerance
             && _alignment == obj._alignment
             && EqualityComparer<Margins>.Default.Equals(_margins, obj._margins)
-            && _encoding == obj._encoding;
+            && _alphaLevel == obj._alphaLevel
+            && _encoding == obj._encoding
+            && _isRelative == obj._isRelative;
     }
 
     /// <summary>
@@ -561,6 +693,23 @@ public partial class Style(int id) : BindableBase
         var result = data[..q].ToString();
         data = data[(q < data.Length ? q + 1 : q)..];
         return result;
+    }
+
+    /// <summary>
+    /// Parse a boolean
+    /// </summary>
+    /// <param name="data">Incoming data</param>
+    /// <returns>Resulting integer</returns>
+    /// <remarks>1 = <see langword="true"/>, 0 = <see langword="false"/></remarks>
+    private static bool ParseBool(ref ReadOnlySpan<char> data)
+    {
+        data = data.TrimStart();
+        var q = data.IndexOf(',');
+        if (q < 0)
+            q = data.Length;
+        var result = data[..q].ToString().ParseAssInt();
+        data = data[(q < data.Length ? q + 1 : q)..];
+        return result == 1;
     }
 
     #endregion Parsing Helpers
