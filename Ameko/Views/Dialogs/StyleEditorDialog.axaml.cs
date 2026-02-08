@@ -38,7 +38,7 @@ public partial class StyleEditorDialog : ReactiveWindow<StyleEditorDialogViewMod
                 {
                     // Try to commit the style name,
                     // and cancel closing the window if the name is invalid
-                    if (!ViewModel.CommitNameChange())
+                    if (!ViewModel.CommitNameChange() && !ViewModel.IsNewStyle)
                         e.Cancel = true;
                 };
             }

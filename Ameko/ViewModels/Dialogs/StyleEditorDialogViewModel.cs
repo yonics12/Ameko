@@ -48,6 +48,8 @@ public partial class StyleEditorDialogViewModel : ViewModelBase
             && (string.IsNullOrWhiteSpace(_styleName) || _styleManager.TryGet(_styleName, out _))
         );
 
+    public bool IsNewStyle => string.IsNullOrEmpty(_backupStyle.Name);
+
     /// <summary>
     /// Commit a style name change
     /// </summary>
