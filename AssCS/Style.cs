@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MPL-2.0
 
+using System.Globalization;
 using AssCS.Utilities;
 
 namespace AssCS;
@@ -371,22 +372,31 @@ public class Style(int id) : BindableBase
         switch (version)
         {
             case AssVersion.V400:
-                return $"Style: {cleanName},{cleanFont},{_fontSize},"
-                    + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
-                    + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
-                    + $"{_margins.Left},{_margins.Right},{_margins.Vertical},{_alphaLevel},{_encoding}";
+                return string.Create(
+                    CultureInfo.CurrentCulture,
+                    $"Style: {cleanName},{cleanFont},{_fontSize},"
+                        + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
+                        + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
+                        + $"{_margins.Left},{_margins.Right},{_margins.Vertical},{_alphaLevel},{_encoding}"
+                );
             case AssVersion.V400P:
-                return $"Style: {cleanName},{cleanFont},{_fontSize},"
-                    + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
-                    + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{(_isUnderline ? -1 : 0)},{(_isStrikethrough ? -1 : 0)},"
-                    + $"{_scaleX},{_scaleY},{_spacing},{_angle},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
-                    + $"{_margins.Left},{_margins.Right},{_margins.Vertical},{_encoding}";
+                return string.Create(
+                    CultureInfo.InvariantCulture,
+                    $"Style: {cleanName},{cleanFont},{_fontSize},"
+                        + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
+                        + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{(_isUnderline ? -1 : 0)},{(_isStrikethrough ? -1 : 0)},"
+                        + $"{_scaleX},{_scaleY},{_spacing},{_angle},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
+                        + $"{_margins.Left},{_margins.Right},{_margins.Vertical},{_encoding}"
+                );
             case AssVersion.V400PP:
-                return $"Style: {cleanName},{cleanFont},{_fontSize},"
-                    + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
-                    + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{(_isUnderline ? -1 : 0)},{(_isStrikethrough ? -1 : 0)},"
-                    + $"{_scaleX},{_scaleY},{_spacing},{_angle},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
-                    + $"{_margins.Left},{_margins.Right},{_margins.Top},{_margins.Bottom},{_encoding},{(_isRelative ? 1 : 0)}";
+                return string.Create(
+                    CultureInfo.InvariantCulture,
+                    $"Style: {cleanName},{cleanFont},{_fontSize},"
+                        + $"{_primaryColor.AsStyleColor()},{_secondaryColor.AsStyleColor()},{_outlineColor.AsStyleColor()},{_shadowColor.AsStyleColor()},"
+                        + $"{(_isBold ? -1 : 0)},{(_isItalic ? -1 : 0)},{(_isUnderline ? -1 : 0)},{(_isStrikethrough ? -1 : 0)},"
+                        + $"{_scaleX},{_scaleY},{_spacing},{_angle},{_borderStyle},{_borderThickness},{_shadowDistance},{_alignment},"
+                        + $"{_margins.Left},{_margins.Right},{_margins.Top},{_margins.Bottom},{_encoding},{(_isRelative ? 1 : 0)}"
+                );
             default:
                 throw new FormatException("Unknown style version");
         }

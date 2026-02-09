@@ -352,10 +352,14 @@ public partial class Event(int id) : BindableBase, IEntry
 
         var margins = version switch
         {
-            AssVersion.V400 or AssVersion.V400P =>
-                $"{_margins.Left},{_margins.Right},{_margins.Vertical}",
-            AssVersion.V400PP =>
-                $"{_margins.Left},{_margins.Right},{_margins.Top},{_margins.Bottom}",
+            AssVersion.V400 or AssVersion.V400P => string.Create(
+                CultureInfo.InvariantCulture,
+                $"{_margins.Left},{_margins.Right},{_margins.Vertical}"
+            ),
+            AssVersion.V400PP => string.Create(
+                CultureInfo.InvariantCulture,
+                $"{_margins.Left},{_margins.Right},{_margins.Top},{_margins.Bottom}"
+            ),
             _ => throw new FormatException("Unknown event version"),
         };
         var layer = version switch
@@ -364,9 +368,12 @@ public partial class Event(int id) : BindableBase, IEntry
             _ => Layer.ToString(),
         };
 
-        return $"{(IsComment ? Comment : Dialogue)} {layer},{Start.AsAss()},{End.AsAss()},{Style},{Actor},"
-            + $"{margins},{Effect},{extradatas}"
-            + $"{textContent}";
+        return string.Create(
+            CultureInfo.InvariantCulture,
+            $"{(IsComment ? Comment : Dialogue)} {layer},{Start.AsAss()},{End.AsAss()},{Style},{Actor},"
+                + $"{margins},{Effect},{extradatas}"
+                + $"{textContent}"
+        );
     }
 
     /// <summary>

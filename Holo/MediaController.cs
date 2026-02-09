@@ -905,7 +905,8 @@ public class MediaController : BindableBase
         var writer = new AssWriter(document, new ConsumerInfo("", "", ""));
         lock (_requestLock)
         {
-            _provider.SetSubtitles(writer.Write(), null);
+            var content = writer.Write();
+            _provider.SetSubtitles(content, null);
             _subtitlesChanged = true;
         }
 
