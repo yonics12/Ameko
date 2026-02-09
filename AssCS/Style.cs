@@ -90,6 +90,10 @@ public class Style(int id) : BindableBase
     /// <summary>
     /// Outline color
     /// </summary>
+    /// <remarks>
+    /// When using <see cref="AssVersion.V400"/> (SSA),
+    /// this field represents the tertiary color.
+    /// </remarks>
     public Color OutlineColor
     {
         get => _outlineColor;
@@ -99,6 +103,10 @@ public class Style(int id) : BindableBase
     /// <summary>
     /// Shadow color
     /// </summary>
+    /// <remarks>
+    /// When using <see cref="AssVersion.V400"/> (SSA),
+    /// this field represents the border and shadow color.
+    /// </remarks>
     public Color ShadowColor
     {
         get => _shadowColor;
