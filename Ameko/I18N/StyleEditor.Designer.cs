@@ -356,5 +356,47 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("StyleEditor_Button_Save", resourceCulture);
             }
         }
+        
+        public static string StyleEditor_Label_MarginTop {
+            get {
+                return ResourceManager.GetString("StyleEditor_Label_MarginTop", resourceCulture);
+            }
+        }
+        
+        public static string StyleEditor_Label_MarginBottom {
+            get {
+                return ResourceManager.GetString("StyleEditor_Label_MarginBottom", resourceCulture);
+            }
+        }
+        
+        public static string StyleEditor_MarginTop_ToolTip {
+            get {
+                return ResourceManager.GetString("StyleEditor_MarginTop_ToolTip", resourceCulture);
+            }
+        }
+        
+        public static string StyleEditor_MarginBottom_ToolTip {
+            get {
+                return ResourceManager.GetString("StyleEditor_MarginBottom_ToolTip", resourceCulture);
+            }
+        }
+        
+        public static string StyleEditor_Label_Tertiary {
+            get {
+                return ResourceManager.GetString("StyleEditor_Label_Tertiary", resourceCulture);
+            }
+        }
+        
+        public static string StyleEditor_Label_Back {
+            get {
+                return ResourceManager.GetString("StyleEditor_Label_Back", resourceCulture);
+            }
+        }
+        
+        public static string StyleEditor_CheckBox_Relative {
+            get {
+                return ResourceManager.GetString("StyleEditor_CheckBox_Relative", resourceCulture);
+            }
+        }
     }
 }

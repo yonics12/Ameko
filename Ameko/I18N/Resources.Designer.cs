@@ -848,5 +848,17 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("Video_Button_Mute_ToolTip", resourceCulture);
             }
         }
+        
+        public static string Editor_MarginTop_ToolTip {
+            get {
+                return ResourceManager.GetString("Editor_MarginTop_ToolTip", resourceCulture);
+            }
+        }
+        
+        public static string Editor_MarginBottom_ToolTip {
+            get {
+                return ResourceManager.GetString("Editor_MarginBottom_ToolTip", resourceCulture);
+            }
+        }
     }
 }
