@@ -75,7 +75,7 @@ jobs:
         shell: pwsh
         run: |
           pushd Mizuki
-          zig build --release=safe
+          zig build -Dcpu=x86_64_v3 -Doptimize=ReleaseSafe
           popd
 
       - name: Build and Test Ameko
@@ -121,7 +121,7 @@ jobs:
         shell: bash
         run: |
           pushd Mizuki
-          zig build --release=safe
+          zig build -Dcpu=baseline -Doptimize=ReleaseSafe
           popd
 
       - name: Build and Test Ameko
@@ -195,7 +195,7 @@ jobs:
         shell: bash
         run: |
           pushd Mizuki
-          zig build --release=safe
+          zig build -Dcpu=x86_64_v3 -Doptimize=ReleaseSafe
           popd
 
       - name: Build and Test Ameko
