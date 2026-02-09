@@ -32,7 +32,7 @@ namespace Ameko.Views.Windows;
 
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
-    private static readonly string[] ScriptExtensions = [".ass", ".srt", ".txt"];
+    private static readonly string[] ScriptExtensions = [".ass", ".ssa", ".srt", ".txt"];
     private static readonly string[] VideoExtensions =
     [
         ".mkv",
@@ -110,7 +110,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 [
                     new FilePickerFileType(I18N.Other.FileDialog_FileType_Ass)
                     {
-                        Patterns = ["*.ass"],
+                        Patterns = ["*.ass", "*.ssa"],
                     },
                     new FilePickerFileType(I18N.Other.FileDialog_FileType_Srt)
                     {
@@ -312,7 +312,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 [
                     new FilePickerFileType(I18N.Other.FileDialog_FileType_Ass)
                     {
-                        Patterns = ["*.ass"],
+                        Patterns = ["*.ass", "*.ssa"],
                     },
                     new FilePickerFileType(I18N.Other.FileDialog_FileType_Srt)
                     {
@@ -500,6 +500,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                     {
                         case ".ass":
                         case ".srt":
+                        case ".ssa":
                             ViewModel?.OpenSubtitleNoGuiCommand.Execute(file.Path);
                             break;
                         case ".aproj":

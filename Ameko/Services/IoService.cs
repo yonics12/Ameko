@@ -347,7 +347,7 @@ public class IoService(
             var ext = Path.GetExtension(uri.LocalPath);
             var doc = ext switch
             {
-                ".ass" => new AssParser().Parse(fileSystem, uri),
+                ".ass" or ".ssa" => new AssParser().Parse(fileSystem, uri),
                 ".srt" => new SrtParser().Parse(fileSystem, uri),
                 ".txt" => new TxtParser().Parse(fileSystem, uri),
                 _ => throw new ArgumentOutOfRangeException(nameof(uri)),
@@ -355,7 +355,7 @@ public class IoService(
 
             Workspace wsp;
 
-            if (ext == ".ass")
+            if (ext is ".ass" or ".ssa")
             {
                 wsp = prj.AddWorkspace(doc, uri);
                 wsp.IsSaved = true;
@@ -452,7 +452,7 @@ public class IoService(
         {
             wsp.ReferenceFileManager.Reference = ext switch
             {
-                ".ass" => new AssParser().Parse(fileSystem, uri),
+                ".ass" or ".ssa" => new AssParser().Parse(fileSystem, uri),
                 ".srt" => new SrtParser().Parse(fileSystem, uri),
                 _ => throw new ArgumentOutOfRangeException(nameof(uri)),
             };

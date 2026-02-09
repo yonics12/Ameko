@@ -243,6 +243,13 @@ public partial class TabItemViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref field, value);
     }
 
+    #region Versioned items
+
+    public bool DisplayLayers => Workspace.Document.Version is not AssVersion.V400;
+    public bool DisplayMarginTopBtm => Workspace.Document.Version is AssVersion.V400PP;
+
+    #endregion
+
     public TabItemViewModel(
         IProjectProvider projectProvider,
         IConfiguration configuration,

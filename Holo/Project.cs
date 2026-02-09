@@ -474,7 +474,7 @@ public class Project : BindableBase
             var ext = Path.GetExtension(item.Uri!.LocalPath);
             var document = ext switch
             {
-                ".ass" => new AssParser().Parse(_fileSystem, item.Uri!),
+                ".ass" or ".ssa" => new AssParser().Parse(_fileSystem, item.Uri!),
                 ".srt" => new SrtParser().Parse(_fileSystem, item.Uri!),
                 ".txt" => new TxtParser().Parse(_fileSystem, item.Uri!),
                 _ => throw new ArgumentOutOfRangeException(nameof(id), "Invalid document type"),
@@ -483,7 +483,7 @@ public class Project : BindableBase
             BeginSelectionChange();
             item.Workspace = _workspaceFactory.Create(document, item.Id, item.Uri);
 
-            if (ext != ".ass")
+            if (ext is not (".ass" or ".ssa"))
             {
                 // Non-ass sourced documents need to be re-saved as an ass file
                 item.Workspace.SavePath = null;

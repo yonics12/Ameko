@@ -233,6 +233,7 @@ public partial class App : Application
                 {
                     case ".ass":
                     case ".srt":
+                    case ".ssa":
                         subs.Add(new Uri(path));
                         break;
                     case ".aproj":
