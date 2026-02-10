@@ -38,6 +38,17 @@ public class ColorTests
     }
 
     [Test]
+    public async Task FromAss_Decimal()
+    {
+        var c = Color.FromAss("-2147483640");
+
+        await Assert.That(c.Alpha).IsEqualTo<byte>(0x80);
+        await Assert.That(c.Blue).IsEqualTo<byte>(0x00);
+        await Assert.That(c.Green).IsEqualTo<byte>(0x00);
+        await Assert.That(c.Red).IsEqualTo<byte>(0x08);
+    }
+
+    [Test]
     public async Task FromRgb()
     {
         var c = Color.FromRgb(0, 0xFF, 0x33);
