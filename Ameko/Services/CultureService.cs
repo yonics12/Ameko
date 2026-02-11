@@ -22,7 +22,7 @@ public class CultureService : ICultureService
     [
         new("English (US)", "en-US"),
         new("English (UK)", "en-GB"),
-        new("Español (LATM)", "es-419"),
+        new("Español (LATAM)", "es-419"),
         new("Polski", "pl-PL"),
         new("Deutch", "de-DE"),
         new("Tiếng Việt", "vi-VN"),
