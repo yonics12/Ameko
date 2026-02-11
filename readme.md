@@ -110,10 +110,12 @@ implementing features, or starting a discussion, all contributions are welcome a
 
 ### Localization
 
-[![es-419](https://img.shields.io/badge/dynamic/json?color=green&label=es-419&style=flat&logo=crowdin&query=%24.progress.1.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
-[![en-GB](https://img.shields.io/badge/dynamic/json?color=green&label=en-GB&style=flat&logo=crowdin&query=%24.progress.0.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
-[![pl](https://img.shields.io/badge/dynamic/json?color=green&label=pl&style=flat&logo=crowdin&query=%24.progress.2.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
-[![vi](https://img.shields.io/badge/dynamic/json?color=green&label=vi&style=flat&logo=crowdin&query=%24.progress.3.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
+[![en-GB](https://img.shields.io/badge/dynamic/json?color=green&label=en-GB&style=flat&logo=crowdin&query=%24.progress.1.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
+[![pl](https://img.shields.io/badge/dynamic/json?color=green&label=pl&style=flat&logo=crowdin&query=%24.progress.3.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
+[![de](https://img.shields.io/badge/dynamic/json?color=green&label=de&style=flat&logo=crowdin&query=%24.progress.0.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
+[![es-419](https://img.shields.io/badge/dynamic/json?color=green&label=es-419&style=flat&logo=crowdin&query=%24.progress.2.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
+[![vi](https://img.shields.io/badge/dynamic/json?color=green&label=vi&style=flat&logo=crowdin&query=%24.progress.4.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
+[![zh-TW](https://img.shields.io/badge/dynamic/json?color=green&label=zh-TW&style=flat&logo=crowdin&query=%24.progress.5.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-17157354-799340.json)](https://crowdin.com/project/ameko)
 
 If you are interested in localizing Ameko into your language (Thank you!), please see
 the [Crowdin project](https://crowdin.com/project/ameko). Note: Ameko is localized via the ResX format,
