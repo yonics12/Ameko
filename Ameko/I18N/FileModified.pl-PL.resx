@@ -17,10 +17,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandPalette_Title" xml:space="preserve">
-    <value>Command Palette</value>
-  </data>
-  <data name="CmdP_Button" xml:space="preserve">
-    <value>Go</value>
-  </data>
+  <data name="FileModified_WindowTitle" xml:space="preserve">
+        <value>Plik zmodyfikowany</value>
+    </data>
+  <data name="FileModified_CallToAction" xml:space="preserve">
+        <value>Możesz to zignorować lub zapisać zmiany do innego pliku.</value>
+    </data>
+  <data name="FileModified_Recommendation" xml:space="preserve">
+        <value>Zaleca się zapisanie zmian w celu uniknięcia utraty danych.</value>
+    </data>
+  <data name="FileModified_Header" xml:space="preserve">
+        <value>Plik "{0}" został zmodyfikowany przez inny program.</value>
+    </data>
+  <data name="FileModified_Button_Ignore" xml:space="preserve">
+        <value>Ignoruj zmiany</value>
+    </data>
+  <data name="FileModified_Button_SaveAs" xml:space="preserve">
+        <value>Zapisz jako...</value>
+    </data>
 </root>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConfigDialog_Title" xml:space="preserve">
+        <value>Ustawienia</value>
+    </data>
+  <data name="Config_RpcLevel_Disabled" xml:space="preserve">
+        <value>Wyłączone</value>
+    </data>
+  <data name="Config_RpcLevel_Enabled" xml:space="preserve">
+        <value>Włączone</value>
+    </data>
+  <data name="Config_RpcLevel_TimeOnly" xml:space="preserve">
+        <value>Tylko czas</value>
+    </data>
+  <data name="Config_PropFields_All" xml:space="preserve">
+        <value>Wszystkie pola</value>
+    </data>
+  <data name="Config_PropFields_None" xml:space="preserve">
+        <value>Żadne pole</value>
+    </data>
+  <data name="Config_PropFields_NonText" xml:space="preserve">
+        <value>Tylko pola metadanych</value>
+    </data>
+  <data name="Config_Theme_Default" xml:space="preserve">
+        <value>Domyślny</value>
+    </data>
+  <data name="Config_Theme_Light" xml:space="preserve">
+        <value>Jasny</value>
+    </data>
+  <data name="Config_Theme_Dark" xml:space="preserve">
+        <value>Ciemny</value>
+    </data>
+  <data name="Config_SaveFrames_WithVideo" xml:space="preserve">
+        <value>Z napisami</value>
+    </data>
+  <data name="Config_SaveFrames_WithSubtitles" xml:space="preserve">
+        <value>Z wideo</value>
+    </data>
+  <data name="Config_Label_CpsWarnThreshold" xml:space="preserve">
+        <value>Próg ostrzeżenia ZNS</value>
+    </data>
+  <data name="Config_Label_CpsWhitespace" xml:space="preserve">
+        <value>Czy ZNS powinno zawierać znaki niedrukowalne?</value>
+    </data>
+  <data name="Config_Label_CpsPunctuation" xml:space="preserve">
+        <value>Czy ZNS powinno zawierać znaki interpunkcyjne?</value>
+    </data>
+  <data name="Config_Label_SoftLinebreaks" xml:space="preserve">
+        <value>Czy używać miękkich łamań linii?</value>
+    </data>
+  <data name="Config_Label_SoftLinebreaks_ToolTip" xml:space="preserve">
+        <value>Wstawia \n zamiast \N</value>
+    </data>
+  <data name="Config_Label_DefaultLayer" xml:space="preserve">
+        <value>Domyślna warstwa</value>
+    </data>
+  <data name="Config_Label_DisplayLanguage" xml:space="preserve">
+        <value>Język interfejsu</value>
+    </data>
+  <data name="Config_Label_SpellcheckLanguage" xml:space="preserve">
+        <value>Język sprawdzania pisowni</value>
+    </data>
+  <data name="Config_Label_RichPresence" xml:space="preserve">
+        <value>Rich Presence</value>
+    </data>
+  <data name="Config_Label_PropagateChanges" xml:space="preserve">
+        <value>Zastosuj zmiany do</value>
+    </data>
+  <data name="Config_Label_PropagateChanges_ToolTip" xml:space="preserve">
+        <value>Kontroluje, jak zmiany wprowadzone we właściwościach zdarzeń będą stosowane do innych wybranych zdarzeń</value>
+    </data>
+  <data name="Config_Label_AutosaveEnabled" xml:space="preserve">
+        <value>Autozapis włączony?</value>
+    </data>
+  <data name="Config_Label_SaveFrames" xml:space="preserve">
+        <value>Zapisz klatki</value>
+    </data>
+  <data name="Config_Label_AutosaveInterval" xml:space="preserve">
+        <value>Interwał autozapisu (sekundy)</value>
+    </data>
+  <data name="Config_Label_Theme" xml:space="preserve">
+        <value>Motyw</value>
+    </data>
+  <data name="Config_Label_EditorFs" xml:space="preserve">
+        <value>Rozmiar czcionki edytora</value>
+    </data>
+  <data name="Config_Label_GridFs" xml:space="preserve">
+        <value>Rozmiar czcionki siatki</value>
+    </data>
+  <data name="Config_Label_ReferenceFs" xml:space="preserve">
+        <value>Rozmiar czcionki pliku odniesienia</value>
+    </data>
+  <data name="Config_Label_GridPadding" xml:space="preserve">
+        <value>Margines wewnętrzny siatki</value>
+    </data>
+  <data name="Config_Header_Ssa" xml:space="preserve">
+        <value>SubStation Alpha</value>
+    </data>
+  <data name="Config_Header_Behavior" xml:space="preserve">
+        <value>Zachowanie</value>
+    </data>
+  <data name="Config_Header_Appearance" xml:space="preserve">
+        <value>Wygląd</value>
+    </data>
+  <data name="Config_Label_LineWidthPunctuation" xml:space="preserve">
+        <value>Czy szerokość linii powinna zawierać znaki interpunkcyjne?</value>
+    </data>
+  <data name="Config_Label_LineWidthWhitespace" xml:space="preserve">
+        <value>Czy długość linii powinna zawierać znaki niedrukowalne?</value>
+    </data>
+  <data name="Config_Label_RestartRequired" xml:space="preserve">
+        <value>Wymagane ponowne uruchomienie</value>
+    </data>
+  <data name="ProjectConfigDialog_Title" xml:space="preserve">
+        <value>Ustawienia projektu</value>
+    </data>
+  <data name="Config_Header_Spellchecking" xml:space="preserve">
+        <value>Sprawdzanie pisowni</value>
+    </data>
+  <data name="Config_Button_Add" xml:space="preserve">
+        <value>Dodaj</value>
+    </data>
+  <data name="Config_Button_Remove" xml:space="preserve">
+        <value>Usuń</value>
+    </data>
+  <data name="Config_CustomWordBox_Watermark" xml:space="preserve">
+        <value>Dodaj słowo do słownika</value>
+    </data>
+  <data name="Config_Label_AutoloadAudioTracks" xml:space="preserve">
+        <value>Czy automatycznie wczytywać ścieżki dźwiękowe?</value>
+    </data>
+  <data name="Config_Label_AutoloadAudioTracks_ToolTip" xml:space="preserve">
+        <value>Automatycznie wczytaj ostatnio używaną ścieżkę, gdy dostępne jest wiele ścieżek dźwiękowych</value>
+    </data>
+  <data name="Config_Label_IndexCacheExpiration" xml:space="preserve">
+        <value>Czas wygasania pamięci podręcznej indeksu (dni)</value>
+    </data>
+</root>

@@ -17,10 +17,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandPalette_Title" xml:space="preserve">
-    <value>Command Palette</value>
-  </data>
-  <data name="CmdP_Button" xml:space="preserve">
-    <value>Go</value>
-  </data>
+  <data name="JumpDialog_Title" xml:space="preserve">
+        <value>Skocz</value>
+    </data>
+  <data name="Jump_Frame" xml:space="preserve">
+        <value>Klatka:</value>
+    </data>
+  <data name="Jump_Time" xml:space="preserve">
+        <value>Czas:</value>
+    </data>
+  <data name="Jump_Button_Jump" xml:space="preserve">
+        <value>Skocz</value>
+    </data>
+  <data name="Jump_Line" xml:space="preserve">
+        <value>Linijka:</value>
+    </data>
 </root>

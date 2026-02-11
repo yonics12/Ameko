@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Git_NotInRepo" xml:space="preserve">
+        <value>Nie wykryto repozytorium Git.</value>
+    </data>
+  <data name="Git_NotInRepo_Tutorial" xml:space="preserve">
+        <value>Aby korzystać z funkcji Gita, otwórz projekt w folderze zawierającym repozytorium.</value>
+    </data>
+  <data name="Git_StagedChanges" xml:space="preserve">
+        <value>Przygotowane zmiany</value>
+    </data>
+  <data name="Git_UnstagedChanges" xml:space="preserve">
+        <value>Zmiany</value>
+    </data>
+  <data name="Git_Button_Unstage_ToolTip" xml:space="preserve">
+        <value>Cofnij przygotowanie zmian</value>
+    </data>
+  <data name="Git_Button_Stage_ToolTip" xml:space="preserve">
+        <value>Przygotuj zmiany</value>
+    </data>
+  <data name="Git_Button_Commit" xml:space="preserve">
+        <value>Zatwierdź</value>
+    </data>
+  <data name="Git_Button_Stash" xml:space="preserve">
+        <value>Przechowalnia</value>
+    </data>
+  <data name="Git_Button_Commit_ToolTip" xml:space="preserve">
+        <value>Zatwierdź zmiany do {0}</value>
+    </data>
+  <data name="Git_Button_Stash_ToolTip" xml:space="preserve">
+        <value>Przechowalnia</value>
+    </data>
+  <data name="Git_Button_Refresh_ToolTip" xml:space="preserve">
+        <value>Synchronizuj</value>
+    </data>
+  <data name="Git_CommitBox_Watermark" xml:space="preserve">
+        <value>Komunikat</value>
+    </data>
+  <data name="Git_PotentialOwnershipIssue" xml:space="preserve">
+        <value>Wykryto katalog .git, ale libgit2 nie jest w stanie go przetworzyć. Upewnij się, że to repozytorium jest oznaczone jako „safe” w twoim pliku .gitconfig.</value>
+    </data>
+  <data name="Git_NothingToCommit" xml:space="preserve">
+        <value>Brak zmian do zatwierdzenia.</value>
+    </data>
+  <data name="Git_Button_Pull_ToolTip" xml:space="preserve">
+        <value>Ściągnij</value>
+    </data>
+  <data name="Git_LatestCommits" xml:space="preserve">
+        <value>Najnowsze zatwierdzenia na {0}:</value>
+    </data>
+  <data name="Git_Button_Push_ToolTip" xml:space="preserve">
+        <value>Wypchnij</value>
+    </data>
+</root>
