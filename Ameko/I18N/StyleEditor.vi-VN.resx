@@ -173,4 +173,25 @@
   <data name="StyleEditor_Button_Save" xml:space="preserve">
         <value>Save</value>
     </data>
+  <data name="StyleEditor_Label_MarginTop" xml:space="preserve">
+        <value>Top</value>
+    </data>
+  <data name="StyleEditor_Label_MarginBottom" xml:space="preserve">
+        <value>Bottom</value>
+    </data>
+  <data name="StyleEditor_MarginTop_ToolTip" xml:space="preserve">
+        <value>Top margin</value>
+    </data>
+  <data name="StyleEditor_MarginBottom_ToolTip" xml:space="preserve">
+        <value>Bottom margin</value>
+    </data>
+  <data name="StyleEditor_Label_Tertiary" xml:space="preserve">
+        <value>Tertiary</value>
+    </data>
+  <data name="StyleEditor_Label_Back" xml:space="preserve">
+        <value>Back</value>
+    </data>
+  <data name="StyleEditor_CheckBox_Relative" xml:space="preserve">
+        <value>Relative</value>
+    </data>
 </root>

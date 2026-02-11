@@ -18,63 +18,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SearchWindow_Title" xml:space="preserve">
-        <value>Search</value>
+        <value>Szukaj</value>
     </data>
   <data name="Search_Label_Find" xml:space="preserve">
-        <value>Find:</value>
+        <value>Szukany tekst:</value>
     </data>
   <data name="Search_QueryBox_Watermark" xml:space="preserve">
-        <value>Query...</value>
+        <value>Wpisz tekst...</value>
     </data>
   <data name="Search_Button_Find" xml:space="preserve">
-        <value>Find</value>
+        <value>Szukaj</value>
     </data>
   <data name="Search_RB_Text" xml:space="preserve">
-        <value>Text</value>
+        <value>Tekst</value>
     </data>
   <data name="Search_RB_Style" xml:space="preserve">
-        <value>Style</value>
+        <value>Styl</value>
     </data>
   <data name="Search_RB_Actor" xml:space="preserve">
-        <value>Actor</value>
+        <value>Aktor</value>
     </data>
   <data name="Search_RB_Effect" xml:space="preserve">
-        <value>Effect</value>
+        <value>Efekt</value>
     </data>
   <data name="Search_RB_TextStripped" xml:space="preserve">
-        <value>Text (plain)</value>
+        <value>Tekst (prosty)</value>
     </data>
   <data name="SelectWindow_Title" xml:space="preserve">
-        <value>Select</value>
+        <value>Zaznacz</value>
     </data>
   <data name="Select_Button_Select" xml:space="preserve">
-        <value>Select</value>
+        <value>Zaznacz</value>
     </data>
   <data name="SortWindow_Title" xml:space="preserve">
-        <value>Sort</value>
+        <value>Sortuj</value>
     </data>
   <data name="Sort_Button_Sort" xml:space="preserve">
-        <value>Sort</value>
+        <value>Sortuj</value>
     </data>
   <data name="Search_RB_Comment" xml:space="preserve">
-        <value>Is Comment</value>
+        <value>Komentarz</value>
     </data>
   <data name="Search_RB_Start" xml:space="preserve">
-        <value>Start Time</value>
+        <value>Czas początkowy</value>
     </data>
   <data name="Search_RB_End" xml:space="preserve">
-        <value>End Time</value>
+        <value>Czas końcowy</value>
     </data>
   <data name="Search_RB_None" xml:space="preserve">
-        <value>None</value>
+        <value>Brak</value>
     </data>
   <data name="Sort_Label_Descending" xml:space="preserve">
-        <value>Descending?</value>
+        <value>Malejąco?</value>
     </data>
   <data name="Sort_Label_SortBy" xml:space="preserve">
-        <value>Sort By:</value>
+        <value>Sortuj wg:</value>
     </data>
   <data name="Sort_Label_ThenBy" xml:space="preserve">
-        <value>Then By:</value>
+        <value>Następnie:</value>
     </data>
 </root>

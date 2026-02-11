@@ -18,411 +18,411 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Menu_File" xml:space="preserve">
-        <value>Archivo</value>
+        <value>Plik</value>
     </data>
   <data name="Menu_Edit" xml:space="preserve">
-        <value>Editar</value>
+        <value>Edycja</value>
     </data>
   <data name="Menu_Subtitle" xml:space="preserve">
-        <value>Subtítulo</value>
+        <value>Napisy</value>
     </data>
   <data name="Menu_Timing" xml:space="preserve">
-        <value>Tiempos</value>
+        <value>Czas</value>
     </data>
   <data name="Menu_Video" xml:space="preserve">
-        <value>Video</value>
+        <value>Wideo</value>
     </data>
   <data name="Menu_Scripts" xml:space="preserve">
-        <value>Complementos</value>
+        <value>Skrypty</value>
     </data>
   <data name="Menu_Layouts" xml:space="preserve">
-        <value>Entornos</value>
+        <value>Układy ekranu</value>
     </data>
   <data name="Menu_Help" xml:space="preserve">
-        <value>Ayuda</value>
+        <value>Pomoc</value>
     </data>
   <data name="Menu_ShowLogs" xml:space="preserve">
-        <value>Mostrar registros...</value>
+        <value>Rejestr zdarzeń</value>
     </data>
   <data name="ProjectExplorer_Header" xml:space="preserve">
-        <value>Navegador de proyectos</value>
+        <value>Podgląd projektu</value>
     </data>
   <data name="Toolbox_Header" xml:space="preserve">
-        <value>Herramientas</value>
+        <value>Narzędzia</value>
     </data>
   <data name="EventsGrid_Header_Start" xml:space="preserve">
-        <value>Inicio</value>
+        <value>Początek</value>
     </data>
   <data name="EventsGrid_Header_End" xml:space="preserve">
-        <value>Final</value>
+        <value>Koniec</value>
     </data>
   <data name="EventsGrid_Header_Cps" xml:space="preserve">
-        <value>CPS</value>
+        <value>ZNS</value>
     </data>
   <data name="EventsGrid_Header_Style" xml:space="preserve">
-        <value>Estilo</value>
+        <value>Styl</value>
     </data>
   <data name="EventsGrid_Header_Actor" xml:space="preserve">
-        <value>Actor</value>
+        <value>Aktor</value>
     </data>
   <data name="EventsGrid_Header_Effect" xml:space="preserve">
-        <value>Efecto</value>
+        <value>Efekt</value>
     </data>
   <data name="EventsGrid_Header_Content" xml:space="preserve">
-        <value>Contenido</value>
+        <value>Tekst</value>
     </data>
   <data name="EventsGrid_Menu_Duplicate" xml:space="preserve">
-        <value>Duplicar</value>
+        <value>Powiel linie</value>
     </data>
   <data name="EventsGrid_Menu_MergeLines" xml:space="preserve">
-        <value>Unir líneas</value>
+        <value>Złącz linie</value>
     </data>
   <data name="EventsGrid_Menu_SplitLine" xml:space="preserve">
-        <value>Dividir líneas por saltos de línea</value>
+        <value>Podziel linie w miejscu łamania</value>
     </data>
   <data name="EventsGrid_Menu_InsertBefore" xml:space="preserve">
-        <value>Insertar antes</value>
+        <value>Wstaw przed</value>
     </data>
   <data name="EventsGrid_Menu_InsertAfter" xml:space="preserve">
-        <value>Insertar después</value>
+        <value>Wstaw po</value>
     </data>
   <data name="EventsGrid_Menu_Copy" xml:space="preserve">
-        <value>Copiar</value>
+        <value>Kopiuj</value>
     </data>
   <data name="EventsGrid_Menu_Paste" xml:space="preserve">
-        <value>Pegar</value>
+        <value>Wklej</value>
     </data>
   <data name="EventsGrid_Menu_PasteOver" xml:space="preserve">
-        <value>Pegar solamente...</value>
+        <value>Nadpisz...</value>
     </data>
   <data name="EventsGrid_Menu_Delete" xml:space="preserve">
-        <value>Eliminar</value>
+        <value>Usuń</value>
     </data>
   <data name="EventsGrid_Menu_Cut" xml:space="preserve">
-        <value>Cortar</value>
+        <value>Wytnij</value>
     </data>
   <data name="Editor_IsComment_Label" xml:space="preserve">
-        <value>Comentar</value>
+        <value>Komentarz</value>
     </data>
   <data name="Editor_IsComment_ToolTip" xml:space="preserve">
-        <value>Marcar línea como comentario</value>
+        <value>Ustaw jako komentarz</value>
     </data>
   <data name="Editor_StyleBox_ToolTip" xml:space="preserve">
-        <value>Estilo de la línea</value>
+        <value>Styl linii</value>
     </data>
   <data name="Editor_EditStyle_ToolTip" xml:space="preserve">
-        <value>Editar el estilo actual</value>
+        <value>Edytuj styl</value>
     </data>
   <data name="Editor_ActorAcBox_Watermark" xml:space="preserve">
-        <value>Actor</value>
+        <value>Aktor</value>
     </data>
   <data name="Editor_ActorAcBox_ToolTip" xml:space="preserve">
-        <value>Actor de la línea</value>
+        <value>Aktor linii</value>
     </data>
   <data name="Editor_EffectAcBox_Watermark" xml:space="preserve">
-        <value>Efecto</value>
+        <value>Efekt</value>
     </data>
   <data name="Editor_EffectAcBox_ToolTip" xml:space="preserve">
-        <value>Efecto de la línea</value>
+        <value>Efekt linii</value>
     </data>
   <data name="Editor_MaxLineWidth_ToolTip" xml:space="preserve">
-        <value>Ancho máximo de la línea</value>
+        <value>Ilość znaków w najdłuższym wierszu linii</value>
     </data>
   <data name="Editor_LayerUpDown_ToolTip" xml:space="preserve">
-        <value>Capa</value>
+        <value>Warstwa</value>
     </data>
   <data name="Editor_StartBox_ToolTip" xml:space="preserve">
-        <value>Tiempo de inicio</value>
+        <value>Czas początkowy</value>
     </data>
   <data name="Editor_EndBox_ToolTip" xml:space="preserve">
-        <value>Tiempo final</value>
+        <value>Czas końcowy</value>
     </data>
   <data name="Editor_MarginLeft_ToolTip" xml:space="preserve">
-        <value>Margen izquierdo (0 en el estilo Default)</value>
+        <value>Lewy margines (0 = margines stylu)</value>
     </data>
   <data name="Editor_MarginRight_ToolTip" xml:space="preserve">
-        <value>Margen derecho (0 en el estilo Default)</value>
+        <value>Prawy margines (0 = margines stylu)</value>
     </data>
   <data name="Editor_MarginVertical_ToolTip" xml:space="preserve">
-        <value>Margen vertical (0 en el estilo Default)</value>
+        <value>Górny i dolny margines (0 = margines stylu)</value>
     </data>
   <data name="Editor_ToggleBold_ToolTip" xml:space="preserve">
-        <value>Aplicar negritas \b en la posición del cursor</value>
+        <value>Wstaw pogrubienie w miejscu kursora</value>
     </data>
   <data name="Editor_ToggleItalics_ToolTip" xml:space="preserve">
-        <value>Aplicar itálicas \i en la posición del cursor</value>
+        <value>Wstaw pochylenie w miejscu kursora</value>
     </data>
   <data name="Editor_ToggleUnderline_ToolTip" xml:space="preserve">
-        <value>Aplicar subrayado \u en la posición del cursor</value>
+        <value>Wstaw podkreślenie w miejscu kursora</value>
     </data>
   <data name="Editor_ToggleStrikethrough_ToolTip" xml:space="preserve">
-        <value>Aplicar tachado \s en la posición del cursor</value>
+        <value>Wstaw przekreślenie w miejscu kursora</value>
     </data>
   <data name="Editor_SetFont_ToolTip" xml:space="preserve">
-        <value>Establecer fuente \fn en la posición del cursor</value>
+        <value>Wybór czcionki</value>
     </data>
   <data name="Editor_NextOrCreate_ToolTip" xml:space="preserve">
-        <value>Mover a la siguiente línea, creando una nueva si es necesaria</value>
+        <value>Przejdź do następnej linii (stwórz nową, jeśli trzeba)</value>
     </data>
   <data name="Menu_New" xml:space="preserve">
-        <value>_Nuevo</value>
+        <value>Nowy</value>
     </data>
   <data name="Menu_OpenSubtitle" xml:space="preserve">
-        <value>_Abrir subtítulos...</value>
+        <value>Otwórz napisy...</value>
     </data>
   <data name="Menu_SaveSubtitle" xml:space="preserve">
-        <value>_Guardar subtítulos...</value>
+        <value>Zapisz napisy...</value>
     </data>
   <data name="Menu_SaveSubtitleAs" xml:space="preserve">
-        <value>Guardar subtítulos _como...</value>
+        <value>Zapisz napisy jako...</value>
     </data>
   <data name="Menu_ExportSubtitles" xml:space="preserve">
-        <value>_Exportar subtítulos como texto...</value>
+        <value>Eksportuj napisy jako tekst...</value>
     </data>
   <data name="Menu_OpenProject" xml:space="preserve">
-        <value>Abrir _proyecto...</value>
+        <value>Otwórz projekt...</value>
     </data>
   <data name="Menu_SaveProject" xml:space="preserve">
-        <value>Guardar pro_yecto...</value>
+        <value>Zapisz projekt...</value>
     </data>
   <data name="Menu_Quit" xml:space="preserve">
-        <value>_Salir</value>
+        <value>Zamknij program</value>
     </data>
   <data name="Menu_Undo" xml:space="preserve">
-        <value>_Deshacer</value>
+        <value>Cofnij</value>
     </data>
   <data name="Menu_Redo" xml:space="preserve">
-        <value>_Rehacer</value>
+        <value>Ponów</value>
     </data>
   <data name="Menu_Search" xml:space="preserve">
-        <value>_Buscar...</value>
+        <value>Wyszukaj...</value>
     </data>
   <data name="Menu_StylesManager" xml:space="preserve">
-        <value>Administrador de est_ilos...</value>
+        <value>Menadżer stylów...</value>
     </data>
   <data name="Menu_ScriptProperties" xml:space="preserve">
-        <value>Propiedades del proye_cto...</value>
+        <value>Właściwości pliku ASS...</value>
     </data>
   <data name="Menu_Project" xml:space="preserve">
-        <value>Pr_oyecto</value>
+        <value>Projekt</value>
     </data>
   <data name="Menu_ProjectConfig" xml:space="preserve">
-        <value>_Configuración...</value>
+        <value>Ustawienia...</value>
     </data>
   <data name="Menu_ShiftTimes" xml:space="preserve">
-        <value>Despla_zador de tiempos...</value>
+        <value>Przesuń czasy...</value>
     </data>
   <data name="Menu_OpenVideo" xml:space="preserve">
-        <value>_Abrir video...</value>
+        <value>Otwórz wideo...</value>
     </data>
   <data name="Menu_JumpTo" xml:space="preserve">
-        <value>_Saltar a...</value>
+        <value>Przejdź do...</value>
     </data>
   <data name="Menu_Configuration" xml:space="preserve">
-        <value>_Configuraciones...</value>
+        <value>Ustawienia...</value>
     </data>
   <data name="Menu_Keybinds" xml:space="preserve">
-        <value>Ata_jos de teclado...</value>
+        <value>Skróty klawiszowe...</value>
     </data>
   <data name="Menu_About" xml:space="preserve">
-        <value>_Acerca de Ameko...</value>
+        <value>O Ameko...</value>
     </data>
   <data name="ProjectExplorer_ContextMenu_Remove" xml:space="preserve">
-        <value>Quitar del proyecto</value>
+        <value>Usuń z projektu</value>
     </data>
   <data name="ProjectExplorer_ContextMenu_Open" xml:space="preserve">
-        <value>Abrir</value>
+        <value>Otwórz</value>
     </data>
   <data name="Menu_CloseTab" xml:space="preserve">
-        <value>_Cerrar pestaña</value>
+        <value>Zamknij kartę</value>
     </data>
   <data name="Menu_CloseProject" xml:space="preserve">
-        <value>Cerrar _proyecto</value>
+        <value>Zamknij projekt</value>
     </data>
   <data name="Tab_CloseButton_ToolTip" xml:space="preserve">
-        <value>Cerrar pestaña</value>
+        <value>Zamknij kartę</value>
     </data>
   <data name="ProjectExplorer_ContextMenu_ChangeDisplayName" xml:space="preserve">
-        <value>Cambiar nombre...</value>
+        <value>Zmień wyświetlaną nazwę...</value>
     </data>
   <data name="Menu_ReloadScripts" xml:space="preserve">
-        <value>_Recargar complementos</value>
+        <value>Odśwież skrypty</value>
     </data>
   <data name="Menu_PackageManager" xml:space="preserve">
-        <value>_Abrir administrador de paquetes...</value>
+        <value>Otwórz menadżera pakietów...</value>
     </data>
   <data name="Menu_OpenProjectFolder" xml:space="preserve">
-        <value>Abrir _carpeta como un proyecto...</value>
+        <value>Otwórz folder jako projekt...</value>
     </data>
   <data name="Menu_ReloadLayouts" xml:space="preserve">
-        <value>Recargar _entornos</value>
+        <value>Odśwież układy</value>
     </data>
   <data name="Video_Button_PlayPause_ToolTip" xml:space="preserve">
-        <value>Play/Pausa</value>
+        <value>Otwórz/Zapauzuj</value>
     </data>
   <data name="Video_Button_PlaySelection_ToolTip" xml:space="preserve">
-        <value>Reproducir selección</value>
+        <value>Odtwórz aktywną linię</value>
     </data>
   <data name="Video_Button_EnableAutoSeek_ToolTip" xml:space="preserve">
-        <value>Activar búsqueda automática para el inicio de los eventos seleccionados</value>
+        <value>Włącz automatyczne przeskakiwanie do początku wybranej linii</value>
     </data>
   <data name="Video_Button_DisableAutoSeek_ToolTip" xml:space="preserve">
-        <value>Desactivar búsqueda automática para el inicio de los eventos seleccionados</value>
+        <value>Wyłącz automatyczne przeskakiwanie do początku wybranej linii</value>
     </data>
   <data name="Video_Time_ToolTip" xml:space="preserve">
-        <value>Tiempo actual</value>
+        <value>Obecny czas</value>
     </data>
   <data name="Video_Frame_ToolTip" xml:space="preserve">
-        <value>Fotograma actual</value>
+        <value>Obecna klatka</value>
     </data>
   <data name="Video_LockAR" xml:space="preserve">
-        <value>Fijar</value>
+        <value>Zablokuj</value>
     </data>
   <data name="Video_LockAR_ToolTip" xml:space="preserve">
-        <value>Fijar la relación de aspecto</value>
+        <value>Zablokuj format obrazu</value>
     </data>
   <data name="Menu_ReferenceFile_Attach" xml:space="preserve">
-        <value>_Adjuntar un archivo de referencia...</value>
+        <value>Dodaj plik referencyjny...</value>
     </data>
   <data name="Menu_ReferenceFile_Detach" xml:space="preserve">
-        <value>_Separar archivo de referencia</value>
+        <value>Usuń plik referencyjny</value>
     </data>
   <data name="Menu_Spellcheck" xml:space="preserve">
-        <value>Comprobar _ortografía...</value>
+        <value>Sprawdź pisownię...</value>
     </data>
   <data name="Menu_Playground" xml:space="preserve">
-        <value>Abrir el área de _ejecución...</value>
+        <value>Otwórz obszar testowy...</value>
     </data>
   <data name="Message_Welcome" xml:space="preserve">
-        <value>¡Bienvenido a Ameko!</value>
+        <value>Witamy w Ameko!</value>
     </data>
   <data name="EventsGrid_Menu_SplitLineKeepTimes" xml:space="preserve">
-        <value>Dividir líneas por saltos de línea (manteniendo tiempos)</value>
+        <value>Podziel linijki w miejscu łamania (zachowaj czasy)</value>
     </data>
   <data name="Tab_NothingLoaded" xml:space="preserve">
-        <value>Abre un archivo de subtítulos o crea uno nuevo para comenzar.</value>
+        <value>Otwórz plik z napisami lub stwórz nowy, by zacząć.</value>
     </data>
   <data name="EventsGrid_Menu_CopyPlaintext" xml:space="preserve">
-        <value>Copiar (texto plano)</value>
+        <value>Kopiuj (sam tekst)</value>
     </data>
   <data name="ProjectExplorer_ContextMenu_AttachAsReference" xml:space="preserve">
-        <value>Adjuntar como referencia</value>
+        <value>Dodaj jako plik referencyjny</value>
     </data>
   <data name="Video_Angle" xml:space="preserve">
-        <value>Ángulo:</value>
+        <value>Kąt:</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Wystąpił błąd</value>
     </data>
   <data name="Error_FailedToParse" xml:space="preserve">
-        <value>Error al analizar el archivo:</value>
+        <value>Wystąpił błąd podczas przetwarzania pliku:</value>
     </data>
   <data name="Video_ContextMenu_Copy_Frame" xml:space="preserve">
-        <value>Copiar fotograma al portapapeles</value>
+        <value>Kopiuj klatkę do schowka</value>
     </data>
   <data name="Video_ContextMenu_Copy_VideoOnly" xml:space="preserve">
-        <value>Copiar fotograma al portapapeles (solo el video)</value>
+        <value>Kopiuj klatkę do schowka (bez napisów)</value>
     </data>
   <data name="Video_ContextMenu_Copy_SubsOnly" xml:space="preserve">
-        <value>Copiar fotograma al portapapeles (solo subtítulos)</value>
+        <value>Kopiuj klatkę do schowka (tylko napisy)</value>
     </data>
   <data name="Video_ContextMenu_Save_Frame" xml:space="preserve">
-        <value>Guardar fotograma</value>
+        <value>Zapisz klatkę</value>
     </data>
   <data name="Video_ContextMenu_Save_VideoOnly" xml:space="preserve">
-        <value>Guardar fotograma (solo el video)</value>
+        <value>Zapisz klatkę (tylko wideo)</value>
     </data>
   <data name="Video_ContextMenu_Save_SubsOnly" xml:space="preserve">
-        <value>Guardar fotograma (solo subtítulos)</value>
+        <value>Zapisz klatkę (tylko napisy)</value>
     </data>
   <data name="Video_Indexing" xml:space="preserve">
-        <value>Indexando...</value>
+        <value>Indeksowanie...</value>
     </data>
   <data name="Menu_CloseVideo" xml:space="preserve">
-        <value>_Cerrar video</value>
+        <value>Zamknij wideo</value>
     </data>
   <data name="Menu_IssueTracker" xml:space="preserve">
-        <value>_Rastreador de problemas</value>
+        <value>System zgłoszeń</value>
     </data>
   <data name="Editor_Menu_SplitLineAtCursor" xml:space="preserve">
-        <value>Dividir líneas en el cursor</value>
+        <value>Podziel linię w miejscu kursora</value>
     </data>
   <data name="Editor_Menu_SplitLineAtCursorKeepTimes" xml:space="preserve">
-        <value>Dividir líneas en el cursor (Manteniendo tiempos)</value>
+        <value>Podziel linię w miejscu kursora (zachowaj czasy)</value>
     </data>
   <data name="Editor_Menu_SpellcheckLine" xml:space="preserve">
-        <value>Corregir automáticamente esta línea</value>
+        <value>Sprawdź pisownię tej linijki</value>
     </data>
   <data name="EventsGrid_Menu_InsertBeforeAtVideoTime" xml:space="preserve">
-        <value>Insertar antes del tiempo de video</value>
+        <value>Wstaw przed z czasem wideo</value>
     </data>
   <data name="EventsGrid_Menu_InsertAfterAtVideoTime" xml:space="preserve">
-        <value>Insertar después del tiempo de video</value>
+        <value>Wstaw po z czasem wideo</value>
     </data>
   <data name="Audio_HorizontalScale_ToolTip" xml:space="preserve">
-        <value>Escala horizontal</value>
+        <value>Rozciągnięcie w poziomie</value>
     </data>
   <data name="Audio_VerticalScale_ToolTip" xml:space="preserve">
-        <value>Escala vertical</value>
+        <value>Rozciągnięcie w pionie</value>
     </data>
   <data name="Menu_Audio" xml:space="preserve">
-        <value>_Audio</value>
+        <value>Audio</value>
     </data>
   <data name="Menu_OpenAudio" xml:space="preserve">
-        <value>A_brir audio...</value>
+        <value>Otwórz plik audio...</value>
     </data>
   <data name="Menu_CloseAudio" xml:space="preserve">
-        <value>_Cerrar audio</value>
+        <value>Zamknij audio</value>
     </data>
   <data name="Menu_ChangeTracks" xml:space="preserve">
-        <value>Cambiar _pistas...</value>
+        <value>Wybierz inną ścieżkę...</value>
     </data>
   <data name="Menu_RecentSubtitles" xml:space="preserve">
-        <value>_Subtítulos recientes</value>
+        <value>Ostatnie napisy</value>
     </data>
   <data name="Menu_RecentProjects" xml:space="preserve">
-        <value>Pro_yectos recientes</value>
+        <value>Ostatnie projekty</value>
     </data>
   <data name="Menu_RecentClear" xml:space="preserve">
-        <value>Limpiar</value>
+        <value>Wyczyść</value>
     </data>
   <data name="Menu_SnapKf_Start" xml:space="preserve">
-        <value>Ajustar _inicio al keyframe más cercano</value>
+        <value>Przeciągnij czas początkowy do najbliższej klatki kluczowej</value>
     </data>
   <data name="Menu_SnapKf_End" xml:space="preserve">
-        <value>Ajustar _final al keyframe más cercano</value>
+        <value>Przeciągnij czas końcowy do najbliższej klatki kluczowej</value>
     </data>
   <data name="Menu_OpenKeyframes" xml:space="preserve">
-        <value>Abrir _keyframes...</value>
+        <value>Otwórz klatki kluczowe...</value>
     </data>
   <data name="Menu_SelectLines" xml:space="preserve">
-        <value>Seleccionar _líneas...</value>
+        <value>Zaznacz linie</value>
     </data>
   <data name="Menu_Sort_Lines" xml:space="preserve">
-        <value>Ordena_r líneas...</value>
+        <value>Sortuj linie...</value>
     </data>
   <data name="Menu_SnapFrame_End" xml:space="preserve">
-        <value>Snap End to Current F_rame</value>
+        <value>Przeciągnij czas końcowy do obecnej klatki</value>
     </data>
   <data name="Menu_SnapFrame_Start" xml:space="preserve">
-        <value>Snap Start to _Current Frame</value>
+        <value>Przeciągnij czas początkowy do obecnej klatki</value>
     </data>
   <data name="ProjectExplorer_ContextMenu_CreateFolder_Root" xml:space="preserve">
-        <value>Create New Root Folder...</value>
+        <value>Stwórz nowy katalog główny...</value>
     </data>
   <data name="ProjectExplorer_ContextMenu_CreateFolder_Folder" xml:space="preserve">
-        <value>Create New Folder Here...</value>
+        <value>Stwórz nowy folder</value>
     </data>
   <data name="ProjectExplorer_ContextMenu_MoveToFolder" xml:space="preserve">
-        <value>Move to Folder...</value>
+        <value>Przenieś do folderu...</value>
     </data>
   <data name="Video_Button_Mute_ToolTip" xml:space="preserve">
-        <value>Play audio with video</value>
+        <value>Włącz/wyłącz audio</value>
     </data>
   <data name="Editor_MarginTop_ToolTip" xml:space="preserve">
-        <value>Top Margin (0 is style default)</value>
+        <value>Margines górny (0 = margines stylu)</value>
     </data>
   <data name="Editor_MarginBottom_ToolTip" xml:space="preserve">
-        <value>Bottom Margin (0 is style default)</value>
+        <value>Margines dolny (0 = margines stylu)</value>
     </data>
 </root>

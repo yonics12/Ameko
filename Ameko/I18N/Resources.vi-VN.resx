@@ -419,4 +419,10 @@
   <data name="Video_Button_Mute_ToolTip" xml:space="preserve">
         <value>Play audio with video</value>
     </data>
+  <data name="Editor_MarginTop_ToolTip" xml:space="preserve">
+        <value>Top Margin (0 is style default)</value>
+    </data>
+  <data name="Editor_MarginBottom_ToolTip" xml:space="preserve">
+        <value>Bottom Margin (0 is style default)</value>
+    </data>
 </root>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Spellcheck_WindowTitle" xml:space="preserve">
+        <value>Sprawdzanie pisowni</value>
+    </data>
+  <data name="Spellcheck_Install_ProjectHeader" xml:space="preserve">
+        <value>Nie zainstalowano słownika "{0}", który ustawiono w tym projekcie do sprawdzania pisowni.</value>
+    </data>
+  <data name="Spellcheck_Install_ConfigHeader" xml:space="preserve">
+        <value>Nie zainstalowano słownika "{0}", który ustawiono w Ameko do sprawdzania pisowni.</value>
+    </data>
+  <data name="Spellcheck_Install_Capabilities" xml:space="preserve">
+        <value>Ameko może pobrać wymagany słownik za ciebie.</value>
+    </data>
+  <data name="Spellcheck_Install_Notice" xml:space="preserve">
+        <value>Funkcja sprawdzania pisowni nie będzie dostępna bez słownika.</value>
+    </data>
+  <data name="Spellcheck_Install_Button_Download" xml:space="preserve">
+        <value>Pobierz</value>
+    </data>
+  <data name="Spellcheck_Install_Button_Ignore" xml:space="preserve">
+        <value>Ignoruj</value>
+    </data>
+  <data name="Spellcheck_Button_Change" xml:space="preserve">
+        <value>Zamień</value>
+    </data>
+  <data name="Spellcheck_Button_FindNext" xml:space="preserve">
+        <value>Znajdź następne</value>
+    </data>
+  <data name="Spellcheck_Label_NotFound" xml:space="preserve">
+        <value>Nie odnaleziono słowa w słowniku.</value>
+    </data>
+  <data name="Spellcheck_Button_AddToProject" xml:space="preserve">
+        <value>Dodaj do projektu</value>
+    </data>
+  <data name="Spellcheck_Button_AddToGlobals" xml:space="preserve">
+        <value>Dodaj lokalnie</value>
+    </data>
+  <data name="Spellcheck_Button_AddToBoth" xml:space="preserve">
+        <value>Dodaj do obu</value>
+    </data>
+  <data name="Spellcheck_Label_Dictionary" xml:space="preserve">
+        <value>Słownik: {0}</value>
+    </data>
+  <data name="Spellcheck_Button_AddToProject_ToolTip" xml:space="preserve">
+        <value>Zapisz to słowo do słownika projektu</value>
+    </data>
+  <data name="Spellcheck_Button_AddToGlobals_ToolTip" xml:space="preserve">
+        <value>Zapisz to słowo do słownika lokalnego</value>
+    </data>
+  <data name="Spellcheck_Button_AddToBoth_ToolTip" xml:space="preserve">
+        <value>Zapisz to słowo do słownika projektu i słownika lokalnego</value>
+    </data>
+  <data name="Spellcheck_Label_NoIssues" xml:space="preserve">
+        <value>Nie znaleziono błędów.</value>
+    </data>
+</root>
