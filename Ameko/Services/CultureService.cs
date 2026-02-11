@@ -22,11 +22,11 @@ public class CultureService : ICultureService
     [
         new("English (US)", "en-US"),
         new("English (UK)", "en-GB"),
-        new("Spanish (LATM)", "es-419"),
-        new("Polish", "pl-PL"),
-        new("German", "de-DE"),
-        new("Vietnamese", "vi-VN"),
-        new("Chinese (Traditional)", "zh-TW"),
+        new("Español (LATM)", "es-419"),
+        new("Polski", "pl-PL"),
+        new("Deutch", "de-DE"),
+        new("Tiếng Việt", "vi-VN"),
+        new("中文（繁體）", "zh-TW"),
     ];
 
     private static readonly List<CultureInfo> StaticCultures = StaticLanguages
