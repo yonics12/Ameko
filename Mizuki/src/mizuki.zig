@@ -22,6 +22,8 @@ pub export fn Initialize() c_int {
     }
     logger.Debug("Initializing Mizuki...");
 
+    common.InitAllocator();
+
     ffms.Initialize();
     libass.Initialize();
 

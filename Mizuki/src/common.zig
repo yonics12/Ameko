@@ -2,8 +2,14 @@
 
 const std = @import("std");
 
-pub var gpa: std.heap.GeneralPurposeAllocator(.{ .safety = true }) = .init;
-pub const allocator = gpa.allocator();
+pub var gpa: std.heap.GeneralPurposeAllocator(.{ .safety = true }) = undefined;
+pub var allocator: std.mem.Allocator = undefined;
+
+/// Initialize the global allocator
+pub fn InitAllocator() void {
+    gpa = .init;
+    allocator = gpa.allocator();
+}
 
 /// Version of a backing library
 pub const BackingVersion = extern struct {
