@@ -87,4 +87,52 @@ public class VideoInfo(
     {
         return Time.FromMillis(MillisecondsFromFrame(frameNumber));
     }
+
+    /// <summary>
+    /// Get the midpoint between <paramref name="frame1"/> and <paramref name="frame2"/> in milliseconds
+    /// </summary>
+    /// <param name="frame1">First frame</param>
+    /// <param name="frame2">Second frame</param>
+    /// <returns>Time in milliseconds</returns>
+    public long MillisecondsFromMidpoint(int frame1, int frame2)
+    {
+        if (frame1 > frame2)
+            (frame1, frame2) = (frame2, frame1);
+
+        var ms1 = MillisecondsFromFrame(frame1);
+        var ms2 = MillisecondsFromFrame(frame2);
+
+        // Real midpoint
+        if (ms1 != ms2)
+        {
+            return (ms2 - ms1) / 2 + ms1;
+        }
+
+        // Zero
+        if (frame1 < 0)
+            return 0;
+
+        // Max
+        if (frame2 >= FrameCount)
+        {
+            // Use the midpoint delta between frame1 and the previous frame
+            // to calculate the midpoint of frame2 and the end of the video
+            var ms3 = MillisecondsFromFrame(frame1 - 1);
+            return (ms1 - ms3) / 2 + ms2;
+        }
+
+        // Not sure what's happening here
+        return ms1;
+    }
+
+    /// <summary>
+    /// Get the midpoint between <paramref name="frame1"/> and <paramref name="frame2"/>
+    /// </summary>
+    /// <param name="frame1">First frame</param>
+    /// <param name="frame2">Second frame</param>
+    /// <returns>Time</returns>
+    public Time TimeFromMidpoint(int frame1, int frame2)
+    {
+        return Time.FromMillis(MillisecondsFromMidpoint(frame1, frame2));
+    }
 }

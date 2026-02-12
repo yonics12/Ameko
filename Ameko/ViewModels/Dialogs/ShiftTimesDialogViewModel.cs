@@ -98,22 +98,26 @@ public partial class ShiftTimesDialogViewModel : ViewModelBase
                     if (ShiftTarget is ShiftTimesTarget.Start or ShiftTimesTarget.Both)
                     {
                         if (ShiftDirection is ShiftTimesDirection.Forward)
-                            @event.Start = vi.TimeFromFrame(
+                            @event.Start = vi.TimeFromMidpoint(
+                                vi.FrameFromTime(@event.Start) + ShiftFrames - 1,
                                 vi.FrameFromTime(@event.Start) + ShiftFrames
                             );
                         else
-                            @event.Start = vi.TimeFromFrame(
+                            @event.Start = vi.TimeFromMidpoint(
+                                vi.FrameFromTime(@event.Start) - ShiftFrames - 1,
                                 vi.FrameFromTime(@event.Start) - ShiftFrames
                             );
                     }
                     if (ShiftTarget is ShiftTimesTarget.End or ShiftTimesTarget.Both)
                     {
                         if (ShiftDirection is ShiftTimesDirection.Forward)
-                            @event.End = vi.TimeFromFrame(
+                            @event.End = vi.TimeFromMidpoint(
+                                vi.FrameFromTime(@event.End) + ShiftFrames - 1,
                                 vi.FrameFromTime(@event.End) + ShiftFrames
                             );
                         else
-                            @event.End = vi.TimeFromFrame(
+                            @event.End = vi.TimeFromMidpoint(
+                                vi.FrameFromTime(@event.End) - ShiftFrames - 1,
                                 vi.FrameFromTime(@event.End) - ShiftFrames
                             );
                     }

@@ -762,7 +762,7 @@ public partial class MainWindowViewModel
                 return;
             var @event = wsp.SelectionManager.ActiveEvent;
 
-            @event.Start = mc.VideoInfo.TimeFromFrame(mc.CurrentFrame);
+            @event.Start = mc.VideoInfo.TimeFromMidpoint(mc.CurrentFrame - 1, mc.CurrentFrame);
             wsp.Commit(@event, ChangeType.ModifyEventMeta);
         });
     }
@@ -785,7 +785,7 @@ public partial class MainWindowViewModel
                 return;
             var @event = wsp.SelectionManager.ActiveEvent;
 
-            @event.End = mc.VideoInfo.TimeFromFrame(mc.CurrentFrame + 1);
+            @event.End = mc.VideoInfo.TimeFromMidpoint(mc.CurrentFrame, mc.CurrentFrame + 1);
             wsp.Commit(@event, ChangeType.ModifyEventMeta);
         });
     }
