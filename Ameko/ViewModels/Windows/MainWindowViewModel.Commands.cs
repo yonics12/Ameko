@@ -785,7 +785,7 @@ public partial class MainWindowViewModel
                 return;
             var @event = wsp.SelectionManager.ActiveEvent;
 
-            @event.End = mc.VideoInfo.TimeFromFrame(mc.CurrentFrame);
+            @event.End = mc.VideoInfo.TimeFromFrame(mc.CurrentFrame + 1);
             wsp.Commit(@event, ChangeType.ModifyEventMeta);
         });
     }
