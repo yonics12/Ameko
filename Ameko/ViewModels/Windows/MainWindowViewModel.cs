@@ -91,6 +91,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     // Other
     public Interaction<CommandPaletteDialogViewModel, Unit> ShowCommandPaletteDialog { get; }
+    public Interaction<Unit, Unit> ToggleFullscreen { get; }
     public Interaction<InstallDictionaryDialogViewModel, Unit> ShowInstallDictionaryDialog { get; }
     public Interaction<
         SelectFolderDialogViewModel,
@@ -252,6 +253,9 @@ public partial class MainWindowViewModel : ViewModelBase
     // Other
     [Command("ameko.commandPalette.show", "Ctrl+P", KeybindContext.Global)]
     public ICommand ShowCommandPaletteCommand { get; }
+
+    [Command("ameko.window.fullscreen", "F11", KeybindContext.Global)]
+    public ICommand ToggleFullscreenCommand { get; }
     public ICommand RemoveDocumentFromProjectCommand { get; }
     public ICommand RemoveDirectoryFromProjectCommand { get; }
     public ICommand OpenDocumentCommand { get; }
@@ -462,6 +466,7 @@ public partial class MainWindowViewModel : ViewModelBase
         OpenIssueTracker = new Interaction<Unit, Unit>();
         // Other
         ShowCommandPaletteDialog = new Interaction<CommandPaletteDialogViewModel, Unit>();
+        ToggleFullscreen = new Interaction<Unit, Unit>();
         ShowInstallDictionaryDialog = new Interaction<InstallDictionaryDialogViewModel, Unit>();
         ShowSelectFolderDialog =
             new Interaction<SelectFolderDialogViewModel, SelectFolderMessage?>();
@@ -533,6 +538,7 @@ public partial class MainWindowViewModel : ViewModelBase
         OpenIssueTrackerCommand = CreateOpenIssueTrackerCommand();
         // Other
         ShowCommandPaletteCommand = CreateShowCommandPaletteCommand();
+        ToggleFullscreenCommand = CreateToggleFullscreenCommand();
         RemoveDocumentFromProjectCommand = CreateRemoveDocumentFromProjectCommand();
         RemoveDirectoryFromProjectCommand = CreateRemoveFolderFromProjectCommand();
         OpenDocumentCommand = CreateOpenDocumentCommand();

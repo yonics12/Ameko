@@ -65,6 +65,8 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     private bool _isCmdPaletteOpen;
     private bool _canClose;
 
+    private WindowState? _lastWindowState = null;
+
     /// <summary>
     /// Show an async dialog window
     /// </summary>
@@ -446,6 +448,20 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         interaction.SetOutput(Unit.Default);
     }
 
+    private void DoToggleFullscreen(IInteractionContext<Unit, Unit> interaction)
+    {
+        interaction.SetOutput(Unit.Default);
+        if (WindowState is WindowState.FullScreen && _lastWindowState is not null)
+        {
+            WindowState = _lastWindowState.Value;
+        }
+        else if (WindowState is not WindowState.FullScreen)
+        {
+            _lastWindowState = WindowState;
+            WindowState = WindowState.FullScreen;
+        }
+    }
+
     public MainWindow(
         ILogger<MainWindow> logger,
         IConfiguration config,
@@ -554,6 +570,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 ViewModel.OpenIssueTracker.RegisterHandler(DoOpenIssueTrackerAsync);
                 // Other
                 ViewModel.ShowCommandPaletteDialog.RegisterHandler(DoShowCommandPalette);
+                ViewModel.ToggleFullscreen.RegisterHandler(DoToggleFullscreen);
                 ViewModel.ShowInstallDictionaryDialog.RegisterHandler(DoShowInstallDictionaryDialogAsync);
                 ViewModel.ShowSelectFolderDialog.RegisterHandler(DoShowSelectFolderDialogAsync);
                 // csharpier-ignore-end

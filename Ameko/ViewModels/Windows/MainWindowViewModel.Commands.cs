@@ -1164,6 +1164,17 @@ public partial class MainWindowViewModel
     }
 
     /// <summary>
+    /// Toggle fullscreen
+    /// </summary>
+    private ReactiveCommand<Unit, Unit> CreateToggleFullscreenCommand()
+    {
+        return ReactiveCommand.CreateFromTask(async () =>
+        {
+            await ToggleFullscreen.Handle(Unit.Default);
+        });
+    }
+
+    /// <summary>
     /// Remove workspace from the project
     /// </summary>
     private ReactiveCommand<int, Unit> CreateRemoveDocumentFromProjectCommand()
