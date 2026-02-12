@@ -315,6 +315,7 @@ public class IoService(
             if (result is not null)
                 workspaces.Add(result);
         }
+
         return workspaces.ToArray();
     }
 
@@ -353,6 +354,14 @@ public class IoService(
                 _ => throw new ArgumentOutOfRangeException(nameof(uri)),
             };
 
+            // Check for lame duck file
+            int? lameDuckId = null;
+            if (
+                prj.LoadedWorkspaces.Count == 1
+                && prj.WorkingSpace is { IsSaved: true, SavePath: null } lameDuck
+            )
+                lameDuckId = lameDuck.Id;
+
             Workspace wsp;
 
             if (ext is ".ass" or ".ssa")
@@ -369,6 +378,13 @@ public class IoService(
             }
 
             logger.LogInformation("Opened subtitle file {WspTitle}", wsp.Title);
+
+            // If we're replacing a lame duck file, close it
+            if (lameDuckId is not null)
+            {
+                prj.CloseDocument(lameDuckId.Value);
+            }
+
             prj.WorkingSpace = wsp;
             return wsp;
         }
