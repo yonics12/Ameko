@@ -74,5 +74,11 @@ namespace Ameko.I18N {
                 return ResourceManager.GetString("Help_Section_Projects", resourceCulture);
             }
         }
+        
+        public static string Help_Empty {
+            get {
+                return ResourceManager.GetString("Help_Empty", resourceCulture);
+            }
+        }
     }
 }

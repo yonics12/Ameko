@@ -38,8 +38,14 @@
                 <ListBox DockPanel.Dock="Left"
                          ItemsSource="{Binding ScriptHelps}"
                          SelectedItem="{Binding SelectedScriptHelp}"
-                         DisplayMemberBinding="{Binding DisplayName}" />
-                <HtmlPanel Text="{Binding SelectedScriptHelp.Content, FallbackValue=''}" />                
+                         DisplayMemberBinding="{Binding DisplayName}"
+                         IsVisible="{Binding HasScriptHelps}" />
+                <HtmlPanel Text="{Binding SelectedScriptHelp.Content, FallbackValue=''}"
+                           IsVisible="{Binding HasScriptHelps}"/>   
+                <TextBlock Text="{x:Static i18n:Help.Help_Empty}"
+                           IsVisible="{Binding !HasScriptHelps}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center" />
             </DockPanel>
         </TabItem>
     </TabControl>

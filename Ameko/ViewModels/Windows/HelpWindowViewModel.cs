@@ -101,6 +101,8 @@ public partial class HelpWindowViewModel(
         set => this.RaiseAndSetIfChanged(ref field, value);
     }
 
+    public bool HasScriptHelps => ScriptHelps.Count > 0;
+
     private string BuildScriptHelp(string path)
     {
         using var fs = fileSystem.FileStream.New(
