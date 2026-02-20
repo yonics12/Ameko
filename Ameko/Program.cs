@@ -35,6 +35,8 @@ sealed class Program
     {
         Args = args;
 
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
 #if !DEBUG
         // Handle non-UI-thread exceptions
         AppDomain.CurrentDomain.UnhandledException += (_, ex) =>
